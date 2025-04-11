@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/dsaAssignment.dir/src/main.cpp.o -o dsaAssignment  libdsaAssignment_lib.a
