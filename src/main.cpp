@@ -1,4 +1,5 @@
 #include "LinkList.h"
+#include "radixSort.h"
 #include "reviews.h"
 #include "transactions.h"
 #include <fstream>
@@ -44,9 +45,17 @@ int main(int argc, char *argv[]) {
   loadTransaction(transactionFile, transArray, transCount);
   loadReview(reviewFile, reviewArray, reviewCount);
 
-  cout << "Display csv data from array: " << endl;
-  displayTransactionArr(transArray, transCount);
+  // cout << "Display csv data from array: " << endl;
+  // displayTransactionArr(transArray, transCount);
+  // displayReviewsArray(reviewArray, reviewCount);
+
+  // radixSort::radixsort(transArray, transCount);
+  // displayTransactionArr(transArray, transCount);
+
+  radixSort::radixsort(reviewArray, reviewCount);
   displayReviewsArray(reviewArray, reviewCount);
+
+  cout << endl;
 
   return 0;
 }

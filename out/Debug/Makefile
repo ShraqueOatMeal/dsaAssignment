@@ -148,7 +148,6 @@ src/main.o: src/main.cpp.o
 # target to build an object file
 src/main.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment.dir/build.make CMakeFiles/dsaAssignment.dir/src/main.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/main.cpp.o
 .PHONY : src/main.cpp.o
 
 src/main.i: src/main.cpp.i
@@ -157,7 +156,6 @@ src/main.i: src/main.cpp.i
 # target to preprocess a source file
 src/main.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment.dir/build.make CMakeFiles/dsaAssignment.dir/src/main.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/main.cpp.i
 .PHONY : src/main.cpp.i
 
 src/main.s: src/main.cpp.s
@@ -166,8 +164,31 @@ src/main.s: src/main.cpp.s
 # target to generate assembly for a file
 src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment.dir/build.make CMakeFiles/dsaAssignment.dir/src/main.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
+
+src/radixSort.o: src/radixSort.cpp.o
+.PHONY : src/radixSort.o
+
+# target to build an object file
+src/radixSort.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/radixSort.cpp.o
+.PHONY : src/radixSort.cpp.o
+
+src/radixSort.i: src/radixSort.cpp.i
+.PHONY : src/radixSort.i
+
+# target to preprocess a source file
+src/radixSort.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/radixSort.cpp.i
+.PHONY : src/radixSort.cpp.i
+
+src/radixSort.s: src/radixSort.cpp.s
+.PHONY : src/radixSort.s
+
+# target to generate assembly for a file
+src/radixSort.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/radixSort.cpp.s
+.PHONY : src/radixSort.cpp.s
 
 # Help Target
 help:
@@ -182,6 +203,9 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/radixSort.o"
+	@echo "... src/radixSort.i"
+	@echo "... src/radixSort.s"
 .PHONY : help
 
 

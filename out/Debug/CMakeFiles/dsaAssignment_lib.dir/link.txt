@@ -1,2 +1,2 @@
-/usr/bin/ar qc libdsaAssignment_lib.a CMakeFiles/dsaAssignment_lib.dir/src/main.cpp.o
+/usr/bin/ar qc libdsaAssignment_lib.a CMakeFiles/dsaAssignment_lib.dir/src/radixSort.cpp.o
 /usr/bin/ranlib libdsaAssignment_lib.a
