@@ -1,4 +1,5 @@
 #include "radixSort.h"
+#include "LinkList.h"
 #include "reviews.h"
 #include "transactions.h"
 #include <string>
@@ -19,6 +20,21 @@ int dateToInt(const std::string &dateStr) {
   return year * 10000 + month * 100 + day;
 }
 
+int maxDate(LinkList<transactions> *transactionList, int n) {
+
+  Node<transactions> *current = transactionList->getHead();
+  int max = dateToInt(current->data.date);
+
+  while (current != nullptr) {
+    int dateVal = dateToInt(current->data.date);
+    if (dateVal > max) {
+      max = dateVal;
+    }
+    current = current->next;
+  }
+  return max;
+}
+
 int maxDate(transactions *transArray, int n) {
 
   int max = dateToInt(transArray[0].date);
@@ -31,6 +47,29 @@ int maxDate(transactions *transArray, int n) {
   }
 
   return max;
+}
+
+void countSort(LinkList<transactions> *transactionList, int n, int exp) {
+  LinkList<transactions> count[10];
+
+  Node<transactions> *current = transactionList->getHead();
+
+  while (current != nullptr) {
+    int dateVal = dateToInt(current->data.date);
+    int digit = (dateVal / exp) % 10;
+    count[digit].addData(current->data);
+    current = current->next;
+  }
+
+  transactionList->clear();
+
+  for (int i = 0; i < 10; i++) {
+    Node<transactions> *countNode = count[i].getHead();
+    while (countNode != nullptr) {
+      transactionList->addData(countNode->data);
+      countNode = countNode->next;
+    }
+  }
 }
 
 void countSort(transactions *transArray, int n, int exp) {
@@ -55,19 +94,19 @@ void countSort(transactions *transArray, int n, int exp) {
     transArray[i] = output[i];
 }
 
-void countSort(reviews *reviewArray, int n, int exp) {
+void radixSort::countSort(reviews *reviewArray, int n) {
   reviews *output = new reviews[n];
   int count[10] = {0};
 
   for (int i = 0; i < n; i++)
-    count[(reviewArray[i].rating / exp) % 10]++;
+    count[reviewArray[i].rating % 10]++;
 
   for (int i = 1; i < 10; i++)
     count[i] += count[i - 1];
 
   for (int i = n - 1; i >= 0; i--) {
-    output[count[(reviewArray[i].rating / exp) % 10] - 1] = reviewArray[i];
-    count[(reviewArray[i].rating / exp) % 10]--;
+    output[count[reviewArray[i].rating % 10] - 1] = reviewArray[i];
+    count[reviewArray[i].rating % 10]--;
   }
 
   for (int i = 0; i < n; i++)
@@ -79,13 +118,13 @@ void radixSort::radixsort(transactions *transArray, int n) {
   int m = maxDate(transArray, n);
 
   for (int exp = 1; m / exp > 0; exp *= 10)
-    countSort(transArray, n, exp);
+    ::countSort(transArray, n, exp);
 }
 
-void radixSort::radixsort(reviews *reviewArray, int n) {
+void radixSort::radixsort(LinkList<transactions> *transactionList, int n) {
 
-  const int m = 5;
+  int m = maxDate(transactionList, n);
 
   for (int exp = 1; m / exp > 0; exp *= 10)
-    countSort(reviewArray, n, exp);
+    ::countSort(transactionList, n, exp);
 }

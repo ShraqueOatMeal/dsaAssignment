@@ -29,6 +29,7 @@ public:
   Node<T> *getHead() { return head; }
   void display();
   void addData(T data);
+  void clear();
 };
 
 template <typename T> LinkList<T>::~LinkList() {}
@@ -50,4 +51,15 @@ template <typename T> void LinkList<T>::addData(T data) {
     tail = newNode;
   }
   size++;
+}
+
+template <typename T> void LinkList<T>::clear() {
+  Node<T> *current = head;
+  while (current) {
+    Node<T> *temp = current;
+    current = current->next;
+    delete temp;
+  }
+  head = tail = nullptr;
+  size = 0;
 }

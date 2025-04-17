@@ -59,7 +59,6 @@ int main(int argc, char *argv[]) {
   ifstream transactionFile("../../data/transactions_cleaned.csv");
   ifstream reviewFile("../../data/reviews_cleaned.csv");
 
-  // loadTransaction(transactionFile, transactionList);
   // loadReview(reviewFile, reviewList);
 
   // cout << "Display csv data from link list: " << endl;
@@ -83,28 +82,31 @@ int main(int argc, char *argv[]) {
   // radixSort::radixsort(transArray, transCount);
   // displayTransactionArr(transArray, transCount);
 
-  // radixSort::radixsort(reviewArray, reviewCount);
+  radixSort::radixsort(&transactionList, transCount);
+  transactionList.display();
+
+  // radixSort::countSort(reviewArray, reviewCount);
   // displayReviewsArray(reviewArray, reviewCount);
 
-  int catChoice;
-  int paymentChoice;
-  cout << "Choose a category to filter: " << endl;
-  cout << "\t1. Automotive\n\t2. Books\n\t3. Groceries\n\t4. Sports\n\t5. "
-          "Toys\n\t6. Beauty\n\t7. Furniture\n\t8. Electronics\n\t9. "
-          "Fashion\n\t10. Home Appliances"
-       << endl;
-  cout << "Category: ";
-  cin >> catChoice;
-
-  cout << "Choose a payment method to filter: " << endl;
-  cout << "\t1. Bank Transfer\n\t2. PayPal\n\t3. Debit Card\n\t4. Cash on "
-          "Delivery\n\t5. "
-          "Credit Card"
-       << endl;
-  cout << "Payment Method: ";
-  cin >> paymentChoice;
+  // int catChoice;
+  // int paymentChoice;
+  // cout << "Choose a category to filter: " << endl;
+  // cout << "\t1. Automotive\n\t2. Books\n\t3. Groceries\n\t4. Sports\n\t5. "
+  //         "Toys\n\t6. Beauty\n\t7. Furniture\n\t8. Electronics\n\t9. "
+  //         "Fashion\n\t10. Home Appliances"
+  //      << endl;
+  // cout << "Category: ";
+  // cin >> catChoice;
+  //
+  // cout << "Choose a payment method to filter: " << endl;
+  // cout << "\t1. Bank Transfer\n\t2. PayPal\n\t3. Debit Card\n\t4. Cash on "
+  //         "Delivery\n\t5. "
+  //         "Credit Card"
+  //      << endl;
+  // cout << "Payment Method: ";
+  // cin >> paymentChoice;
   // linearSearch(catChoice, paymentChoice, transCount, transArray);
-  linearSearch(catChoice, paymentChoice, transCount, transactionList);
+  // linearSearch(catChoice, paymentChoice, transCount, transactionList);
   cout << endl;
 
   return 0;
