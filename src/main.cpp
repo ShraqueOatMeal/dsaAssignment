@@ -22,6 +22,9 @@ void displayReviewsArray(reviews *reviewArray, int size);
 void linearSearch(int catChoice, int paymentChoice, int size,
                   transactions *transArray);
 
+void linearSearch(int catChoice, int paymentChoice, int size,
+                  LinkList<transactions> &transactionList);
+
 int rowsNum(ifstream &file);
 
 string trim(const string &str) {
@@ -69,6 +72,7 @@ int main(int argc, char *argv[]) {
   transactions *transArray = new transactions[transCount];
   reviews *reviewArray = new reviews[reviewCount];
 
+  loadTransaction(transactionFile, transactionList);
   loadTransaction(transactionFile, transArray, transCount);
   loadReview(reviewFile, reviewArray, reviewCount);
 
@@ -99,7 +103,8 @@ int main(int argc, char *argv[]) {
        << endl;
   cout << "Payment Method: ";
   cin >> paymentChoice;
-  linearSearch(catChoice, paymentChoice, transCount, transArray);
+  // linearSearch(catChoice, paymentChoice, transCount, transArray);
+  linearSearch(catChoice, paymentChoice, transCount, transactionList);
   cout << endl;
 
   return 0;
@@ -133,7 +138,7 @@ void loadTransaction(ifstream &transactionFile,
     t.cat = cat;
     t.price = stod(priceStr);
     t.date = date;
-    t.paymentMethod = paymentMethod;
+    t.paymentMethod = trim(paymentMethod);
 
     transactionList.addData(t);
   }
@@ -206,6 +211,82 @@ void loadReview(ifstream &reviewFile, LinkList<reviews> &reviewList) {
     r.review = reviewText;
 
     reviewList.addData(r);
+  }
+}
+
+void linearSearch(int catChoice, int paymentChoice, int size,
+                  LinkList<transactions> &transactionList) {
+  string selectedCat;
+  string selectedPaymentMethod;
+
+  switch (catChoice) {
+  case Automotive:
+    selectedCat = "Automotive";
+    break;
+  case Books:
+    selectedCat = "Books";
+    break;
+  case Groceries:
+    selectedCat = "Groceries";
+    break;
+  case Sports:
+    selectedCat = "Sports";
+    break;
+  case Toys:
+    selectedCat = "Toys";
+    break;
+  case Beauty:
+    selectedCat = "Beauty";
+    break;
+  case Furniture:
+    selectedCat = "Furniture";
+    break;
+  case Electronics:
+    selectedCat = "Electronics";
+    break;
+  case Fashion:
+    selectedCat = "Fashion";
+    break;
+  case HomeAppliances:
+    selectedCat = "Home Appliances";
+    break;
+  default:
+    cout << "Unknown Category Choice" << endl;
+    break;
+  }
+
+  switch (paymentChoice) {
+  case BankTransfer:
+    selectedPaymentMethod = "Bank Transfer";
+    break;
+  case PayPal:
+    selectedPaymentMethod = "PayPal";
+    break;
+  case DebitCard:
+    selectedPaymentMethod = "Debit Card";
+    break;
+  case COD:
+    selectedPaymentMethod = "Cash on Delivery";
+    break;
+  case CreditCard:
+    selectedPaymentMethod = "Credit Card";
+    break;
+  default:
+    cout << "Unknown Payment Method Choice" << endl;
+    break;
+  }
+
+  cout << "Filtered List: " << endl;
+
+  Node<transactions> *current = transactionList.getHead();
+
+  while (current != nullptr) {
+
+    if (current->data.cat == selectedCat &&
+        current->data.paymentMethod == selectedPaymentMethod) {
+      current->data.print();
+    }
+    current = current->next;
   }
 }
 
