@@ -19,7 +19,34 @@ void loadReview(ifstream &reviewFile, LinkList<reviews> &reviewList);
 void loadReview(ifstream &reviewFile, reviews *reviewArray, int size);
 void displayReviewsArray(reviews *reviewArray, int size);
 
+void linearSearch(int catChoice, int paymentChoice, int size,
+                  transactions *transArray);
+
 int rowsNum(ifstream &file);
+
+string trim(const string &str) {
+  size_t first = str.find_first_not_of(" \n\r\t");
+  if (string::npos == first) {
+    return str;
+  }
+  size_t last = str.find_last_not_of(" \n\r\t");
+  return str.substr(first, (last - first + 1));
+}
+
+enum paymentMeth { BankTransfer = 1, PayPal, DebitCard, COD, CreditCard };
+
+enum category {
+  Automotive = 1,
+  Books,
+  Groceries,
+  Sports,
+  Toys,
+  Beauty,
+  Furniture,
+  Electronics,
+  Fashion,
+  HomeAppliances
+};
 
 // System will run in here
 int main(int argc, char *argv[]) {
@@ -52,9 +79,27 @@ int main(int argc, char *argv[]) {
   // radixSort::radixsort(transArray, transCount);
   // displayTransactionArr(transArray, transCount);
 
-  radixSort::radixsort(reviewArray, reviewCount);
-  displayReviewsArray(reviewArray, reviewCount);
+  // radixSort::radixsort(reviewArray, reviewCount);
+  // displayReviewsArray(reviewArray, reviewCount);
 
+  int catChoice;
+  int paymentChoice;
+  cout << "Choose a category to filter: " << endl;
+  cout << "\t1. Automotive\n\t2. Books\n\t3. Groceries\n\t4. Sports\n\t5. "
+          "Toys\n\t6. Beauty\n\t7. Furniture\n\t8. Electronics\n\t9. "
+          "Fashion\n\t10. Home Appliances"
+       << endl;
+  cout << "Category: ";
+  cin >> catChoice;
+
+  cout << "Choose a payment method to filter: " << endl;
+  cout << "\t1. Bank Transfer\n\t2. PayPal\n\t3. Debit Card\n\t4. Cash on "
+          "Delivery\n\t5. "
+          "Credit Card"
+       << endl;
+  cout << "Payment Method: ";
+  cin >> paymentChoice;
+  linearSearch(catChoice, paymentChoice, transCount, transArray);
   cout << endl;
 
   return 0;
@@ -122,7 +167,7 @@ void loadTransaction(ifstream &transactionFile, transactions *transArray,
     t.cat = cat;
     t.price = stod(priceStr);
     t.date = date;
-    t.paymentMethod = paymentMethod;
+    t.paymentMethod = trim(paymentMethod);
 
     transArray[index] = t;
     index++;
@@ -199,6 +244,77 @@ void displayReviewsArray(reviews *reviewArray, int size) {
   cout << "Reviews (Array):" << endl;
   for (int i = 0; i < size; i++) {
     reviewArray[i].print();
+  }
+}
+
+void linearSearch(int catChoice, int paymentChoice, int size,
+                  transactions *transArray) {
+  string selectedCat;
+  string selectedPaymentMethod;
+
+  switch (catChoice) {
+  case Automotive:
+    selectedCat = "Automotive";
+    break;
+  case Books:
+    selectedCat = "Books";
+    break;
+  case Groceries:
+    selectedCat = "Groceries";
+    break;
+  case Sports:
+    selectedCat = "Sports";
+    break;
+  case Toys:
+    selectedCat = "Toys";
+    break;
+  case Beauty:
+    selectedCat = "Beauty";
+    break;
+  case Furniture:
+    selectedCat = "Furniture";
+    break;
+  case Electronics:
+    selectedCat = "Electronics";
+    break;
+  case Fashion:
+    selectedCat = "Fashion";
+    break;
+  case HomeAppliances:
+    selectedCat = "Home Appliances";
+    break;
+  default:
+    cout << "Unknown Category Choice" << endl;
+    break;
+  }
+
+  switch (paymentChoice) {
+  case BankTransfer:
+    selectedPaymentMethod = "Bank Transfer";
+    break;
+  case PayPal:
+    selectedPaymentMethod = "PayPal";
+    break;
+  case DebitCard:
+    selectedPaymentMethod = "Debit Card";
+    break;
+  case COD:
+    selectedPaymentMethod = "Cash on Delivery";
+    break;
+  case CreditCard:
+    selectedPaymentMethod = "Credit Card";
+    break;
+  default:
+    cout << "Unknown Payment Method Choice" << endl;
+    break;
+  }
+
+  cout << "Filtered List: " << endl;
+  for (int i = 0; i < size; i++) {
+    if (transArray[i].cat == selectedCat &&
+        transArray[i].paymentMethod == selectedPaymentMethod) {
+      transArray[i].print();
+    }
   }
 }
 
