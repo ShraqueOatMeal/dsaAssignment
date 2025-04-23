@@ -28,9 +28,11 @@ void linearSearch(int catChoice, int paymentChoice, int size,
 
 int rowsNum(ifstream &file);
 
-double calculatePercentage(int matchCount, int totalCount) {
-  return (double)matchCount / totalCount * 100;
-};
+void calculatePercentage(LinkList<transactions> &transactionList, int size,
+                         const string &category, const string &paymentMethod);
+
+void calculatePercentage(transactions *transArray, int size,
+                         const string &category, const string &paymentMethod);
 
 // Use to trim the white spaces, tabs, and new lines from the string
 string trim(const string &str) {
@@ -67,6 +69,14 @@ int main(int argc, char *argv[]) {
   ifstream transactionFile("../../data/transactions_cleaned.csv");
   ifstream reviewFile("../../data/reviews_cleaned.csv");
 
+  int choice;
+  string mode;
+
+  cout << "Choose a mode to run: " << endl;
+  cout << "\t1. Link List" << endl;
+  cout << "\t2. Array" << endl;
+  cout << "Mode: ";
+  cin >> choice;
   // loadReview(reviewFile, reviewList);
 
   // cout << "Display csv data from link list: " << endl;
@@ -79,14 +89,17 @@ int main(int argc, char *argv[]) {
   transactions *transArray = new transactions[transCount];
   reviews *reviewArray = new reviews[reviewCount];
 
-  loadTransaction(transactionFile, transactionList);
-  // loadTransaction(transactionFile, transArray, transCount);
-  loadReview(reviewFile, reviewArray, reviewCount);
+  choice == 1 ? loadReview(reviewFile, reviewList),
+      loadTransaction(transactionFile, transactionList)
+              : loadReview(reviewFile, reviewArray, reviewCount),
+      loadTransaction(transactionFile, transArray, transCount);
 
   // cout << "Display csv data from array: " << endl;
   // displayTransactionArr(transArray, transCount);
   // displayReviewsArray(reviewArray, reviewCount);
 
+  choice == 1 ? radixSort::radixsort(&transactionList, transCount)
+              : radixSort::radixsort(transArray, transCount);
   // sort array using radix sort
   // radixSort::radixsort(transArray, transCount);
   // displayTransactionArr(transArray, transCount);
@@ -118,11 +131,9 @@ int main(int argc, char *argv[]) {
   cout << "Payment Method: ";
   cin >> paymentChoice;
 
-  // filter transactions array based on the category and payment method
-  // linearSearch(catChoice, paymentChoice, transCount, transArray);
-
-  // filter transactions link list based on the category and payment method
-  linearSearch(catChoice, paymentChoice, transCount, transactionList);
+  choice == 1
+      ? linearSearch(catChoice, paymentChoice, transCount, transactionList)
+      : linearSearch(catChoice, paymentChoice, transCount, transArray);
   cout << endl;
 
   return 0;
@@ -233,6 +244,33 @@ void loadReview(ifstream &reviewFile, LinkList<reviews> &reviewList) {
   }
 }
 
+void calculatePercentage(LinkList<transactions> &transactionList,
+                         const string &category, const string &paymentMethod) {
+  int categoryCount = 0;
+  int matchCount = 0;
+
+  Node<transactions> *current = transactionList.getHead();
+
+  while (current != nullptr) {
+    if (current->data.cat == category) {
+      categoryCount++;
+      if (current->data.paymentMethod == paymentMethod) {
+        matchCount++;
+      }
+    }
+    current = current->next;
+  }
+
+  double percentage =
+      (categoryCount > 0) ? (double)matchCount / categoryCount * 100 : 0;
+  cout << "Category: " << category << endl;
+  cout << "Payment Method: " << paymentMethod << endl;
+  cout << "Transactions in category: " << categoryCount << endl;
+  cout << "Transactions with payment method: " << matchCount << endl;
+  cout << "Percentage: " << fixed << setprecision(2) << percentage << "%"
+       << endl;
+}
+
 // Use to filter the transactions based on the category and payment method
 // using link list
 void linearSearch(int catChoice, int paymentChoice, int size,
@@ -299,7 +337,6 @@ void linearSearch(int catChoice, int paymentChoice, int size,
 
   cout << "Filtered List: " << endl;
 
-  int matchCount = 0;
   Node<transactions> *current = transactionList.getHead();
 
   while (current != nullptr) {
@@ -307,14 +344,11 @@ void linearSearch(int catChoice, int paymentChoice, int size,
     if (current->data.cat == selectedCat &&
         current->data.paymentMethod == selectedPaymentMethod) {
       current->data.print();
-      matchCount++;
     }
     current = current->next;
   }
 
-  cout << "Match Count: " << matchCount << endl;
-  cout << "Percentage: " << fixed << setprecision(2)
-       << calculatePercentage(matchCount, size) << "%" << endl;
+  calculatePercentage(transactionList, selectedCat, selectedPaymentMethod);
 }
 
 // load array
@@ -354,6 +388,30 @@ void displayReviewsArray(reviews *reviewArray, int size) {
   for (int i = 0; i < size; i++) {
     reviewArray[i].print();
   }
+}
+
+void calculatePercentage(transactions *transArray, int size,
+                         const string &category, const string &paymentMethod) {
+  int categoryCount = 0;
+  int matchCount = 0;
+
+  for (int i = 0; i < size; i++) {
+    if (transArray[i].cat == category) {
+      categoryCount++;
+      if (transArray[i].paymentMethod == paymentMethod) {
+        matchCount++;
+      }
+    }
+  }
+
+  double percentage =
+      (categoryCount > 0) ? (double)matchCount / categoryCount * 100 : 0;
+  cout << "Category: " << category << endl;
+  cout << "Payment Method: " << paymentMethod << endl;
+  cout << "Transactions in category: " << categoryCount << endl;
+  cout << "Transactions with payment method: " << matchCount << endl;
+  cout << "Percentage: " << fixed << setprecision(2) << percentage << "%"
+       << endl;
 }
 
 // Use to filter the transactions based on the category and payment method
@@ -421,18 +479,14 @@ void linearSearch(int catChoice, int paymentChoice, int size,
   }
 
   cout << "Filtered List: " << endl;
-  int matchCount = 0;
   for (int i = 0; i < size; i++) {
     if (transArray[i].cat == selectedCat &&
         transArray[i].paymentMethod == selectedPaymentMethod) {
       transArray[i].print();
-      matchCount++;
     }
   }
 
-  cout << "Match Count: " << matchCount << endl;
-  cout << "Percentage: " << fixed << setprecision(2)
-       << calculatePercentage(matchCount, size) << "%" << endl;
+  calculatePercentage(transArray, size, selectedCat, selectedPaymentMethod);
 }
 
 // Use to count the number of rows in the file
