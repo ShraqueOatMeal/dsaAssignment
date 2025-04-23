@@ -113,6 +113,27 @@ void radixSort::countSort(reviews *reviewArray, int n) {
     reviewArray[i] = output[i];
 }
 
+void radixSort::countSort(LinkList<reviews> *reviewList, int n) {
+  LinkList<reviews> count[10];
+
+  Node<reviews> *current = reviewList->getHead();
+
+  while (current != nullptr) {
+    count[current->data.rating % 10].addData(current->data);
+    current = current->next;
+  }
+
+  reviewList->clear();
+
+  for (int i = 0; i < 10; i++) {
+    Node<reviews> *countNode = count[i].getHead();
+    while (countNode != nullptr) {
+      reviewList->addData(countNode->data);
+      countNode = countNode->next;
+    }
+  }
+}
+
 void radixSort::radixsort(transactions *transArray, int n) {
 
   int m = maxDate(transArray, n);

@@ -12,4 +12,5 @@ public:
   static void radixsort(reviews *reviewArray, int n);
   static void radixsort(LinkList<transactions> *transactionList, int n);
   static void countSort(reviews *reviewArray, int n);
+  static void countSort(LinkList<reviews> *reviewList, int n);
 };
