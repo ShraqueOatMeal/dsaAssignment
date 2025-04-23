@@ -27,6 +27,7 @@ void linearSearch(int catChoice, int paymentChoice, int size,
 
 int rowsNum(ifstream &file);
 
+// Use to trim the white spaces, tabs, and new lines from the string
 string trim(const string &str) {
   size_t first = str.find_first_not_of(" \n\r\t");
   if (string::npos == first) {
@@ -36,8 +37,10 @@ string trim(const string &str) {
   return str.substr(first, (last - first + 1));
 }
 
+// Use to define the payment method
 enum paymentMeth { BankTransfer = 1, PayPal, DebitCard, COD, CreditCard };
 
+// Use to define the category
 enum category {
   Automotive = 1,
   Books,
@@ -79,15 +82,19 @@ int main(int argc, char *argv[]) {
   // displayTransactionArr(transArray, transCount);
   // displayReviewsArray(reviewArray, reviewCount);
 
+  // sort array using radix sort
   // radixSort::radixsort(transArray, transCount);
   // displayTransactionArr(transArray, transCount);
 
+  // sort link list using radix sort
   radixSort::radixsort(&transactionList, transCount);
   transactionList.display();
 
+  // sort review array using count sort, because radix sort is unnecessary
   // radixSort::countSort(reviewArray, reviewCount);
   // displayReviewsArray(reviewArray, reviewCount);
 
+  // filter transactions based on the category and payment method
   // int catChoice;
   // int paymentChoice;
   // cout << "Choose a category to filter: " << endl;
@@ -105,7 +112,11 @@ int main(int argc, char *argv[]) {
   //      << endl;
   // cout << "Payment Method: ";
   // cin >> paymentChoice;
+
+  // filter transactions array based on the category and payment method
   // linearSearch(catChoice, paymentChoice, transCount, transArray);
+
+  // filter transactions link list based on the category and payment method
   // linearSearch(catChoice, paymentChoice, transCount, transactionList);
   cout << endl;
 
@@ -181,6 +192,7 @@ void loadTransaction(ifstream &transactionFile, transactions *transArray,
   }
 }
 
+// Use to display the transactions array
 void displayTransactionArr(transactions *transArr, int size) {
   cout << "Transactions (Array):" << endl;
   for (int i = 0; i < size; i++) {
@@ -216,6 +228,8 @@ void loadReview(ifstream &reviewFile, LinkList<reviews> &reviewList) {
   }
 }
 
+// Use to filter the transactions based on the category and payment method
+// using link list
 void linearSearch(int catChoice, int paymentChoice, int size,
                   LinkList<transactions> &transactionList) {
   string selectedCat;
@@ -323,6 +337,7 @@ void loadReview(ifstream &reviewFile, reviews *reviewArray, int size) {
   }
 }
 
+// Use to display the reviews array
 void displayReviewsArray(reviews *reviewArray, int size) {
   cout << "Reviews (Array):" << endl;
   for (int i = 0; i < size; i++) {
@@ -330,6 +345,8 @@ void displayReviewsArray(reviews *reviewArray, int size) {
   }
 }
 
+// Use to filter the transactions based on the category and payment method
+// using array
 void linearSearch(int catChoice, int paymentChoice, int size,
                   transactions *transArray) {
   string selectedCat;
@@ -401,6 +418,7 @@ void linearSearch(int catChoice, int paymentChoice, int size,
   }
 }
 
+// Use to count the number of rows in the file
 int rowsNum(ifstream &file) {
   int count = 0;
   string line;
