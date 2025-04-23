@@ -3,6 +3,7 @@
 #include "reviews.h"
 #include "transactions.h"
 #include <fstream>
+#include <iomanip>
 #include <iostream>
 #include <sstream>
 
@@ -26,6 +27,10 @@ void linearSearch(int catChoice, int paymentChoice, int size,
                   LinkList<transactions> &transactionList);
 
 int rowsNum(ifstream &file);
+
+double calculatePercentage(int matchCount, int totalCount) {
+  return (double)matchCount / totalCount * 100;
+};
 
 // Use to trim the white spaces, tabs, and new lines from the string
 string trim(const string &str) {
@@ -75,7 +80,7 @@ int main(int argc, char *argv[]) {
   reviews *reviewArray = new reviews[reviewCount];
 
   loadTransaction(transactionFile, transactionList);
-  loadTransaction(transactionFile, transArray, transCount);
+  // loadTransaction(transactionFile, transArray, transCount);
   loadReview(reviewFile, reviewArray, reviewCount);
 
   // cout << "Display csv data from array: " << endl;
@@ -87,37 +92,37 @@ int main(int argc, char *argv[]) {
   // displayTransactionArr(transArray, transCount);
 
   // sort link list using radix sort
-  radixSort::radixsort(&transactionList, transCount);
-  transactionList.display();
+  // radixSort::radixsort(&transactionList, transCount);
+  // transactionList.display();
 
   // sort review array using count sort, because radix sort is unnecessary
   // radixSort::countSort(reviewArray, reviewCount);
   // displayReviewsArray(reviewArray, reviewCount);
 
   // filter transactions based on the category and payment method
-  // int catChoice;
-  // int paymentChoice;
-  // cout << "Choose a category to filter: " << endl;
-  // cout << "\t1. Automotive\n\t2. Books\n\t3. Groceries\n\t4. Sports\n\t5. "
-  //         "Toys\n\t6. Beauty\n\t7. Furniture\n\t8. Electronics\n\t9. "
-  //         "Fashion\n\t10. Home Appliances"
-  //      << endl;
-  // cout << "Category: ";
-  // cin >> catChoice;
-  //
-  // cout << "Choose a payment method to filter: " << endl;
-  // cout << "\t1. Bank Transfer\n\t2. PayPal\n\t3. Debit Card\n\t4. Cash on "
-  //         "Delivery\n\t5. "
-  //         "Credit Card"
-  //      << endl;
-  // cout << "Payment Method: ";
-  // cin >> paymentChoice;
+  int catChoice;
+  int paymentChoice;
+  cout << "Choose a category to filter: " << endl;
+  cout << "\t1. Automotive\n\t2. Books\n\t3. Groceries\n\t4. Sports\n\t5. "
+          "Toys\n\t6. Beauty\n\t7. Furniture\n\t8. Electronics\n\t9. "
+          "Fashion\n\t10. Home Appliances"
+       << endl;
+  cout << "Category: ";
+  cin >> catChoice;
+
+  cout << "Choose a payment method to filter: " << endl;
+  cout << "\t1. Bank Transfer\n\t2. PayPal\n\t3. Debit Card\n\t4. Cash on "
+          "Delivery\n\t5. "
+          "Credit Card"
+       << endl;
+  cout << "Payment Method: ";
+  cin >> paymentChoice;
 
   // filter transactions array based on the category and payment method
   // linearSearch(catChoice, paymentChoice, transCount, transArray);
 
   // filter transactions link list based on the category and payment method
-  // linearSearch(catChoice, paymentChoice, transCount, transactionList);
+  linearSearch(catChoice, paymentChoice, transCount, transactionList);
   cout << endl;
 
   return 0;
@@ -294,6 +299,7 @@ void linearSearch(int catChoice, int paymentChoice, int size,
 
   cout << "Filtered List: " << endl;
 
+  int matchCount = 0;
   Node<transactions> *current = transactionList.getHead();
 
   while (current != nullptr) {
@@ -301,9 +307,14 @@ void linearSearch(int catChoice, int paymentChoice, int size,
     if (current->data.cat == selectedCat &&
         current->data.paymentMethod == selectedPaymentMethod) {
       current->data.print();
+      matchCount++;
     }
     current = current->next;
   }
+
+  cout << "Match Count: " << matchCount << endl;
+  cout << "Percentage: " << fixed << setprecision(2)
+       << calculatePercentage(matchCount, size) << "%" << endl;
 }
 
 // load array
@@ -410,12 +421,18 @@ void linearSearch(int catChoice, int paymentChoice, int size,
   }
 
   cout << "Filtered List: " << endl;
+  int matchCount = 0;
   for (int i = 0; i < size; i++) {
     if (transArray[i].cat == selectedCat &&
         transArray[i].paymentMethod == selectedPaymentMethod) {
       transArray[i].print();
+      matchCount++;
     }
   }
+
+  cout << "Match Count: " << matchCount << endl;
+  cout << "Percentage: " << fixed << setprecision(2)
+       << calculatePercentage(matchCount, size) << "%" << endl;
 }
 
 // Use to count the number of rows in the file
