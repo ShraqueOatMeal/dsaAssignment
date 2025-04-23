@@ -2,11 +2,9 @@
 #include "radixSort.h"
 #include "reviews.h"
 #include "transactions.h"
-#include <algorithm>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
-#include <map>
 #include <sstream>
 
 using namespace std;
@@ -136,7 +134,18 @@ int main(int argc, char *argv[]) {
       : linearSearch(catChoice, paymentChoice, transCount, transArray);
   cout << endl;
 
-  // Question 3
+  // Question 3: which words are most frequently used in the reviews rated 1
+  // star?
+
+  int count = 0;
+
+  for (int i = 0; i < reviewCount && reviewArray[i].rating == 1; i++) {
+    // string review = reviewArray[i].review;
+    count++;
+  }
+  string *words = new string[count];
+  displayReviewsArray(reviewArray, count);
+
   // displayReviewsArray(reviewArray, reviewCount);
 
   return 0;
