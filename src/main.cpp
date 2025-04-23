@@ -3,6 +3,7 @@
 #include "reviews.h"
 #include "transactions.h"
 #include <fstream>
+#include <iomanip>
 #include <iostream>
 #include <sstream>
 
@@ -79,7 +80,7 @@ int main(int argc, char *argv[]) {
   reviews *reviewArray = new reviews[reviewCount];
 
   loadTransaction(transactionFile, transactionList);
-  loadTransaction(transactionFile, transArray, transCount);
+  // loadTransaction(transactionFile, transArray, transCount);
   loadReview(reviewFile, reviewArray, reviewCount);
 
   // cout << "Display csv data from array: " << endl;
@@ -118,10 +119,10 @@ int main(int argc, char *argv[]) {
   cin >> paymentChoice;
 
   // filter transactions array based on the category and payment method
-  linearSearch(catChoice, paymentChoice, transCount, transArray);
+  // linearSearch(catChoice, paymentChoice, transCount, transArray);
 
   // filter transactions link list based on the category and payment method
-  // linearSearch(catChoice, paymentChoice, transCount, transactionList);
+  linearSearch(catChoice, paymentChoice, transCount, transactionList);
   cout << endl;
 
   return 0;
@@ -312,7 +313,8 @@ void linearSearch(int catChoice, int paymentChoice, int size,
   }
 
   cout << "Match Count: " << matchCount << endl;
-  cout << "Percentage: " << calculatePercentage(matchCount, size) << endl;
+  cout << "Percentage: " << fixed << setprecision(2)
+       << calculatePercentage(matchCount, size) << "%" << endl;
 }
 
 // load array
@@ -429,7 +431,8 @@ void linearSearch(int catChoice, int paymentChoice, int size,
   }
 
   cout << "Match Count: " << matchCount << endl;
-  cout << "Percentage: " << calculatePercentage(matchCount, size) << endl;
+  cout << "Percentage: " << fixed << setprecision(2)
+       << calculatePercentage(matchCount, size) << "%" << endl;
 }
 
 // Use to count the number of rows in the file
