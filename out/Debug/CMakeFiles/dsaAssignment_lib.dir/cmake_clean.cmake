@@ -1,4 +1,8 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/dsaAssignment_lib.dir/src/bubblesort.cpp.o"
+  "CMakeFiles/dsaAssignment_lib.dir/src/bubblesort.cpp.o.d"
+  "CMakeFiles/dsaAssignment_lib.dir/src/jumpsearch.cpp.o"
+  "CMakeFiles/dsaAssignment_lib.dir/src/jumpsearch.cpp.o.d"
   "CMakeFiles/dsaAssignment_lib.dir/src/radixSort.cpp.o"
   "CMakeFiles/dsaAssignment_lib.dir/src/radixSort.cpp.o.d"
   "libdsaAssignment_lib.a"

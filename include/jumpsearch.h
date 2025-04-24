@@ -2,7 +2,15 @@
 #include "LinkList.h"
 #include "transactions.h"
 
-void searchByProduct(LinkList<transactions>& list, const string& product);
-void searchByCategory(LinkList<transactions>& list, const string& category);
-void searchByPaymentMethod(LinkList<transactions>& list, const string& paymentMethod);
-void searchMenu(LinkList<transactions>& list);
+class jumpSearch {
+public:
+  jumpSearch();
+  ~jumpSearch();
+  static void searchByProduct(LinkList<transactions> &list,
+                              const string &product);
+  static void searchByCategory(LinkList<transactions> &list,
+                               const string &category);
+  static void searchByPaymentMethod(LinkList<transactions> &list,
+                                    const string &paymentMethod);
+  static void searchMenu(LinkList<transactions> &list);
+};

@@ -142,6 +142,54 @@ dsaAssignment_lib/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/build
 .PHONY : dsaAssignment_lib/fast
 
+src/bubblesort.o: src/bubblesort.cpp.o
+.PHONY : src/bubblesort.o
+
+# target to build an object file
+src/bubblesort.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/bubblesort.cpp.o
+.PHONY : src/bubblesort.cpp.o
+
+src/bubblesort.i: src/bubblesort.cpp.i
+.PHONY : src/bubblesort.i
+
+# target to preprocess a source file
+src/bubblesort.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/bubblesort.cpp.i
+.PHONY : src/bubblesort.cpp.i
+
+src/bubblesort.s: src/bubblesort.cpp.s
+.PHONY : src/bubblesort.s
+
+# target to generate assembly for a file
+src/bubblesort.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/bubblesort.cpp.s
+.PHONY : src/bubblesort.cpp.s
+
+src/jumpsearch.o: src/jumpsearch.cpp.o
+.PHONY : src/jumpsearch.o
+
+# target to build an object file
+src/jumpsearch.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/jumpsearch.cpp.o
+.PHONY : src/jumpsearch.cpp.o
+
+src/jumpsearch.i: src/jumpsearch.cpp.i
+.PHONY : src/jumpsearch.i
+
+# target to preprocess a source file
+src/jumpsearch.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/jumpsearch.cpp.i
+.PHONY : src/jumpsearch.cpp.i
+
+src/jumpsearch.s: src/jumpsearch.cpp.s
+.PHONY : src/jumpsearch.s
+
+# target to generate assembly for a file
+src/jumpsearch.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/jumpsearch.cpp.s
+.PHONY : src/jumpsearch.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -200,6 +248,12 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... dsaAssignment"
 	@echo "... dsaAssignment_lib"
+	@echo "... src/bubblesort.o"
+	@echo "... src/bubblesort.i"
+	@echo "... src/bubblesort.s"
+	@echo "... src/jumpsearch.o"
+	@echo "... src/jumpsearch.i"
+	@echo "... src/jumpsearch.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

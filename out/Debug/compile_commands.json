@@ -7,6 +7,18 @@
 },
 {
   "directory": "/home/loh-yen-kuan/Coding/dsaAssignment/out/Debug",
+  "command": "/usr/bin/c++  -I/home/loh-yen-kuan/Coding/dsaAssignment/include -g -std=gnu++17 -o CMakeFiles/dsaAssignment_lib.dir/src/bubblesort.cpp.o -c /home/loh-yen-kuan/Coding/dsaAssignment/src/bubblesort.cpp",
+  "file": "/home/loh-yen-kuan/Coding/dsaAssignment/src/bubblesort.cpp",
+  "output": "CMakeFiles/dsaAssignment_lib.dir/src/bubblesort.cpp.o"
+},
+{
+  "directory": "/home/loh-yen-kuan/Coding/dsaAssignment/out/Debug",
+  "command": "/usr/bin/c++  -I/home/loh-yen-kuan/Coding/dsaAssignment/include -g -std=gnu++17 -o CMakeFiles/dsaAssignment_lib.dir/src/jumpsearch.cpp.o -c /home/loh-yen-kuan/Coding/dsaAssignment/src/jumpsearch.cpp",
+  "file": "/home/loh-yen-kuan/Coding/dsaAssignment/src/jumpsearch.cpp",
+  "output": "CMakeFiles/dsaAssignment_lib.dir/src/jumpsearch.cpp.o"
+},
+{
+  "directory": "/home/loh-yen-kuan/Coding/dsaAssignment/out/Debug",
   "command": "/usr/bin/c++  -I/home/loh-yen-kuan/Coding/dsaAssignment/include -g -std=gnu++17 -o CMakeFiles/dsaAssignment.dir/src/main.cpp.o -c /home/loh-yen-kuan/Coding/dsaAssignment/src/main.cpp",
   "file": "/home/loh-yen-kuan/Coding/dsaAssignment/src/main.cpp",
   "output": "CMakeFiles/dsaAssignment.dir/src/main.cpp.o"
