@@ -1,0 +1,14 @@
+[
+{
+  "directory": "C:/Users/lokai/OneDrive/Documents/GitHub/dsaAssignment/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -IC:/Users/lokai/OneDrive/Documents/GitHub/dsaAssignment/include -g -std=gnu++17 -o CMakeFiles\\dsaAssignment.dir\\src\\main.cpp.obj -c C:\\Users\\lokai\\OneDrive\\Documents\\GitHub\\dsaAssignment\\src\\main.cpp",
+  "file": "C:\\Users\\lokai\\OneDrive\\Documents\\GitHub\\dsaAssignment\\src\\main.cpp",
+  "output": "CMakeFiles\\dsaAssignment.dir\\src\\main.cpp.obj"
+},
+{
+  "directory": "C:/Users/lokai/OneDrive/Documents/GitHub/dsaAssignment/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -IC:/Users/lokai/OneDrive/Documents/GitHub/dsaAssignment/include -g -std=gnu++17 -o CMakeFiles\\dsaAssignment_lib.dir\\src\\radixSort.cpp.obj -c C:\\Users\\lokai\\OneDrive\\Documents\\GitHub\\dsaAssignment\\src\\radixSort.cpp",
+  "file": "C:\\Users\\lokai\\OneDrive\\Documents\\GitHub\\dsaAssignment\\src\\radixSort.cpp",
+  "output": "CMakeFiles\\dsaAssignment_lib.dir\\src\\radixSort.cpp.obj"
+}
+]

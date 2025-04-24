@@ -2,6 +2,8 @@
 #include "radixSort.h"
 #include "reviews.h"
 #include "transactions.h"
+#include "bubblesort.h"
+#include "jumpsearch.h" 
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -53,6 +55,8 @@ enum category {
 
 // System will run in here
 int main(int argc, char *argv[]) {
+
+
   LinkList<reviews> reviewList;
   LinkList<transactions> transactionList;
 
@@ -84,6 +88,9 @@ int main(int argc, char *argv[]) {
 
   radixSort::radixsort(&transactionList, transCount);
   transactionList.display();
+
+  displaySortedByDate(transactionList); //kai
+  searchMenu(transactionList);  // kai
 
   // radixSort::countSort(reviewArray, reviewCount);
   // displayReviewsArray(reviewArray, reviewCount);
