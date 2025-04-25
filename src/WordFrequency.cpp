@@ -117,21 +117,19 @@ void processOneStarReviews(LinkList<reviews> &reviewList) {
 
   int wordCount = 0;
 
-  // Iterate through all reviews
   while (current != nullptr) {
-    // Filter reviews with rating = 1
     if (current->data.rating == 1) {
       string reviewText = current->data.review;
       istringstream iss(reviewText);
       string word;
 
-      // Extract words from the review
+      // Extract words
       while (iss >> word) {
         // Remove punctuation and convert to lowercase
         word = cleanWord(word);
 
         if (word.empty() || word.length() < 3) {
-          // Skip empty words or very short words (like "a", "an", "the", etc.)
+          // Skip empty words or very short words (like "a", "an", etc.)
           continue;
         }
 
@@ -141,7 +139,6 @@ void processOneStarReviews(LinkList<reviews> &reviewList) {
 
         while (wordNode != nullptr) {
           if (wordNode->data.word == word) {
-            // Word found, increment count
             wordNode->data.count++;
             found = true;
             break;
@@ -149,7 +146,6 @@ void processOneStarReviews(LinkList<reviews> &reviewList) {
           wordNode = wordNode->next;
         }
 
-        // If word not found, add it to the list
         if (!found) {
           WordFrequency newWord(word);
           wordFrequencyList.addData(newWord);
