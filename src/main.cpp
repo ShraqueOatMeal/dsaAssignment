@@ -1,4 +1,5 @@
 #include "LinkList.h"
+#include "WordFrequency.h"
 #include "radixSort.h"
 #include "reviews.h"
 #include "transactions.h"
@@ -98,20 +99,18 @@ int main(int argc, char *argv[]) {
   // displayTransactionArr(transArray, transCount);
   // displayReviewsArray(reviewArray, reviewCount);
 
-  choice == 1 ? radixSort::radixsort(&transactionList, transCount)
-              : radixSort::radixsort(transArray, transCount);
-  // sort array using radix sort
-  // radixSort::radixsort(transArray, transCount);
+  choice == 1 ? radixSort::radixsort(&transactionList, transCount),
+      radixSort::countSort(&reviewList, reviewCount)
+              : radixSort::radixsort(transArray, transCount),
+      radixSort::countSort(reviewArray, reviewCount);
+
+  // Question 1: Array
   // displayTransactionArr(transArray, transCount);
 
-  // sort link list using radix sort
-  // radixSort::radixsort(&transactionList, transCount);
+  // Question 1: Link List
   // transactionList.display();
 
-  // sort review array using count sort, because radix sort is unnecessary
-  // radixSort::countSort(reviewArray, reviewCount);
-  // displayReviewsArray(reviewArray, reviewCount);
-
+  // Question 2
   // filter transactions based on the category and payment method
   int catChoice;
   int paymentChoice;
@@ -135,6 +134,23 @@ int main(int argc, char *argv[]) {
       ? linearSearch(catChoice, paymentChoice, transCount, transactionList)
       : linearSearch(catChoice, paymentChoice, transCount, transArray);
   cout << endl;
+
+  // Question 3: which words are most frequently used in the reviews rated 1
+  // star?
+
+  if (choice == 1) {
+    processOneStarReviews(reviewList);
+  } else {
+    LinkList<reviews> tempReviewList;
+    for (int i = 0; i < reviewCount; i++) {
+      tempReviewList.addData(reviewArray[i]);
+    }
+    processOneStarReviews(tempReviewList);
+  }
+
+  // displayReviewsArray(reviewArray, reviewCount);
+  delete[] transArray;
+  delete[] reviewArray;
 
   return 0;
 }
