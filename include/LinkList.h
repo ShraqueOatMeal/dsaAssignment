@@ -26,7 +26,8 @@ public:
   LinkList() : head(nullptr), tail(nullptr), size(0){};
   ~LinkList();
 
-  Node<T> *getHead() { return head; }
+  Node<T> *getHead() const { return head; }
+  Node<T> *setHead(Node<T> *newHead) { return head = newHead; }
   void display();
   void addData(T data);
   void clear();

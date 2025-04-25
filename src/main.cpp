@@ -1,4 +1,5 @@
 #include "LinkList.h"
+#include "WordFrequency.h"
 #include "radixSort.h"
 #include "reviews.h"
 #include "transactions.h"
@@ -137,16 +138,19 @@ int main(int argc, char *argv[]) {
   // Question 3: which words are most frequently used in the reviews rated 1
   // star?
 
-  int count = 0;
-
-  for (int i = 0; i < reviewCount && reviewArray[i].rating == 1; i++) {
-    // string review = reviewArray[i].review;
-    count++;
+  if (choice == 1) {
+    processOneStarReviews(reviewList);
+  } else {
+    LinkList<reviews> tempReviewList;
+    for (int i = 0; i < reviewCount; i++) {
+      tempReviewList.addData(reviewArray[i]);
+    }
+    processOneStarReviews(tempReviewList);
   }
-  string *words = new string[count];
-  displayReviewsArray(reviewArray, count);
 
   // displayReviewsArray(reviewArray, reviewCount);
+  delete[] transArray;
+  delete[] reviewArray;
 
   return 0;
 }

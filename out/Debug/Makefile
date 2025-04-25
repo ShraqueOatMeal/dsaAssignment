@@ -142,6 +142,30 @@ dsaAssignment_lib/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/build
 .PHONY : dsaAssignment_lib/fast
 
+src/WordFrequency.o: src/WordFrequency.cpp.o
+.PHONY : src/WordFrequency.o
+
+# target to build an object file
+src/WordFrequency.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/WordFrequency.cpp.o
+.PHONY : src/WordFrequency.cpp.o
+
+src/WordFrequency.i: src/WordFrequency.cpp.i
+.PHONY : src/WordFrequency.i
+
+# target to preprocess a source file
+src/WordFrequency.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/WordFrequency.cpp.i
+.PHONY : src/WordFrequency.cpp.i
+
+src/WordFrequency.s: src/WordFrequency.cpp.s
+.PHONY : src/WordFrequency.s
+
+# target to generate assembly for a file
+src/WordFrequency.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/WordFrequency.cpp.s
+.PHONY : src/WordFrequency.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -200,6 +224,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... dsaAssignment"
 	@echo "... dsaAssignment_lib"
+	@echo "... src/WordFrequency.o"
+	@echo "... src/WordFrequency.i"
+	@echo "... src/WordFrequency.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
