@@ -90,6 +90,20 @@ build CMakeFiles/dsaAssignment_lib.dir/src/radixSort.cpp.obj: CXX_COMPILER__dsaA
   OBJECT_DIR = CMakeFiles\dsaAssignment_lib.dir
   OBJECT_FILE_DIR = CMakeFiles\dsaAssignment_lib.dir\src
 
+build CMakeFiles/dsaAssignment_lib.dir/src/bubblesort.cpp.obj: CXX_COMPILER__dsaAssignment_lib_unscanned_Debug C$:/Users/lokai/OneDrive/Documents/GitHub/dsaAssignment/src/bubblesort.cpp || cmake_object_order_depends_target_dsaAssignment_lib
+  DEP_FILE = CMakeFiles\dsaAssignment_lib.dir\src\bubblesort.cpp.obj.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -IC:/Users/lokai/OneDrive/Documents/GitHub/dsaAssignment/include
+  OBJECT_DIR = CMakeFiles\dsaAssignment_lib.dir
+  OBJECT_FILE_DIR = CMakeFiles\dsaAssignment_lib.dir\src
+
+build CMakeFiles/dsaAssignment_lib.dir/src/jumpsearch.cpp.obj: CXX_COMPILER__dsaAssignment_lib_unscanned_Debug C$:/Users/lokai/OneDrive/Documents/GitHub/dsaAssignment/src/jumpsearch.cpp || cmake_object_order_depends_target_dsaAssignment_lib
+  DEP_FILE = CMakeFiles\dsaAssignment_lib.dir\src\jumpsearch.cpp.obj.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -IC:/Users/lokai/OneDrive/Documents/GitHub/dsaAssignment/include
+  OBJECT_DIR = CMakeFiles\dsaAssignment_lib.dir
+  OBJECT_FILE_DIR = CMakeFiles\dsaAssignment_lib.dir\src
+
 
 # =============================================================================
 # Link build statements for STATIC_LIBRARY target dsaAssignment_lib
@@ -98,7 +112,7 @@ build CMakeFiles/dsaAssignment_lib.dir/src/radixSort.cpp.obj: CXX_COMPILER__dsaA
 #############################################
 # Link the static library libdsaAssignment_lib.a
 
-build libdsaAssignment_lib.a: CXX_STATIC_LIBRARY_LINKER__dsaAssignment_lib_Debug CMakeFiles/dsaAssignment_lib.dir/src/radixSort.cpp.obj
+build libdsaAssignment_lib.a: CXX_STATIC_LIBRARY_LINKER__dsaAssignment_lib_Debug CMakeFiles/dsaAssignment_lib.dir/src/radixSort.cpp.obj CMakeFiles/dsaAssignment_lib.dir/src/bubblesort.cpp.obj CMakeFiles/dsaAssignment_lib.dir/src/jumpsearch.cpp.obj
   LANGUAGE_COMPILE_FLAGS = -g
   OBJECT_DIR = CMakeFiles\dsaAssignment_lib.dir
   POST_BUILD = cd .

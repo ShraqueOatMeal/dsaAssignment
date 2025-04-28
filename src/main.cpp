@@ -8,9 +8,11 @@
 #include <iostream>
 #include <sstream>
 
+
 using namespace std;
 
 // Declaration
+
 void loadTransaction(ifstream &transactionFile,
                      LinkList<transactions> &transactionList);
 void loadTransaction(ifstream &transactionFile, transactions *transArray,
@@ -53,14 +55,36 @@ enum category {
   HomeAppliances
 };
 
+// void displayTransactionList(LinkList<transactions>& transactionList) {
+//   Node<transactions>* current = transactionList.getHead();
+
+//   if (!current) {
+//       cout << "Transaction list is empty." << endl;
+//       return;
+//   }
+
+//   cout << "Transaction List:\n";
+
+//   while (current != nullptr) {
+//       current->data.print();  // Using the transactions' built-in print() method
+//       current = current->next;
+//   }
+// }
+
+
 // System will run in here
 int main(int argc, char *argv[]) {
 
   LinkList<reviews> reviewList;
   LinkList<transactions> transactionList;
 
-  ifstream transactionFile("../../data/transactions_cleaned.csv");
-  ifstream reviewFile("../../data/reviews_cleaned.csv");
+  ifstream transactionFile("../data/transactions_cleaned.csv");
+  ifstream reviewFile("../data/reviews_cleaned.csv");
+
+//   if (!transactionFile.is_open()) {
+//     cout << "Failed to open transaction file!" << endl;
+//     return 1;
+// }
 
   // loadReview(reviewFile, reviewList);
 
@@ -71,6 +95,17 @@ int main(int argc, char *argv[]) {
   int transCount = rowsNum(transactionFile);
   int reviewCount = rowsNum(reviewFile);
 
+  //reset the file pointer AFTER counting rows
+  transactionFile.clear();
+  transactionFile.seekg(0);
+  string dummyLine;
+  getline(transactionFile, dummyLine); // Skip transaction header
+  
+  reviewFile.clear();
+  reviewFile.seekg(0);
+  getline(reviewFile, dummyLine); // Skip review header
+  
+  // Now load properly
   transactions *transArray = new transactions[transCount];
   reviews *reviewArray = new reviews[reviewCount];
 
@@ -85,14 +120,16 @@ int main(int argc, char *argv[]) {
   // radixSort::radixsort(transArray, transCount);
   // displayTransactionArr(transArray, transCount);
 
-  radixSort::radixsort(&transactionList, transCount);
-  transactionList.display();
+  // radixSort::radixsort(&transactionList, transCount); //undo ltr
+  // transactionList.display();  //undo ltr
 
-  bubblesort::displaySortedByDate(transactionList); // kai
+
+  //displayTransactionList(transactionList);  //file checker
+  //bubblesort::displaySortedByDate(transactionList);  // kai
   jumpSearch::searchMenu(transactionList);          // kai
 
-  // radixSort::countSort(reviewArray, reviewCount);
-  // displayReviewsArray(reviewArray, reviewCount);
+  //radixSort::countSort(reviewArray, reviewCount);
+  //displayReviewsArray(reviewArray, reviewCount);
 
   // int catChoice;
   // int paymentChoice;
@@ -423,3 +460,4 @@ int rowsNum(ifstream &file) {
   file.seekg(0);
   return count;
 }
+
