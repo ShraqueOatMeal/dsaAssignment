@@ -35,6 +35,8 @@ void calculatePercentage(LinkList<transactions> &transactionList, int size,
 void calculatePercentage(transactions *transArray, int size,
                          const string &category, const string &paymentMethod);
 
+void cleanData(ifstream &inputFile, const string &outputFilename);
+
 // Use to trim the white spaces, tabs, and new lines from the string
 string trim(const string &str) {
   size_t first = str.find_first_not_of(" \n\r\t");
@@ -66,6 +68,15 @@ enum category {
 int main(int argc, char *argv[]) {
   LinkList<reviews> reviewList;
   LinkList<transactions> transactionList;
+
+  ifstream uncleanedTransactionFile("../../data/transactions.csv");
+  ifstream uncleanedReviewFile("../../data/reviews.csv");
+
+  cleanData(uncleanedTransactionFile, "../../data/transactions_cleaned.csv");
+  cleanData(uncleanedReviewFile, "../../data/reviews_cleaned.csv");
+
+  uncleanedTransactionFile.close();
+  uncleanedReviewFile.close();
 
   ifstream transactionFile("../../data/transactions_cleaned.csv");
   ifstream reviewFile("../../data/reviews_cleaned.csv");
@@ -521,4 +532,92 @@ int rowsNum(ifstream &file) {
   file.clear();
   file.seekg(0);
   return count;
+}
+
+void cleanData(ifstream &inputFile, const string &outputFilename) {
+  ofstream outputFile(outputFilename);
+
+  if (!inputFile.is_open() || !outputFile.is_open()) {
+    cout << "Error opening files!" << endl;
+    return;
+  }
+
+  string line;
+
+  // Copy the header to the output file
+  getline(inputFile, line);
+  outputFile << line << endl;
+
+  // Process each data row
+  while (getline(inputFile, line)) {
+    // Skip empty lines
+    if (line.empty()) {
+      continue;
+    }
+
+    // Count the maximum possible number of fields (commas + 1)
+    int maxFields = 1;
+    for (char c : line) {
+      if (c == ',')
+        maxFields++;
+    }
+
+    // Create an array to hold the fields
+    string *fields = new string[maxFields];
+    int fieldCount = 0;
+
+    // Parse CSV line accounting for quoted fields
+    bool inQuotes = false;
+    string currentField = "";
+
+    for (char c : line) {
+      if (c == '"') {
+        inQuotes = !inQuotes;
+      } else if (c == ',' && !inQuotes) {
+        // Add the completed field
+        fields[fieldCount++] = trim(currentField);
+        currentField = "";
+      } else {
+        currentField += c;
+      }
+    }
+    // Add the last field
+    fields[fieldCount++] = trim(currentField);
+
+    // Now check the fields for problems
+    bool hasEmptyField = false;
+    bool hasInvalidValue = false;
+
+    for (int i = 0; i < fieldCount; i++) {
+      // Check for empty fields
+      if (fields[i].empty()) {
+        hasEmptyField = true;
+        break;
+      }
+
+      // Check for "Invalid" or "NaN"
+      string lowerField = fields[i];
+      // Convert to lowercase for case-insensitive comparison
+      for (char &c : lowerField) {
+        c = tolower(c);
+      }
+
+      if (lowerField == "invalid" || lowerField == "nan" ||
+          lowerField == "invalid date" || lowerField == "invalid rating") {
+        hasInvalidValue = true;
+        break;
+      }
+    }
+
+    // Write the valid line to the output file
+    if (!hasEmptyField && !hasInvalidValue) {
+      outputFile << line << endl;
+    }
+
+    // Clean up the dynamically allocated array
+    delete[] fields;
+  }
+
+  inputFile.close();
+  outputFile.close();
 }
