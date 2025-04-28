@@ -9,6 +9,6 @@ add_executable(dsaAssignment src/main.cpp)
 
 # If you later add a library, uncomment and modify these lines:
 include_directories(${PROJECT_SOURCE_DIR}/include)
-add_library(dsaAssignment_lib src/radixSort.cpp src/WordFrequency.cpp)
+add_library(dsaAssignment_lib src/radixSort.cpp src/WordFrequency.cpp src/JoinedData.cpp)
 target_link_libraries(dsaAssignment PRIVATE dsaAssignment_lib)
 

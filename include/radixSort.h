@@ -1,5 +1,6 @@
 #pragma once
 
+#include "JoinedData.h"
 #include "LinkList.h"
 #include "reviews.h"
 #include "transactions.h"
@@ -13,4 +14,6 @@ public:
   static void radixsort(LinkList<transactions> *transactionList, int n);
   static void countSort(reviews *reviewArray, int n);
   static void countSort(LinkList<reviews> *reviewList, int n);
+  static void radixsort(LinkList<mergedData> *mergedList, int n);
+  static void radixsort(mergedData *mergedArray, int n);
 };

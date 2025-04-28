@@ -142,6 +142,30 @@ dsaAssignment_lib/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/build
 .PHONY : dsaAssignment_lib/fast
 
+src/JoinedData.o: src/JoinedData.cpp.o
+.PHONY : src/JoinedData.o
+
+# target to build an object file
+src/JoinedData.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/JoinedData.cpp.o
+.PHONY : src/JoinedData.cpp.o
+
+src/JoinedData.i: src/JoinedData.cpp.i
+.PHONY : src/JoinedData.i
+
+# target to preprocess a source file
+src/JoinedData.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/JoinedData.cpp.i
+.PHONY : src/JoinedData.cpp.i
+
+src/JoinedData.s: src/JoinedData.cpp.s
+.PHONY : src/JoinedData.s
+
+# target to generate assembly for a file
+src/JoinedData.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/JoinedData.cpp.s
+.PHONY : src/JoinedData.cpp.s
+
 src/WordFrequency.o: src/WordFrequency.cpp.o
 .PHONY : src/WordFrequency.o
 
@@ -224,6 +248,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... dsaAssignment"
 	@echo "... dsaAssignment_lib"
+	@echo "... src/JoinedData.o"
+	@echo "... src/JoinedData.i"
+	@echo "... src/JoinedData.s"
 	@echo "... src/WordFrequency.o"
 	@echo "... src/WordFrequency.i"
 	@echo "... src/WordFrequency.s"
