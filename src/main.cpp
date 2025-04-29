@@ -1,17 +1,16 @@
 #include "JoinedData.h"
 #include "LinkList.h"
+#include "WordFrequency.h"
 #include "bubblesort.h"
 #include "jumpsearch.h"
-#include "WordFrequency.h"
+#include "oneStarReview.h"
 #include "radixSort.h"
 #include "reviews.h"
 #include "transactions.h"
-#include "oneStarReview.h"
 #include <fstream>
 #include <iomanip>
 #include <iostream>
 #include <sstream>
-
 
 using namespace std;
 
@@ -81,11 +80,10 @@ enum category {
 //   cout << "Transaction List:\n";
 
 //   while (current != nullptr) {
-//       current->data.print();  // Using the transactions' built-in print() method
-//       current = current->next;
+//       current->data.print();  // Using the transactions' built-in print()
+//       method current = current->next;
 //   }
 // }
-
 
 // System will run in here
 int main(int argc, char *argv[]) {
@@ -102,8 +100,8 @@ int main(int argc, char *argv[]) {
   uncleanedTransactionFile.close();
   uncleanedReviewFile.close();
 
-  ifstream transactionFile("../data/transactions_cleaned.csv");
-  ifstream reviewFile("../data/reviews_cleaned.csv");
+  ifstream transactionFile("../../data/transactions_cleaned.csv");
+  ifstream reviewFile("../../data/reviews_cleaned.csv");
 
   int choice;
   string mode;
@@ -122,16 +120,16 @@ int main(int argc, char *argv[]) {
   int transCount = rowsNum(transactionFile);
   int reviewCount = rowsNum(reviewFile);
 
-  //reset the file pointer AFTER counting rows
+  // reset the file pointer AFTER counting rows
   transactionFile.clear();
   transactionFile.seekg(0);
   string dummyLine;
   getline(transactionFile, dummyLine); // Skip transaction header
-  
+
   reviewFile.clear();
   reviewFile.seekg(0);
   getline(reviewFile, dummyLine); // Skip review header
-  
+
   // Now load properly
   transactions *transArray = new transactions[transCount];
   reviews *reviewArray = new reviews[reviewCount];
@@ -266,16 +264,16 @@ int main(int argc, char *argv[]) {
   // radixSort::radixsort(&transactionList, transCount); //undo ltr
   // transactionList.display();  //undo ltr
 
-
-  //displayTransactionList(transactionList);  //file checker
+  // displayTransactionList(transactionList);  //file checker
   bubblesort::displaySortedByDate(transactionList); // kai
   int size = 0;
-  transactions* sortedArray = bubblesort::getSortedArrayByDate(transactionList, size);
+  transactions *sortedArray =
+      bubblesort::getSortedArrayByDate(transactionList, size);
 
   // Now search on sorted data
-  jumpSearch::searchMenu(sortedArray, size);      // kai
+  jumpSearch::searchMenu(sortedArray, size); // kai
 
-  //oneStarReview::analyzeTopWords(reviewList); // kai
+  oneStarReview::analyzeTopWords(reviewList); // kai
 
   cout << endl;
 
