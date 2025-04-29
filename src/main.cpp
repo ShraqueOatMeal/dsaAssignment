@@ -4,6 +4,7 @@
 #include "radixSort.h"
 #include "reviews.h"
 #include "transactions.h"
+#include "oneStarReview.h"
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -125,8 +126,16 @@ int main(int argc, char *argv[]) {
 
 
   //displayTransactionList(transactionList);  //file checker
-  //bubblesort::displaySortedByDate(transactionList);  // kai
-  jumpSearch::searchMenu(transactionList);          // kai
+  bubblesort::displaySortedByDate(transactionList); // kai
+  int size = 0;
+  transactions* sortedArray = bubblesort::getSortedArrayByDate(transactionList, size);
+
+  // Now search on sorted data
+  jumpSearch::searchMenu(sortedArray, size);      // kai
+
+  //displayReviewsArray(reviewArray, reviewCount);
+  //loadReview(reviewFile, reviewList); 
+  //oneStarReview::analyzeTopWords(reviewList); //kai
 
   //radixSort::countSort(reviewArray, reviewCount);
   //displayReviewsArray(reviewArray, reviewCount);

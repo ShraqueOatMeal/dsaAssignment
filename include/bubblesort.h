@@ -4,8 +4,7 @@
 
 class bubblesort {
 public:
-  bubblesort();
-  ~bubblesort();
-  static void bubbleSortByDate(transactions *arr, int size);
-  static void displaySortedByDate(LinkList<transactions> &list);
+    static void bubbleSortByDate(transactions* arr, int size);
+    static void displaySortedByDate(LinkList<transactions>& list);
+    static transactions* getSortedArrayByDate(LinkList<transactions>& list, int& size); // 🔥 NEW
 };
