@@ -1,53 +1,86 @@
 #include "jumpsearch.h"
+#include <chrono>
 #include <iostream>
+using namespace std::chrono;
 using namespace std;
 
 jumpSearch::jumpSearch() {}
 jumpSearch::~jumpSearch() {}
 
 void jumpSearch::searchByProduct(transactions* arr, int size, const string& product) {
-    bool found = false;
-    cout << "\nSearch results for Product: " << product << "\n";
-    for (int i = 0; i < size; i++) {
-        if (arr[i].prod == product) {
-            arr[i].print();
-            found = true;
-        }
-    }
-    if (!found) {
-        cout << "No transactions found for product: " << product << endl;
-    }
+  auto start = high_resolution_clock::now();  //  Start timing
+
+  bool found = false;
+  cout << "\nSearch results for Product: " << product << "\n";
+  for (int i = 0; i < size; i++) {
+      if (arr[i].prod == product) {
+          arr[i].print();
+          found = true;
+      }
+  }
+  if (!found) {
+      cout << "No transactions found for product: " << product << endl;
+  }
+
+  auto end = high_resolution_clock::now();  //  End timing
+  auto duration = duration_cast<milliseconds>(end - start);
+  cout << " Execution time: " << duration.count() << " ms\n";
+  cout << " Estimated space used: O(1) (no additional memory used)\n";
+
 }
+
 
 void jumpSearch::searchByCategory(transactions* arr, int size, const string& category) {
-    bool found = false;
-    cout << "\nSearch results for Category: " << category << "\n";
-    for (int i = 0; i < size; i++) {
-        if (arr[i].cat == category) {
-            arr[i].print();
-            found = true;
-        }
-    }
-    if (!found) {
-        cout << "No transactions found for category: " << category << endl;
-    }
+  auto start = high_resolution_clock::now();  //  Start timing
+
+  bool found = false;
+  cout << "\nSearch results for Category: " << category << "\n";
+  for (int i = 0; i < size; i++) {
+      if (arr[i].cat == category) {
+          arr[i].print();
+          found = true;
+      }
+  }
+  if (!found) {
+      cout << "No transactions found for category: " << category << endl;
+  }
+
+  auto end = high_resolution_clock::now();  //  End timing
+  auto duration = duration_cast<milliseconds>(end - start);
+  cout << " Execution time: " << duration.count() << " ms\n";
+  cout << " Estimated space used: O(1) (no additional memory used)\n";
+
 }
+
 
 void jumpSearch::searchByPaymentMethod(transactions* arr, int size, const string& method) {
-    bool found = false;
-    cout << "\nSearch results for Payment Method: " << method << "\n";
-    for (int i = 0; i < size; i++) {
-        if (arr[i].paymentMethod == method) {
-            arr[i].print();
-            found = true;
-        }
-    }
-    if (!found) {
-        cout << "No transactions found for payment method: " << method << endl;
-    }
+  auto start = high_resolution_clock::now();  //  Start timing
+
+  bool found = false;
+  cout << "\nSearch results for Payment Method: " << method << "\n";
+  for (int i = 0; i < size; i++) {
+      if (arr[i].paymentMethod == method) {
+          arr[i].print();
+          found = true;
+      }
+  }
+  if (!found) {
+      cout << "No transactions found for payment method: " << method << endl;
+  }
+
+  auto end = high_resolution_clock::now();  //  End timing
+  auto duration = duration_cast<milliseconds>(end - start);
+  cout << " Execution time: " << duration.count() << " ms\n";
+  cout << " Estimated space used: O(1) (no additional memory used)\n";
+
 }
 
+
 void jumpSearch::calculateElectronicsCreditPercentage(transactions* arr, int size) {
+  using namespace chrono;
+
+  auto start = high_resolution_clock::now();  //  Start timer
+
   int electronics_total = 0;
   int electronics_credit = 0;
 
@@ -56,15 +89,15 @@ void jumpSearch::calculateElectronicsCreditPercentage(transactions* arr, int siz
   for (int i = 0; i < size; i++) {
       if (arr[i].cat == "Electronics") {
           electronics_total++;
-
-          // Display the transaction
-          arr[i].print();
-
+          arr[i].print();  //  Display the matching transaction
           if (arr[i].paymentMethod == "Credit Card") {
               electronics_credit++;
           }
       }
   }
+
+  auto end = high_resolution_clock::now();  //  End timer
+  auto duration = duration_cast<milliseconds>(end - start);  // milliseconds output
 
   cout << "\n=== Electronics Purchases with Credit Card ===\n";
   if (electronics_total == 0) {
@@ -75,6 +108,10 @@ void jumpSearch::calculateElectronicsCreditPercentage(transactions* arr, int siz
       cout << "With Credit Card: " << electronics_credit << endl;
       cout << "Percentage: " << percentage << "%\n";
   }
+
+  cout << "\n Execution time: " << duration.count() << " milliseconds.\n";
+  cout << " Estimated space used: O(1) (no additional memory used)\n";
+
 }
 
 

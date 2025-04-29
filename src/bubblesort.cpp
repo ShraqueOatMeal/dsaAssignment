@@ -1,6 +1,7 @@
 #include "bubblesort.h"
 #include "LinkList.h"
 #include "transactions.h"
+#include <chrono>
 #include <iostream>
 #include <string>
 using namespace std;
@@ -78,12 +79,24 @@ void bubblesort::displaySortedByDate(LinkList<transactions>& list) {
     int size = 0;
     transactions* arr = toArray(list, size);
 
-    bubbleSortByDate(arr, size);
+    // Start timing
+    auto start = chrono::high_resolution_clock::now();
+
+    bubbleSortByDate(arr, size);  // Sorting
+
+    // End timing
+    auto end = chrono::high_resolution_clock::now();
+    chrono::duration<double, milli> duration = end - start;
 
     cout << "Transactions sorted by date (Bubble Sort):\n";
     for (int i = 0; i < size; i++) {
         arr[i].print();
     }
 
-    delete[] arr; // Clean up
+    cout << "\n Sorting completed in " << duration.count() << " milliseconds.\n";
+    cout << "Estimated space used: O(1) (in-place sorting)" << endl;
+
+
+    delete[] arr;
 }
+
