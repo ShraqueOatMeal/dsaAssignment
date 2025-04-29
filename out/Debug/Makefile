@@ -190,6 +190,54 @@ src/WordFrequency.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/WordFrequency.cpp.s
 .PHONY : src/WordFrequency.cpp.s
 
+src/bubblesort.o: src/bubblesort.cpp.o
+.PHONY : src/bubblesort.o
+
+# target to build an object file
+src/bubblesort.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/bubblesort.cpp.o
+.PHONY : src/bubblesort.cpp.o
+
+src/bubblesort.i: src/bubblesort.cpp.i
+.PHONY : src/bubblesort.i
+
+# target to preprocess a source file
+src/bubblesort.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/bubblesort.cpp.i
+.PHONY : src/bubblesort.cpp.i
+
+src/bubblesort.s: src/bubblesort.cpp.s
+.PHONY : src/bubblesort.s
+
+# target to generate assembly for a file
+src/bubblesort.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/bubblesort.cpp.s
+.PHONY : src/bubblesort.cpp.s
+
+src/jumpsearch.o: src/jumpsearch.cpp.o
+.PHONY : src/jumpsearch.o
+
+# target to build an object file
+src/jumpsearch.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/jumpsearch.cpp.o
+.PHONY : src/jumpsearch.cpp.o
+
+src/jumpsearch.i: src/jumpsearch.cpp.i
+.PHONY : src/jumpsearch.i
+
+# target to preprocess a source file
+src/jumpsearch.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/jumpsearch.cpp.i
+.PHONY : src/jumpsearch.cpp.i
+
+src/jumpsearch.s: src/jumpsearch.cpp.s
+.PHONY : src/jumpsearch.s
+
+# target to generate assembly for a file
+src/jumpsearch.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/jumpsearch.cpp.s
+.PHONY : src/jumpsearch.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -213,6 +261,30 @@ src/main.s: src/main.cpp.s
 src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment.dir/build.make CMakeFiles/dsaAssignment.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
+
+src/oneStarReview.o: src/oneStarReview.cpp.o
+.PHONY : src/oneStarReview.o
+
+# target to build an object file
+src/oneStarReview.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/oneStarReview.cpp.o
+.PHONY : src/oneStarReview.cpp.o
+
+src/oneStarReview.i: src/oneStarReview.cpp.i
+.PHONY : src/oneStarReview.i
+
+# target to preprocess a source file
+src/oneStarReview.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/oneStarReview.cpp.i
+.PHONY : src/oneStarReview.cpp.i
+
+src/oneStarReview.s: src/oneStarReview.cpp.s
+.PHONY : src/oneStarReview.s
+
+# target to generate assembly for a file
+src/oneStarReview.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/oneStarReview.cpp.s
+.PHONY : src/oneStarReview.cpp.s
 
 src/radixSort.o: src/radixSort.cpp.o
 .PHONY : src/radixSort.o
@@ -254,9 +326,18 @@ help:
 	@echo "... src/WordFrequency.o"
 	@echo "... src/WordFrequency.i"
 	@echo "... src/WordFrequency.s"
+	@echo "... src/bubblesort.o"
+	@echo "... src/bubblesort.i"
+	@echo "... src/bubblesort.s"
+	@echo "... src/jumpsearch.o"
+	@echo "... src/jumpsearch.i"
+	@echo "... src/jumpsearch.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/oneStarReview.o"
+	@echo "... src/oneStarReview.i"
+	@echo "... src/oneStarReview.s"
 	@echo "... src/radixSort.o"
 	@echo "... src/radixSort.i"
 	@echo "... src/radixSort.s"

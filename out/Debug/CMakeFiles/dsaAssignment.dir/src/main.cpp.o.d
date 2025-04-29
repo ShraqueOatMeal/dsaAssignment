@@ -157,6 +157,9 @@ CMakeFiles/dsaAssignment.dir/src/main.cpp.o: \
  /home/loh-yen-kuan/Coding/dsaAssignment/include/reviews.h \
  /home/loh-yen-kuan/Coding/dsaAssignment/include/transactions.h \
  /home/loh-yen-kuan/Coding/dsaAssignment/include/WordFrequency.h \
+ /home/loh-yen-kuan/Coding/dsaAssignment/include/bubblesort.h \
+ /home/loh-yen-kuan/Coding/dsaAssignment/include/jumpsearch.h \
+ /home/loh-yen-kuan/Coding/dsaAssignment/include/oneStarReview.h \
  /home/loh-yen-kuan/Coding/dsaAssignment/include/radixSort.h \
  /usr/include/c++/14/fstream /usr/include/c++/14/bits/codecvt.h \
  /usr/include/x86_64-linux-gnu/c++/14/bits/basic_file.h \

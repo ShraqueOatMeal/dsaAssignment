@@ -1,6 +1,9 @@
 #include "JoinedData.h"
 #include "LinkList.h"
 #include "WordFrequency.h"
+#include "bubblesort.h"
+#include "jumpsearch.h"
+#include "oneStarReview.h"
 #include "radixSort.h"
 #include "reviews.h"
 #include "transactions.h"
@@ -12,6 +15,7 @@
 using namespace std;
 
 // Declaration
+
 void loadTransaction(ifstream &transactionFile,
                      LinkList<transactions> &transactionList);
 void loadTransaction(ifstream &transactionFile, transactions *transArray,
@@ -65,8 +69,25 @@ enum category {
   HomeAppliances
 };
 
+// void displayTransactionList(LinkList<transactions>& transactionList) {
+//   Node<transactions>* current = transactionList.getHead();
+
+//   if (!current) {
+//       cout << "Transaction list is empty." << endl;
+//       return;
+//   }
+
+//   cout << "Transaction List:\n";
+
+//   while (current != nullptr) {
+//       current->data.print();  // Using the transactions' built-in print()
+//       method current = current->next;
+//   }
+// }
+
 // System will run in here
 int main(int argc, char *argv[]) {
+
   LinkList<reviews> reviewList;
   LinkList<transactions> transactionList;
 
@@ -99,6 +120,17 @@ int main(int argc, char *argv[]) {
   int transCount = rowsNum(transactionFile);
   int reviewCount = rowsNum(reviewFile);
 
+  // reset the file pointer AFTER counting rows
+  transactionFile.clear();
+  transactionFile.seekg(0);
+  string dummyLine;
+  getline(transactionFile, dummyLine); // Skip transaction header
+
+  reviewFile.clear();
+  reviewFile.seekg(0);
+  getline(reviewFile, dummyLine); // Skip review header
+
+  // Now load properly
   transactions *transArray = new transactions[transCount];
   reviews *reviewArray = new reviews[reviewCount];
 
@@ -226,6 +258,24 @@ int main(int argc, char *argv[]) {
   // displayReviewsArray(reviewArray, reviewCount);
   delete[] transArray;
   delete[] reviewArray;
+  // radixSort::radixsort(transArray, transCount);
+  // displayTransactionArr(transArray, transCount);
+
+  // radixSort::radixsort(&transactionList, transCount); //undo ltr
+  // transactionList.display();  //undo ltr
+
+  // displayTransactionList(transactionList);  //file checker
+  bubblesort::displaySortedByDate(transactionList); // kai
+  int size = 0;
+  transactions *sortedArray =
+      bubblesort::getSortedArrayByDate(transactionList, size);
+
+  // Now search on sorted data
+  jumpSearch::searchMenu(sortedArray, size); // kai
+
+  oneStarReview::analyzeTopWords(reviewList); // kai
+
+  cout << endl;
 
   return 0;
 }

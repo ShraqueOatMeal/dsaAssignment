@@ -5,6 +5,9 @@ CMakeFiles/dsaAssignment.dir/src/main.cpp.o: /home/loh-yen-kuan/Coding/dsaAssign
   /home/loh-yen-kuan/Coding/dsaAssignment/include/JoinedData.h \
   /home/loh-yen-kuan/Coding/dsaAssignment/include/LinkList.h \
   /home/loh-yen-kuan/Coding/dsaAssignment/include/WordFrequency.h \
+  /home/loh-yen-kuan/Coding/dsaAssignment/include/bubblesort.h \
+  /home/loh-yen-kuan/Coding/dsaAssignment/include/jumpsearch.h \
+  /home/loh-yen-kuan/Coding/dsaAssignment/include/oneStarReview.h \
   /home/loh-yen-kuan/Coding/dsaAssignment/include/radixSort.h \
   /home/loh-yen-kuan/Coding/dsaAssignment/include/reviews.h \
   /home/loh-yen-kuan/Coding/dsaAssignment/include/transactions.h \
@@ -332,6 +335,8 @@ CMakeFiles/dsaAssignment.dir/src/main.cpp.o: /home/loh-yen-kuan/Coding/dsaAssign
 
 /usr/include/wctype.h:
 
+/usr/include/wchar.h:
+
 /usr/include/c++/14/bits/refwrap.h:
 
 /usr/include/c++/14/exception:
@@ -382,8 +387,6 @@ CMakeFiles/dsaAssignment.dir/src/main.cpp.o: /home/loh-yen-kuan/Coding/dsaAssign
 
 /usr/include/c++/14/bits/codecvt.h:
 
-/usr/include/wchar.h:
-
 /usr/include/c++/14/bits/ios_base.h:
 
 /usr/include/c++/14/bits/move.h:
@@ -392,25 +395,73 @@ CMakeFiles/dsaAssignment.dir/src/main.cpp.o: /home/loh-yen-kuan/Coding/dsaAssign
 
 /usr/include/c++/14/bits/utility.h:
 
+/usr/include/stdlib.h:
+
+/usr/include/c++/14/istream:
+
 /usr/include/c++/14/bits/invoke.h:
 
 /usr/include/stdc-predef.h:
 
-/usr/include/c++/14/backward/binders.h:
+/usr/include/c++/14/bits/fstream.tcc:
+
+/usr/include/c++/14/typeinfo:
+
+/usr/include/c++/14/cwctype:
+
+/usr/include/x86_64-linux-gnu/bits/locale.h:
+
+/usr/include/c++/14/bits/exception_defines.h:
 
 /usr/include/x86_64-linux-gnu/bits/waitstatus.h:
 
 /usr/include/c++/14/type_traits:
 
-/home/loh-yen-kuan/Coding/dsaAssignment/include/transactions.h:
+/usr/include/c++/14/bits/basic_string.h:
 
-/usr/include/c++/14/bit:
+/usr/include/c++/14/bits/memory_resource.h:
 
-/usr/include/c++/14/bits/predefined_ops.h:
+/usr/include/x86_64-linux-gnu/c++/14/bits/os_defines.h:
 
-/usr/include/asm-generic/errno.h:
+/usr/include/x86_64-linux-gnu/bits/byteswap.h:
 
-/usr/include/c++/14/bits/stl_function.h:
+/usr/include/c++/14/bits/stl_pair.h:
+
+/usr/include/c++/14/bits/locale_facets.tcc:
+
+/usr/include/stdio.h:
+
+/usr/include/time.h:
+
+/home/loh-yen-kuan/Coding/dsaAssignment/include/reviews.h:
+
+/usr/include/c++/14/bits/alloc_traits.h:
+
+/home/loh-yen-kuan/Coding/dsaAssignment/include/LinkList.h:
+
+/usr/include/x86_64-linux-gnu/bits/wchar.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h:
+
+/usr/include/c++/14/bits/stl_iterator_base_types.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
+
+/home/loh-yen-kuan/Coding/dsaAssignment/include/radixSort.h:
+
+/usr/include/c++/14/bits/cxxabi_forced.h:
+
+/usr/include/c++/14/cctype:
+
+/usr/include/c++/14/bits/exception.h:
+
+/usr/include/c++/14/concepts:
+
+/home/loh-yen-kuan/Coding/dsaAssignment/include/jumpsearch.h:
+
+/usr/include/c++/14/bits/postypes.h:
+
+/home/loh-yen-kuan/Coding/dsaAssignment/include/WordFrequency.h:
 
 /usr/include/alloca.h:
 
@@ -430,45 +481,25 @@ CMakeFiles/dsaAssignment.dir/src/main.cpp.o: /home/loh-yen-kuan/Coding/dsaAssign
 
 /usr/include/features.h:
 
-/usr/include/c++/14/bits/basic_string.h:
+/usr/include/x86_64-linux-gnu/bits/timesize.h:
 
-/usr/include/c++/14/bits/memory_resource.h:
+/usr/include/c++/14/bits/concept_check.h:
 
-/usr/include/x86_64-linux-gnu/c++/14/bits/os_defines.h:
+/usr/include/c++/14/bits/cpp_type_traits.h:
 
-/usr/include/x86_64-linux-gnu/bits/byteswap.h:
+/usr/include/c++/14/backward/binders.h:
 
-/usr/include/c++/14/bits/stl_pair.h:
+/usr/include/c++/14/bits/predefined_ops.h:
 
-/usr/include/c++/14/bits/locale_facets.tcc:
+/home/loh-yen-kuan/Coding/dsaAssignment/include/oneStarReview.h:
 
-/usr/include/stdio.h:
+/usr/include/asm-generic/errno.h:
 
-/usr/include/c++/14/bits/alloc_traits.h:
+/usr/include/c++/14/bits/stl_function.h:
 
-/home/loh-yen-kuan/Coding/dsaAssignment/include/LinkList.h:
+/home/loh-yen-kuan/Coding/dsaAssignment/include/transactions.h:
 
-/usr/include/x86_64-linux-gnu/bits/wchar.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h:
-
-/usr/include/c++/14/bits/stl_iterator_base_types.h:
-
-/usr/include/c++/14/cwctype:
-
-/usr/include/x86_64-linux-gnu/bits/locale.h:
-
-/usr/include/c++/14/bits/exception_defines.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
-
-/home/loh-yen-kuan/Coding/dsaAssignment/include/radixSort.h:
-
-/usr/include/c++/14/bits/cxxabi_forced.h:
-
-/usr/include/c++/14/bits/postypes.h:
-
-/home/loh-yen-kuan/Coding/dsaAssignment/include/WordFrequency.h:
+/usr/include/c++/14/bit:
 
 /usr/include/c++/14/bits/basic_ios.h:
 
@@ -480,25 +511,15 @@ CMakeFiles/dsaAssignment.dir/src/main.cpp.o: /home/loh-yen-kuan/Coding/dsaAssign
 
 /usr/include/c++/14/bits/basic_ios.tcc:
 
-/usr/include/x86_64-linux-gnu/bits/timesize.h:
-
-/usr/include/c++/14/bits/concept_check.h:
-
-/usr/include/c++/14/bits/cpp_type_traits.h:
-
 /usr/include/c++/14/bits/functional_hash.h:
 
 /usr/include/c++/14/ext/atomicity.h:
 
-/usr/include/c++/14/cctype:
+/usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
 
-/usr/include/c++/14/bits/exception.h:
+/usr/include/c++/14/iostream:
 
-/usr/include/c++/14/concepts:
-
-/usr/include/c++/14/bits/fstream.tcc:
-
-/usr/include/c++/14/typeinfo:
+/usr/include/c++/14/bits/requires_hosted.h:
 
 /usr/include/asm-generic/errno-base.h:
 
@@ -566,12 +587,6 @@ CMakeFiles/dsaAssignment.dir/src/main.cpp.o: /home/loh-yen-kuan/Coding/dsaAssign
 
 /usr/include/c++/14/iosfwd:
 
-/usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
-
-/usr/include/c++/14/bits/requires_hosted.h:
-
-/usr/include/c++/14/iostream:
-
 /usr/include/x86_64-linux-gnu/bits/wordsize.h:
 
 /usr/include/c++/14/locale:
@@ -595,6 +610,8 @@ CMakeFiles/dsaAssignment.dir/src/main.cpp.o: /home/loh-yen-kuan/Coding/dsaAssign
 /usr/include/x86_64-linux-gnu/bits/endianness.h:
 
 /usr/include/libintl.h:
+
+/home/loh-yen-kuan/Coding/dsaAssignment/include/bubblesort.h:
 
 /usr/include/c++/14/sstream:
 
@@ -627,11 +644,3 @@ CMakeFiles/dsaAssignment.dir/src/main.cpp.o: /home/loh-yen-kuan/Coding/dsaAssign
 /usr/include/pthread.h:
 
 /usr/include/sched.h:
-
-/usr/include/c++/14/istream:
-
-/usr/include/stdlib.h:
-
-/home/loh-yen-kuan/Coding/dsaAssignment/include/reviews.h:
-
-/usr/include/time.h:
