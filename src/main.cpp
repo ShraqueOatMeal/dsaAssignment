@@ -69,22 +69,6 @@ enum category {
   HomeAppliances
 };
 
-// void displayTransactionList(LinkList<transactions>& transactionList) {
-//   Node<transactions>* current = transactionList.getHead();
-
-//   if (!current) {
-//       cout << "Transaction list is empty." << endl;
-//       return;
-//   }
-
-//   cout << "Transaction List:\n";
-
-//   while (current != nullptr) {
-//       current->data.print();  // Using the transactions' built-in print()
-//       method current = current->next;
-//   }
-// }
-
 // System will run in here
 int main(int argc, char *argv[]) {
 
@@ -111,7 +95,6 @@ int main(int argc, char *argv[]) {
   cout << "\t2. Array" << endl;
   cout << "Mode: ";
   cin >> choice;
-  // loadReview(reviewFile, reviewList);
 
   // cout << "Display csv data from link list: " << endl;
   // reviewList.display();
@@ -142,6 +125,7 @@ int main(int argc, char *argv[]) {
   int processChoice;
   cout << "\t1. Regular sort of transaction and review data" << endl;
   cout << "\t2. Inner join on Customer ID and sort by date" << endl;
+  cout << "\t3. Left join on Customer ID and sort by date" << endl;
   cout << "Choice: ";
   cin >> processChoice;
 
@@ -155,7 +139,7 @@ int main(int argc, char *argv[]) {
       cout << "Inner join completed. Total records: " << mergedList.getCount()
            << endl;
 
-      cout << "Sample of joined data (before sorting): " << endl;
+      cout << "\nSample of joined data (before sorting): " << endl;
 
       int displayCount = 0;
       Node<mergedData> *current = mergedList.getHead();
@@ -165,10 +149,10 @@ int main(int argc, char *argv[]) {
         displayCount++;
       }
 
-      cout << "Sorting joined data by date..." << endl;
+      cout << "\nSorting joined data by date..." << endl;
       radixSort::radixsort(&mergedList, mergedList.getCount());
 
-      cout << "Sample of joined data (after sorting by date): " << endl;
+      cout << "\nSample of joined data (after sorting by date): " << endl;
       displayCount = 0;
       current = mergedList.getHead();
       while (current != nullptr && displayCount < 5) {
@@ -183,39 +167,86 @@ int main(int argc, char *argv[]) {
       JoinedData::innerJoinArrays(transArray, transCount, reviewArray,
                                   reviewCount, joinedArray, joinedSize);
 
-      cout << "Inner join completed. Total records: " << joinedSize << endl;
-      cout << "Sample of joined data (before sorting): " << endl;
+      cout << "\nInner join completed. Total records: " << joinedSize << endl;
+      cout << "\nSample of joined data (before sorting): " << endl;
 
       for (int i = 0; i < min(5, joinedSize); i++) {
         joinedArray[i].print();
       }
 
-      cout << "Sorting joined data by date..." << endl;
+      cout << "\nSorting joined data by date..." << endl;
       radixSort::radixsort(joinedArray, joinedSize);
 
-      cout << "Sample of joined data (after sorting by date): " << endl;
+      cout << "\nSample of joined data (after sorting by date): " << endl;
 
       for (int i = 0; i < min(5, joinedSize); i++) {
         joinedArray[i].print();
       }
       delete[] joinedArray;
     }
-  } else {
+  } else if (processChoice == 3) {
+    if (choice == 1) {
+
+      LinkList<mergedData> mergedList;
+      JoinedData::leftJoinLists(transactionList, reviewList, mergedList);
+
+      cout << "\nLeft join completed. Total records: " << mergedList.getCount()
+           << endl;
+      cout << "\nSample of joined data (before sorting): " << endl;
+
+      int displayCount = 0;
+
+      Node<mergedData> *current = mergedList.getHead();
+      while (current != nullptr && displayCount < 8) {
+        current->data.print();
+        current = current->next;
+        displayCount++;
+      }
+      cout << "\nSorting joined data by date..." << endl;
+      radixSort::radixsort(&mergedList, mergedList.getCount());
+
+      cout << "\nSample of joined data (after sorting by date): " << endl;
+
+      displayCount = 0;
+      current = mergedList.getHead();
+
+      while (current != nullptr && displayCount < 8) {
+        current->data.print();
+        current = current->next;
+        displayCount++;
+      }
+    } else {
+
+      mergedData *joinedArray = new mergedData[transCount * reviewCount];
+
+      int joinedSize = 0;
+
+      JoinedData::leftJoinArrays(transArray, transCount, reviewArray,
+                                 reviewCount, joinedArray, joinedSize);
+      cout << "\nLeft join completed. Total records: " << joinedSize << endl;
+      cout << "\nSample of joined data (before sorting): " << endl;
+
+      for (int i = 0; i < min(8, joinedSize); i++) {
+        joinedArray[i].print();
+      }
+
+      cout << "\nSorting joined data by date..." << endl;
+      radixSort::radixsort(joinedArray, joinedSize);
+
+      cout << "\nSample of joined data (after sorting by date): " << endl;
+      for (int i = 0; i < min(8, joinedSize); i++) {
+        joinedArray[i].print();
+      }
+      delete[] joinedArray;
+    }
+  }
+
+  else {
     choice == 1 ? radixSort::radixsort(&transactionList, transCount),
         radixSort::countSort(&reviewList, reviewCount)
                 : radixSort::radixsort(transArray, transCount),
         radixSort::countSort(reviewArray, reviewCount);
-
-    // Question 1: Array
-    // displayTransactionArr(transArray, transCount);
-
-    // Question 1: Link List
-    // transactionList.display();
   }
-
-  // cout << "Display csv data from array: " << endl;
-  // displayTransactionArr(transArray, transCount);
-  // displayReviewsArray(reviewArray, reviewCount);
 
   // Question 2
   // filter transactions based on the category and payment method
@@ -264,7 +295,6 @@ int main(int argc, char *argv[]) {
   // radixSort::radixsort(&transactionList, transCount); //undo ltr
   // transactionList.display();  //undo ltr
 
-  // displayTransactionList(transactionList);  //file checker
   bubblesort::displaySortedByDate(transactionList); // kai
   int size = 0;
   transactions *sortedArray =

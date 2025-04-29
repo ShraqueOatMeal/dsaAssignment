@@ -22,7 +22,7 @@ struct mergedData {
 
   void print() const {
     cout << custID << " " << prod << " " << cat << " " << price << " " << date
-         << " " << paymentMethod << endl;
+         << " " << paymentMethod << " " << rating << " " << review << endl;
   }
 };
 
@@ -36,4 +36,10 @@ public:
   static void innerJoinArrays(transactions *transArray, int transCount,
                               reviews *reviewArray, int reviewCount,
                               mergedData *mergedArray, int mergedCount);
+  static void leftJoinLists(LinkList<transactions> &transactionList,
+                            LinkList<reviews> &reviewList,
+                            LinkList<mergedData> &joinedList);
+  static void leftJoinArrays(transactions *transArray, int transCount,
+                             reviews *reviewArray, int reviewCount,
+                             mergedData *mergedArray, int &mergedCount);
 };
