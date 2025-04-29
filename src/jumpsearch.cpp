@@ -25,6 +25,7 @@ void jumpSearch::searchByProduct(transactions* arr, int size, const string& prod
   auto end = high_resolution_clock::now();  //  End timing
   auto duration = duration_cast<milliseconds>(end - start);
   cout << " Execution time: " << duration.count() << " ms\n";
+  cout << " Estimated Time Complexity of Jump Search: O(square root n) \n";
   cout << " Estimated space used: O(1) (no additional memory used)\n";
 
 }
@@ -48,6 +49,7 @@ void jumpSearch::searchByCategory(transactions* arr, int size, const string& cat
   auto end = high_resolution_clock::now();  //  End timing
   auto duration = duration_cast<milliseconds>(end - start);
   cout << " Execution time: " << duration.count() << " ms\n";
+  cout << " Estimated Time Complexity of Jump Search: O(square root n) \n";
   cout << " Estimated space used: O(1) (no additional memory used)\n";
 
 }
@@ -71,6 +73,7 @@ void jumpSearch::searchByPaymentMethod(transactions* arr, int size, const string
   auto end = high_resolution_clock::now();  //  End timing
   auto duration = duration_cast<milliseconds>(end - start);
   cout << " Execution time: " << duration.count() << " ms\n";
+  cout << " Estimated Time Complexity of Jump Search: O(square root n) \n";
   cout << " Estimated space used: O(1) (no additional memory used)\n";
 
 }
@@ -110,6 +113,7 @@ void jumpSearch::calculateElectronicsCreditPercentage(transactions* arr, int siz
   }
 
   cout << "\n Execution time: " << duration.count() << " milliseconds.\n";
+  cout << " Estimated Time Complexity of Jump Search: O(square root n) \n";
   cout << " Estimated space used: O(1) (no additional memory used)\n";
 
 }

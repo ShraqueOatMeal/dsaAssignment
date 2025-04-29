@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cstring>
 #include <cctype>
+#include <chrono>  
 using namespace std;
 
 const int MAX_WORDS = 1000;
@@ -27,7 +28,7 @@ int findWord(char words[][MAX_WORD_LENGTH], int wordCount, const char* word) {
     return -1;
 }
 
-void sortWordsByFrequency(char words[][MAX_WORD_LENGTH], int freq[], int count) {
+void bubbleSortWordsByFrequency(char words[][MAX_WORD_LENGTH], int freq[], int count) {
     for (int i = 0; i < count - 1; i++) {
         for (int j = 0; j < count - i - 1; j++) {
             if (freq[j] < freq[j + 1]) {
@@ -43,6 +44,9 @@ void sortWordsByFrequency(char words[][MAX_WORD_LENGTH], int freq[], int count) 
 }
 
 void oneStarReview::analyzeTopWords(LinkList<reviews>& reviewList) {
+    using namespace chrono;
+    auto start = high_resolution_clock::now();  
+
     char words[MAX_WORDS][MAX_WORD_LENGTH];
     int freq[MAX_WORDS] = {0};
     int wordCount = 0;
@@ -75,11 +79,19 @@ void oneStarReview::analyzeTopWords(LinkList<reviews>& reviewList) {
         current = current->next;
     }
 
-    sortWordsByFrequency(words, freq, wordCount);
+    bubbleSortWordsByFrequency(words, freq, wordCount);
+
+    auto end = high_resolution_clock::now();  //  End timing
+    auto duration = duration_cast<milliseconds>(end - start);
 
     cout << "\n==== Top 10 Frequent Words in 1-Star Reviews ====\n";
     int limit = (wordCount < 10) ? wordCount : 10;
     for (int i = 0; i < limit; i++) {
         cout << words[i] << ": " << freq[i] << endl;
     }
+
+    // Execution Time & Complexity Notation
+    cout << "\n Execution time: " << duration.count() << " milliseconds.\n";
+    cout << " Estimated Time Complexity of Bubble Sort: O(n^2) \n";
+    cout << " Estimated Space Complexity of Bubble Sort: O(n) for storing " << wordCount << " words\n";
 }

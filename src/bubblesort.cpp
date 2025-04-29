@@ -94,7 +94,8 @@ void bubblesort::displaySortedByDate(LinkList<transactions>& list) {
     }
 
     cout << "\n Sorting completed in " << duration.count() << " milliseconds.\n";
-    cout << "Estimated space used: O(1) (in-place sorting)" << endl;
+    cout << "Estimated Time Complexity of Bubble Sort: O(n^2) \n";
+    cout << "Estimated space used of Bubble Sort: O(1) (in-place sorting)" << endl;
 
 
     delete[] arr;
