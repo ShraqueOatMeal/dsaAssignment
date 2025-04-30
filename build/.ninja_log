@@ -1,15 +1,11 @@
 # ninja log v6
 7	929	7676892146169423	CMakeFiles/dsaAssignment_lib.dir/src/radixSort.cpp.obj	7f61e035179df922
-22	937	7676892146317625	CMakeFiles/dsaAssignment_lib.dir/src/WordFrequency.cpp.obj	e8f068251538dd0c
 42	967	7676892146519402	CMakeFiles/dsaAssignment_lib.dir/src/JoinedData.cpp.obj	31141df1d58cbda1
-60	1079	7676892146695591	CMakeFiles/dsaAssignment_lib.dir/src/bubblesort.cpp.obj	adeaff3cb53f37ec
-155	1185	7676892147652383	CMakeFiles/dsaAssignment_lib.dir/src/quickSort.cpp.obj	eaa941d97feb2bdf
+22	937	7676892146317625	CMakeFiles/dsaAssignment_lib.dir/src/WordFrequency.cpp.obj	e8f068251538dd0c
+17	1291	7677031472958585	CMakeFiles/dsaAssignment_lib.dir/src/bubblesort.cpp.obj	adeaff3cb53f37ec
+32	1105	7677031473098572	CMakeFiles/dsaAssignment_lib.dir/src/quickSort.cpp.obj	eaa941d97feb2bdf
 124	1192	7676892147332375	CMakeFiles/dsaAssignment_lib.dir/src/oneStarReview.cpp.obj	8497b0d14fb2fad1
 83	1222	7676892146921415	CMakeFiles/dsaAssignment_lib.dir/src/jumpsearch.cpp.obj	6df9290ff107fc32
-228	1433	7676892148381735	CMakeFiles/dsaAssignment.dir/src/main.cpp.obj	391db71c6424c1a9
-1223	1449	7676892158326207	libdsaAssignment_lib.a	755ec878660829b5
-1449	1702	7676892160588378	dsaAssignment.exe	149d7a360c3df4c8
 8	1013	7676905840523815	CMakeFiles/dsaAssignment.dir/src/main.cpp.obj	391db71c6424c1a9
+1223	1449	7676892158326207	libdsaAssignment_lib.a	755ec878660829b5
 1015	1391	7676905850578641	dsaAssignment.exe	149d7a360c3df4c8
-32	1105	7677031473098572	CMakeFiles/dsaAssignment_lib.dir/src/quickSort.cpp.obj	eaa941d97feb2bdf
-17	1291	7677031472958585	CMakeFiles/dsaAssignment_lib.dir/src/bubblesort.cpp.obj	adeaff3cb53f37ec
