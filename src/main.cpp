@@ -103,7 +103,6 @@ int main(int argc, char *argv[]) {
 
   int transCount = rowsNum(transactionFile);
   int reviewCount = rowsNum(reviewFile);
-  cout << "transCount: " << transCount << endl;
 
   // reset the file pointer AFTER counting rows
   transactionFile.clear();
@@ -115,7 +114,6 @@ int main(int argc, char *argv[]) {
   reviewFile.seekg(0);
   getline(reviewFile, dummyLine); // Skip review header
 
-  // Now load properly
   transactions *transArray = new transactions[transCount];
   reviews *reviewArray = new reviews[reviewCount];
 
@@ -186,7 +184,7 @@ int main(int argc, char *argv[]) {
       cout << "\nSorting joined data by date..." << endl;
       switch (sortChoice) {
       case 1:
-        bubblesort::displaySortedByDate(joinedList);
+        // bubblesort::displaySortedByDate(joinedList);
         break;
       case 2:
         // quickSort::displaySortedByDate(joinedList);
