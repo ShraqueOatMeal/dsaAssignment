@@ -5,10 +5,12 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Add the executable
-add_executable(dsaAssignment src/main.cpp)
+add_executable(dsaAssignment
+    src/main.cpp
+)
 
 # If you later add a library, uncomment and modify these lines:
 include_directories(${PROJECT_SOURCE_DIR}/include)
-add_library(dsaAssignment_lib src/radixSort.cpp src/quickSort.cpp)
+add_library(dsaAssignment_lib src/radixSort.cpp src/WordFrequency.cpp src/JoinedData.cpp src/bubblesort.cpp src/jumpsearch.cpp src/oneStarReview.cpp src/quickSort.cpp)
 target_link_libraries(dsaAssignment PRIVATE dsaAssignment_lib)
 

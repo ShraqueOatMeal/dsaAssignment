@@ -6,7 +6,7 @@
 			[
 				{
 					"build" : ".",
-					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.12"
@@ -41,14 +41,14 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "dsaAssignment::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-dsaAssignment-Debug-b050bb46ae7243a098eb.json",
+					"jsonFile" : "target-dsaAssignment-Debug-5cb45af0259c844bdd14.json",
 					"name" : "dsaAssignment",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "dsaAssignment_lib::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-dsaAssignment_lib-Debug-63bd86bcf7edc2144f09.json",
+					"jsonFile" : "target-dsaAssignment_lib-Debug-f1d5add2e0273a169880.json",
 					"name" : "dsaAssignment_lib",
 					"projectIndex" : 0
 				}
@@ -58,12 +58,12 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/home/loh-yen-kuan/Coding/dsaAssignment/out/Debug",
-		"source" : "/home/loh-yen-kuan/Coding/dsaAssignment"
+		"build" : "C:/Users/lokai/OneDrive/Documents/GitHub/dsaAssignment/build",
+		"source" : "C:/Users/lokai/OneDrive/Documents/GitHub/dsaAssignment"
 	},
 	"version" : 
 	{
 		"major" : 2,
-		"minor" : 7
+		"minor" : 6
 	}
 }

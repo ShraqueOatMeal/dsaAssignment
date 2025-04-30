@@ -26,10 +26,12 @@ public:
   LinkList() : head(nullptr), tail(nullptr), size(0){};
   ~LinkList();
 
-  Node<T> *getHead() { return head; }
+  Node<T> *getHead() const { return head; }
+  Node<T> *setHead(Node<T> *newHead) { return head = newHead; }
   void display();
   void addData(T data);
   void clear();
+  int getCount();
 };
 
 template <typename T> LinkList<T>::~LinkList() {}
@@ -62,4 +64,15 @@ template <typename T> void LinkList<T>::clear() {
   }
   head = tail = nullptr;
   size = 0;
+}
+
+template <class T> int LinkList<T>::getCount() {
+  int count = 0;
+  Node<T> *current = head;
+
+  while (current != nullptr) {
+    count++;
+    current = current->next;
+  }
+  return count;
 }
