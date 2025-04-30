@@ -1,7 +1,8 @@
-#include "LinkList.h"
-#include "radixSort.h"
-#include "reviews.h"
-#include "transactions.h"
+#include "../include/LinkList.h" 
+#include "../include/radixSort.h"
+#include "quickSort.cpp"
+#include "../include/reviews.h"
+#include "../include/transactions.h"
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -56,14 +57,15 @@ int main(int argc, char *argv[]) {
   LinkList<reviews> reviewList;
   LinkList<transactions> transactionList;
 
-  ifstream transactionFile("../../data/transactions_cleaned.csv");
-  ifstream reviewFile("../../data/reviews_cleaned.csv");
+  ifstream transactionFile("../data/transactions_cleaned.csv");
+  ifstream reviewFile("../data/reviews_cleaned.csv");
 
-  // loadReview(reviewFile, reviewList);
+  loadReview(reviewFile, reviewList);
+  loadTransaction(transactionFile, transactionList);
 
-  // cout << "Display csv data from link list: " << endl;
+  cout << "Display csv data from link list: " << endl;
   // reviewList.display();
-  // transactionList.display();
+  transactionList.display();
 
   int transCount = rowsNum(transactionFile);
   int reviewCount = rowsNum(reviewFile);
@@ -75,6 +77,30 @@ int main(int argc, char *argv[]) {
   loadTransaction(transactionFile, transArray, transCount);
   loadReview(reviewFile, reviewArray, reviewCount);
 
+  // quickSort::quickSortTransactions(transArray, 0, transCount - 1);
+  // cout << "\n\nSorted transactions (Array): \n\n" << endl;
+  // displayTransactionArr(transArray, transCount);
+
+  // Reset the file stream before reusing it
+  transactionFile.clear();
+  transactionFile.seekg(0);
+  
+  loadTransaction(transactionFile, transArray, transCount);
+  
+  // Debug: Print loaded transactions
+  cout << "Before sorting:" << endl;
+  displayTransactionArr(transArray, transCount);
+  
+  // Perform quick sort
+  quickSort::quickSortTransactions(transArray, 0, transCount - 1);
+  
+  // Debug: Print sorted transactions
+  cout << "After sorting:" << endl;
+  displayTransactionArr(transArray, transCount);
+
+  // quickSort::quickSortTransactions(&transactionList);
+  // transactionList.display();
+
   // cout << "Display csv data from array: " << endl;
   // displayTransactionArr(transArray, transCount);
   // displayReviewsArray(reviewArray, reviewCount);
@@ -82,8 +108,8 @@ int main(int argc, char *argv[]) {
   // radixSort::radixsort(transArray, transCount);
   // displayTransactionArr(transArray, transCount);
 
-  radixSort::radixsort(&transactionList, transCount);
-  transactionList.display();
+  // radixSort::radixsort(&transactionList, transCount);
+  // transactionList.display();
 
   // radixSort::countSort(reviewArray, reviewCount);
   // displayReviewsArray(reviewArray, reviewCount);
