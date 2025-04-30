@@ -75,21 +75,21 @@ int main(int argc, char *argv[]) {
   LinkList<reviews> reviewList;
   LinkList<transactions> transactionList;
 
-  ifstream uncleanedTransactionFile("../data/transactions.csv");
-  ifstream uncleanedReviewFile("../data/reviews.csv");
+  ifstream uncleanedTransactionFile("../../data/transactions.csv");
+  ifstream uncleanedReviewFile("../../data/reviews.csv");
 
-  cleanData(uncleanedTransactionFile,
-           "../data/transactions_cleaned.csv");
-  cleanData(uncleanedReviewFile, "../data/reviews_cleaned.csv");
+  cleanData(uncleanedTransactionFile, "../../data/transactions_cleaned.csv");
+  cleanData(uncleanedReviewFile, "../../data/reviews_cleaned.csv");
 
   uncleanedTransactionFile.close();
   uncleanedReviewFile.close();
 
-  ifstream transactionFile("../data/transactions_cleaned.csv");
-  ifstream reviewFile("../data/reviews_cleaned.csv");
+  ifstream transactionFile("../../data/transactions_cleaned.csv");
+  ifstream reviewFile("../../data/reviews_cleaned.csv");
 
   int choice;
   string mode;
+  int sortChoice;
 
   cout << "Choose a mode to run: " << endl;
   cout << "\t1. Link List" << endl;
@@ -123,6 +123,13 @@ int main(int argc, char *argv[]) {
       loadTransaction(transactionFile, transactionList)
               : loadReview(reviewFile, reviewArray, reviewCount),
       loadTransaction(transactionFile, transArray, transCount);
+
+  cout << "\nChoose a sorting algorithm: " << endl;
+  cout << "\t1. Bubble Sort" << endl;
+  cout << "\t2. Quick Sort" << endl;
+  cout << "\t3. Radix Sort" << endl;
+  cout << "Sorting Algorithm: ";
+  cin >> sortChoice;
 
   int processChoice;
   cout << "\t1. Regular sort of transaction and review data" << endl;
@@ -177,7 +184,20 @@ int main(int argc, char *argv[]) {
       }
 
       cout << "\nSorting joined data by date..." << endl;
-      radixSort::radixsort(joinedArray, joinedSize);
+      switch (sortChoice) {
+      case 1:
+        bubblesort::displaySortedByDate(joinedList);
+        break;
+      case 2:
+        // quickSort::displaySortedByDate(joinedList);
+        break;
+      case 3:
+        radixSort::radixsort(joinedArray, joinedSize);
+        break;
+      default:
+        cout << "Unknown sorting algorithm" << endl;
+        break;
+      }
 
       cout << "\nSample of joined data (after sorting by date): " << endl;
 
@@ -295,18 +315,12 @@ int main(int argc, char *argv[]) {
   // displayReviewsArray(reviewArray, reviewCount);
   delete[] transArray;
   delete[] reviewArray;
-  // radixSort::radixsort(transArray, transCount);
-  // displayTransactionArr(transArray, transCount);
-
-  // radixSort::radixsort(&transactionList, transCount); //undo ltr
-  // transactionList.display();  //undo ltr
 
   bubblesort::displaySortedByDate(transactionList); // kai
   int size = 0;
   transactions *sortedArray =
       bubblesort::getSortedArrayByDate(transactionList, size);
 
-  // Now search on sorted data
   jumpSearch::searchMenu(sortedArray, size); // kai
 
   oneStarReview::analyzeTopWords(reviewList); // kai

@@ -13,6 +13,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/loh-yen-kuan/Coding/dsaAssignment/src/bubblesort.cpp" "CMakeFiles/dsaAssignment_lib.dir/src/bubblesort.cpp.o" "gcc" "CMakeFiles/dsaAssignment_lib.dir/src/bubblesort.cpp.o.d"
   "/home/loh-yen-kuan/Coding/dsaAssignment/src/jumpsearch.cpp" "CMakeFiles/dsaAssignment_lib.dir/src/jumpsearch.cpp.o" "gcc" "CMakeFiles/dsaAssignment_lib.dir/src/jumpsearch.cpp.o.d"
   "/home/loh-yen-kuan/Coding/dsaAssignment/src/oneStarReview.cpp" "CMakeFiles/dsaAssignment_lib.dir/src/oneStarReview.cpp.o" "gcc" "CMakeFiles/dsaAssignment_lib.dir/src/oneStarReview.cpp.o.d"
+  "/home/loh-yen-kuan/Coding/dsaAssignment/src/quickSort.cpp" "CMakeFiles/dsaAssignment_lib.dir/src/quickSort.cpp.o" "gcc" "CMakeFiles/dsaAssignment_lib.dir/src/quickSort.cpp.o.d"
   "/home/loh-yen-kuan/Coding/dsaAssignment/src/radixSort.cpp" "CMakeFiles/dsaAssignment_lib.dir/src/radixSort.cpp.o" "gcc" "CMakeFiles/dsaAssignment_lib.dir/src/radixSort.cpp.o.d"
   )
 
