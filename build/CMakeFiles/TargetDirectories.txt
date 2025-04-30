@@ -1,4 +1,4 @@
-C:/Users/lokai/OneDrive/Documents/GitHub/dsaAssignment/build/CMakeFiles/dsaAssignment.dir
-C:/Users/lokai/OneDrive/Documents/GitHub/dsaAssignment/build/CMakeFiles/dsaAssignment_lib.dir
-C:/Users/lokai/OneDrive/Documents/GitHub/dsaAssignment/build/CMakeFiles/edit_cache.dir
-C:/Users/lokai/OneDrive/Documents/GitHub/dsaAssignment/build/CMakeFiles/rebuild_cache.dir
+C:/Users/Albert Leonardus/OneDrive/Dokumen/GitHub/dsaAssignment/build/CMakeFiles/dsaAssignment.dir
+C:/Users/Albert Leonardus/OneDrive/Dokumen/GitHub/dsaAssignment/build/CMakeFiles/dsaAssignment_lib.dir
+C:/Users/Albert Leonardus/OneDrive/Dokumen/GitHub/dsaAssignment/build/CMakeFiles/edit_cache.dir
+C:/Users/Albert Leonardus/OneDrive/Dokumen/GitHub/dsaAssignment/build/CMakeFiles/rebuild_cache.dir

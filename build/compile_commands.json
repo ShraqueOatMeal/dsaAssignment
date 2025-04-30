@@ -1,38 +1,50 @@
 [
 {
-  "directory": "C:/Users/lokai/OneDrive/Documents/GitHub/dsaAssignment/build",
-  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -IC:/Users/lokai/OneDrive/Documents/GitHub/dsaAssignment/include -g -std=gnu++17 -o CMakeFiles\\dsaAssignment.dir\\src\\main.cpp.obj -c C:\\Users\\lokai\\OneDrive\\Documents\\GitHub\\dsaAssignment\\src\\main.cpp",
-  "file": "C:\\Users\\lokai\\OneDrive\\Documents\\GitHub\\dsaAssignment\\src\\main.cpp",
+  "directory": "C:/Users/Albert Leonardus/OneDrive/Dokumen/GitHub/dsaAssignment/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -I\"C:/Users/Albert Leonardus/OneDrive/Dokumen/GitHub/dsaAssignment/include\" -g -std=gnu++17 -o CMakeFiles\\dsaAssignment.dir\\src\\main.cpp.obj -c \"C:\\Users\\Albert Leonardus\\OneDrive\\Dokumen\\GitHub\\dsaAssignment\\src\\main.cpp\"",
+  "file": "C:\\Users\\Albert Leonardus\\OneDrive\\Dokumen\\GitHub\\dsaAssignment\\src\\main.cpp",
   "output": "CMakeFiles\\dsaAssignment.dir\\src\\main.cpp.obj"
 },
 {
-  "directory": "C:/Users/lokai/OneDrive/Documents/GitHub/dsaAssignment/build",
-  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -IC:/Users/lokai/OneDrive/Documents/GitHub/dsaAssignment/include -g -std=gnu++17 -o CMakeFiles\\dsaAssignment_lib.dir\\src\\radixSort.cpp.obj -c C:\\Users\\lokai\\OneDrive\\Documents\\GitHub\\dsaAssignment\\src\\radixSort.cpp",
-  "file": "C:\\Users\\lokai\\OneDrive\\Documents\\GitHub\\dsaAssignment\\src\\radixSort.cpp",
+  "directory": "C:/Users/Albert Leonardus/OneDrive/Dokumen/GitHub/dsaAssignment/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -I\"C:/Users/Albert Leonardus/OneDrive/Dokumen/GitHub/dsaAssignment/include\" -g -std=gnu++17 -o CMakeFiles\\dsaAssignment_lib.dir\\src\\radixSort.cpp.obj -c \"C:\\Users\\Albert Leonardus\\OneDrive\\Dokumen\\GitHub\\dsaAssignment\\src\\radixSort.cpp\"",
+  "file": "C:\\Users\\Albert Leonardus\\OneDrive\\Dokumen\\GitHub\\dsaAssignment\\src\\radixSort.cpp",
   "output": "CMakeFiles\\dsaAssignment_lib.dir\\src\\radixSort.cpp.obj"
 },
 {
-  "directory": "C:/Users/lokai/OneDrive/Documents/GitHub/dsaAssignment/build",
-  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -IC:/Users/lokai/OneDrive/Documents/GitHub/dsaAssignment/include -g -std=gnu++17 -o CMakeFiles\\dsaAssignment_lib.dir\\src\\WordFrequency.cpp.obj -c C:\\Users\\lokai\\OneDrive\\Documents\\GitHub\\dsaAssignment\\src\\WordFrequency.cpp",
-  "file": "C:\\Users\\lokai\\OneDrive\\Documents\\GitHub\\dsaAssignment\\src\\WordFrequency.cpp",
+  "directory": "C:/Users/Albert Leonardus/OneDrive/Dokumen/GitHub/dsaAssignment/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -I\"C:/Users/Albert Leonardus/OneDrive/Dokumen/GitHub/dsaAssignment/include\" -g -std=gnu++17 -o CMakeFiles\\dsaAssignment_lib.dir\\src\\WordFrequency.cpp.obj -c \"C:\\Users\\Albert Leonardus\\OneDrive\\Dokumen\\GitHub\\dsaAssignment\\src\\WordFrequency.cpp\"",
+  "file": "C:\\Users\\Albert Leonardus\\OneDrive\\Dokumen\\GitHub\\dsaAssignment\\src\\WordFrequency.cpp",
   "output": "CMakeFiles\\dsaAssignment_lib.dir\\src\\WordFrequency.cpp.obj"
 },
 {
-  "directory": "C:/Users/lokai/OneDrive/Documents/GitHub/dsaAssignment/build",
-  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -IC:/Users/lokai/OneDrive/Documents/GitHub/dsaAssignment/include -g -std=gnu++17 -o CMakeFiles\\dsaAssignment_lib.dir\\src\\JoinedData.cpp.obj -c C:\\Users\\lokai\\OneDrive\\Documents\\GitHub\\dsaAssignment\\src\\JoinedData.cpp",
-  "file": "C:\\Users\\lokai\\OneDrive\\Documents\\GitHub\\dsaAssignment\\src\\JoinedData.cpp",
+  "directory": "C:/Users/Albert Leonardus/OneDrive/Dokumen/GitHub/dsaAssignment/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -I\"C:/Users/Albert Leonardus/OneDrive/Dokumen/GitHub/dsaAssignment/include\" -g -std=gnu++17 -o CMakeFiles\\dsaAssignment_lib.dir\\src\\JoinedData.cpp.obj -c \"C:\\Users\\Albert Leonardus\\OneDrive\\Dokumen\\GitHub\\dsaAssignment\\src\\JoinedData.cpp\"",
+  "file": "C:\\Users\\Albert Leonardus\\OneDrive\\Dokumen\\GitHub\\dsaAssignment\\src\\JoinedData.cpp",
   "output": "CMakeFiles\\dsaAssignment_lib.dir\\src\\JoinedData.cpp.obj"
 },
 {
-  "directory": "C:/Users/lokai/OneDrive/Documents/GitHub/dsaAssignment/build",
-  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -IC:/Users/lokai/OneDrive/Documents/GitHub/dsaAssignment/include -g -std=gnu++17 -o CMakeFiles\\dsaAssignment_lib.dir\\src\\bubblesort.cpp.obj -c C:\\Users\\lokai\\OneDrive\\Documents\\GitHub\\dsaAssignment\\src\\bubblesort.cpp",
-  "file": "C:\\Users\\lokai\\OneDrive\\Documents\\GitHub\\dsaAssignment\\src\\bubblesort.cpp",
+  "directory": "C:/Users/Albert Leonardus/OneDrive/Dokumen/GitHub/dsaAssignment/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -I\"C:/Users/Albert Leonardus/OneDrive/Dokumen/GitHub/dsaAssignment/include\" -g -std=gnu++17 -o CMakeFiles\\dsaAssignment_lib.dir\\src\\bubblesort.cpp.obj -c \"C:\\Users\\Albert Leonardus\\OneDrive\\Dokumen\\GitHub\\dsaAssignment\\src\\bubblesort.cpp\"",
+  "file": "C:\\Users\\Albert Leonardus\\OneDrive\\Dokumen\\GitHub\\dsaAssignment\\src\\bubblesort.cpp",
   "output": "CMakeFiles\\dsaAssignment_lib.dir\\src\\bubblesort.cpp.obj"
 },
 {
-  "directory": "C:/Users/lokai/OneDrive/Documents/GitHub/dsaAssignment/build",
-  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -IC:/Users/lokai/OneDrive/Documents/GitHub/dsaAssignment/include -g -std=gnu++17 -o CMakeFiles\\dsaAssignment_lib.dir\\src\\jumpsearch.cpp.obj -c C:\\Users\\lokai\\OneDrive\\Documents\\GitHub\\dsaAssignment\\src\\jumpsearch.cpp",
-  "file": "C:\\Users\\lokai\\OneDrive\\Documents\\GitHub\\dsaAssignment\\src\\jumpsearch.cpp",
+  "directory": "C:/Users/Albert Leonardus/OneDrive/Dokumen/GitHub/dsaAssignment/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -I\"C:/Users/Albert Leonardus/OneDrive/Dokumen/GitHub/dsaAssignment/include\" -g -std=gnu++17 -o CMakeFiles\\dsaAssignment_lib.dir\\src\\jumpsearch.cpp.obj -c \"C:\\Users\\Albert Leonardus\\OneDrive\\Dokumen\\GitHub\\dsaAssignment\\src\\jumpsearch.cpp\"",
+  "file": "C:\\Users\\Albert Leonardus\\OneDrive\\Dokumen\\GitHub\\dsaAssignment\\src\\jumpsearch.cpp",
   "output": "CMakeFiles\\dsaAssignment_lib.dir\\src\\jumpsearch.cpp.obj"
+},
+{
+  "directory": "C:/Users/Albert Leonardus/OneDrive/Dokumen/GitHub/dsaAssignment/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -I\"C:/Users/Albert Leonardus/OneDrive/Dokumen/GitHub/dsaAssignment/include\" -g -std=gnu++17 -o CMakeFiles\\dsaAssignment_lib.dir\\src\\oneStarReview.cpp.obj -c \"C:\\Users\\Albert Leonardus\\OneDrive\\Dokumen\\GitHub\\dsaAssignment\\src\\oneStarReview.cpp\"",
+  "file": "C:\\Users\\Albert Leonardus\\OneDrive\\Dokumen\\GitHub\\dsaAssignment\\src\\oneStarReview.cpp",
+  "output": "CMakeFiles\\dsaAssignment_lib.dir\\src\\oneStarReview.cpp.obj"
+},
+{
+  "directory": "C:/Users/Albert Leonardus/OneDrive/Dokumen/GitHub/dsaAssignment/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -I\"C:/Users/Albert Leonardus/OneDrive/Dokumen/GitHub/dsaAssignment/include\" -g -std=gnu++17 -o CMakeFiles\\dsaAssignment_lib.dir\\src\\quickSort.cpp.obj -c \"C:\\Users\\Albert Leonardus\\OneDrive\\Dokumen\\GitHub\\dsaAssignment\\src\\quickSort.cpp\"",
+  "file": "C:\\Users\\Albert Leonardus\\OneDrive\\Dokumen\\GitHub\\dsaAssignment\\src\\quickSort.cpp",
+  "output": "CMakeFiles\\dsaAssignment_lib.dir\\src\\quickSort.cpp.obj"
 }
 ]

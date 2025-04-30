@@ -75,8 +75,8 @@ int main(int argc, char *argv[]) {
   LinkList<reviews> reviewList;
   LinkList<transactions> transactionList;
 
-  ifstream transactionFile("../../data/transactions_cleaned.csv");
-  ifstream reviewFile("../../data/reviews_cleaned.csv");
+  ifstream transactionFile("../data/transactions_cleaned.csv");
+  ifstream reviewFile("../data/reviews_cleaned.csv");
 
   int choice;
   string mode;
