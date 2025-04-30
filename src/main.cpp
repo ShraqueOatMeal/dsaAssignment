@@ -7,6 +7,7 @@
 #include "radixSort.h"
 #include "reviews.h"
 #include "transactions.h"
+#include <chrono>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
@@ -103,7 +104,6 @@ int main(int argc, char *argv[]) {
 
   int transCount = rowsNum(transactionFile);
   int reviewCount = rowsNum(reviewFile);
-  cout << "transCount: " << transCount << endl;
 
   // reset the file pointer AFTER counting rows
   transactionFile.clear();
@@ -186,14 +186,22 @@ int main(int argc, char *argv[]) {
       cout << "\nSorting joined data by date..." << endl;
       switch (sortChoice) {
       case 1:
-        bubblesort::displaySortedByDate(joinedList);
+        // bubblesort::displaySortedByDate(joinedList);
         break;
       case 2:
         // quickSort::displaySortedByDate(joinedList);
         break;
-      case 3:
+      case 3: {
+        auto start = chrono::high_resolution_clock::now();
         radixSort::radixsort(joinedArray, joinedSize);
+        auto end = chrono::high_resolution_clock::now();
+        chrono::duration<double, milli> duration = end - start;
+        cout << "\n Sorting completed in " << duration.count()
+             << " milliseconds.\n";
+        cout << "Estimated Time Complexity of Radix Sort: O(n*d) \n";
+        cout << "Estimated space used of Radix Sort: O(n) \n";
         break;
+      }
       default:
         cout << "Unknown sorting algorithm" << endl;
         break;
@@ -225,7 +233,14 @@ int main(int argc, char *argv[]) {
         displayCount++;
       }
       cout << "\nSorting joined data by date..." << endl;
+      auto start = chrono::high_resolution_clock::now();
       radixSort::radixsort(&mergedList, mergedList.getCount());
+      auto end = chrono::high_resolution_clock::now();
+      chrono::duration<double, milli> duration = end - start;
+      cout << "\n Sorting completed in " << duration.count()
+           << " milliseconds.\n";
+      cout << "Estimated Time Complexity of Radix Sort: O(n*d) \n";
+      cout << "Estimated space used of Radix Sort: O(n) \n";
 
       cout << "\nSample of joined data (after sorting by date): " << endl;
 
@@ -257,7 +272,14 @@ int main(int argc, char *argv[]) {
       }
 
       cout << "\nSorting joined data by date..." << endl;
+      auto start = chrono::high_resolution_clock::now();
       radixSort::radixsort(joinedArray, joinedSize);
+      auto end = chrono::high_resolution_clock::now();
+      chrono::duration<double, milli> duration = end - start;
+      cout << "\n Sorting completed in " << duration.count()
+           << " milliseconds.\n";
+      cout << "Estimated Time Complexity of Radix Sort: O(n*d) \n";
+      cout << "Estimated space used of Radix Sort: O(n) \n";
 
       cout << "\nSample of joined data (after sorting by date): " << endl;
       for (int i = 0; i < min(5, joinedSize); i++) {
@@ -268,10 +290,25 @@ int main(int argc, char *argv[]) {
   }
 
   else {
-    choice == 1 ? radixSort::radixsort(&transactionList, transCount),
-        radixSort::countSort(&reviewList, reviewCount)
-                : radixSort::radixsort(transArray, transCount),
-        radixSort::countSort(reviewArray, reviewCount);
+    if (choice == 1) {
+      auto start = chrono::high_resolution_clock::now();
+      radixSort::radixsort(&transactionList, transCount);
+      auto end = chrono::high_resolution_clock::now();
+      chrono::duration<double, milli> duration = end - start;
+      cout << "\n Sorting completed in " << duration.count()
+           << " milliseconds.\n";
+      cout << "Estimated Time Complexity of Radix Sort: O(n*d) \n";
+      cout << "Estimated space used of Radix Sort: O(n) \n";
+    } else {
+      auto start = chrono::high_resolution_clock::now();
+      radixSort::radixsort(transArray, transCount);
+      auto end = chrono::high_resolution_clock::now();
+      chrono::duration<double, milli> duration = end - start;
+      cout << "\n Sorting completed in " << duration.count()
+           << " milliseconds.\n";
+      cout << "Estimated Time Complexity of Radix Sort: O(n*d) \n";
+      cout << "Estimated space used of Radix Sort: O(n) \n";
+    }
   }
 
   // Question 2
