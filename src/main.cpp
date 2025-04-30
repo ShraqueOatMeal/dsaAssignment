@@ -6,6 +6,7 @@
 #include "oneStarReview.h"
 #include "radixSort.h"
 #include "reviews.h"
+#include "insertionSort.hpp"
 #include "transactions.h"
 #include <chrono>
 #include <fstream>
@@ -107,67 +108,254 @@ int main(int argc, char *argv[]) {
   reviewFile.seekg(0);
   getline(reviewFile, dummyLine); // Skip header
 
-  // Choose data structure
-  cout << "Choose a mode to run:" << endl;
-  cout << "\t1. Linked List" << endl;
-  cout << "\t2. Array" << endl;
-  cout << "Mode: ";
-  int choice;
-  cin >> choice;
+  // Now load properly
+  transactions *transArray = new transactions[transCount];
+  reviews *reviewArray = new reviews[reviewCount];
 
-  // Data structures
-  LinkList<transactions> transactionList;
-  LinkList<reviews> reviewList;
-  transactions *transArray = nullptr;
-  reviews *reviewArray = nullptr;
+  choice == 1 ? loadReview(reviewFile, reviewList),
+      loadTransaction(transactionFile, transactionList)
+              : loadReview(reviewFile, reviewArray, reviewCount),
+      loadTransaction(transactionFile, transArray, transCount);
 
-  // Load data based on choice
-  if (choice == 1) {
-    loadTransaction(transactionFile, transactionList);
-    loadReview(reviewFile, reviewList);
-  } else if (choice == 2) {
-    transArray = new transactions[transCount];
-    reviewArray = new reviews[reviewCount];
-    loadTransaction(transactionFile, transArray, transCount);
-    loadReview(reviewFile, reviewArray, reviewCount);
-  } else {
-    cout << "Invalid mode choice" << endl;
-    return 1;
-  }
+  cout << "\nChoose a sorting algorithm: " << endl;
+  cout << "\t1. Bubble Sort" << endl;
+  cout << "\t2. Quick Sort" << endl;
+  cout << "\t3. Radix Sort" << endl;
+  cout << "Sorting Algorithm: ";
+  cin >> sortChoice;
 
-  // Main menu loop
-  bool exit = false;
-  while (!exit) {
-    displayMainMenu();
-    int funcChoice;
-    cin >> funcChoice;
+  int processChoice;
+  cout << "\t1. Regular sort of transaction and review data" << endl;
+  cout << "\t2. Inner join on Customer ID and sort by date" << endl;
+  cout << "\t3. Left join on Customer ID and sort by date" << endl;
+  cout << "Choice: ";
+  cin >> processChoice;
 
-    switch (funcChoice) {
-    case 1:
-      sortByDateMenu(choice, transactionList, reviewList, transArray,
-                     reviewArray, transCount, reviewCount);
-      break;
-    case 2:
-      filterByCategoryAndPayment(choice, transactionList, transArray,
-                                 transCount);
-      break;
-    case 3:
-      checkNegativeReviews(choice, reviewList, reviewArray, reviewCount);
-      break;
-    case 4:
-      exit = true;
-      break;
-    default:
-      cout << "Invalid choice, please try again." << endl;
-      break;
+  if (processChoice == 2) {
+    cout << "Performing inner join..." << endl;
+
+    if (choice == 1) {
+      LinkList<mergedData> mergedList;
+      JoinedData::innerJoinLists(transactionList, reviewList, mergedList);
+
+      cout << "Inner join completed. Total records: " << mergedList.getCount()
+           << endl;
+
+      cout << "\nSample of joined data (before sorting): " << endl;
+
+      int displayCount = 0;
+      Node<mergedData> *current = mergedList.getHead();
+      while (current != nullptr && displayCount < 5) {
+        current->data.print();
+        current = current->next;
+        displayCount++;
+      }
+
+      cout << "\nSorting joined data by date..." << endl;
+      radixSort::radixsort(&mergedList, mergedList.getCount());
+
+      cout << "\nSample of joined data (after sorting by date): " << endl;
+      displayCount = 0;
+      current = mergedList.getHead();
+      while (current != nullptr && displayCount < 5) {
+        current->data.print();
+        current = current->next;
+        displayCount++;
+      }
+    } else {
+      mergedData *joinedArray = new mergedData[transCount * reviewCount];
+      int joinedSize = 0;
+
+      JoinedData::innerJoinArrays(transArray, transCount, reviewArray,
+                                  reviewCount, joinedArray, joinedSize);
+
+      cout << "\nInner join completed. Total records: " << joinedSize << endl;
+      cout << "\nSample of joined data (before sorting): " << endl;
+
+      for (int i = 0; i < min(5, joinedSize); i++) {
+        joinedArray[i].print();
+      }
+
+      cout << "\nSorting joined data by date..." << endl;
+      switch (sortChoice) {
+      case 1:
+        // bubblesort::displaySortedByDate(joinedList);
+        break;
+      case 2:
+        insertionSort::insertionSortTransactions(joinedArray, joinedSize);
+        break;
+      case 3: {
+        auto start = chrono::high_resolution_clock::now();
+        radixSort::radixsort(joinedArray, joinedSize);
+        auto end = chrono::high_resolution_clock::now();
+        chrono::duration<double, milli> duration = end - start;
+        cout << "\n Sorting completed in " << duration.count()
+             << " milliseconds.\n";
+        cout << "Estimated Time Complexity of Radix Sort: O(n*d) \n";
+        cout << "Estimated space used of Radix Sort: O(n) \n";
+        break;
+      }
+      default:
+        cout << "Unknown sorting algorithm" << endl;
+        break;
+      }
+
+      cout << "\nSample of joined data (after sorting by date): " << endl;
+
+      for (int i = 0; i < min(5, joinedSize); i++) {
+        joinedArray[i].print();
+      }
+      delete[] joinedArray;
+    }
+  } else if (processChoice == 3) {
+    if (choice == 1) {
+
+      LinkList<mergedData> mergedList;
+      JoinedData::leftJoinLists(transactionList, reviewList, mergedList);
+
+      cout << "\nLeft join completed. Total records: " << mergedList.getCount()
+           << endl;
+      cout << "\nSample of joined data (before sorting): " << endl;
+
+      int displayCount = 0;
+
+      Node<mergedData> *current = mergedList.getHead();
+      while (current != nullptr && displayCount < 8) {
+        current->data.print();
+        current = current->next;
+        displayCount++;
+      }
+      cout << "\nSorting joined data by date..." << endl;
+      auto start = chrono::high_resolution_clock::now();
+      radixSort::radixsort(&mergedList, mergedList.getCount());
+      auto end = chrono::high_resolution_clock::now();
+      chrono::duration<double, milli> duration = end - start;
+      cout << "\n Sorting completed in " << duration.count()
+           << " milliseconds.\n";
+      cout << "Estimated Time Complexity of Radix Sort: O(n*d) \n";
+      cout << "Estimated space used of Radix Sort: O(n) \n";
+
+      cout << "\nSample of joined data (after sorting by date): " << endl;
+
+      displayCount = 0;
+      current = mergedList.getHead();
+
+      while (current != nullptr && displayCount < 8) {
+        current->data.print();
+        current = current->next;
+        displayCount++;
+      }
+    } else {
+
+      mergedData *joinedArray = new mergedData[transCount * reviewCount];
+
+      int joinedSize = 0;
+
+      JoinedData::leftJoinArrays(transArray, transCount, reviewArray,
+                                 reviewCount, joinedArray, joinedSize);
+      cout << "\nLeft join completed. Total records: " << joinedSize << endl;
+      cout << "\nSample of joined data (before sorting): " << endl;
+
+      // for (int i = 0; i < min(5, joinedSize); i++) {
+      //   joinedArray[i].print();
+      // }
+
+      for (int i = 0; i < joinedSize; i++) {
+        joinedArray[i].print();
+      }
+
+      cout << "\nSorting joined data by date..." << endl;
+      auto start = chrono::high_resolution_clock::now();
+      radixSort::radixsort(joinedArray, joinedSize);
+      auto end = chrono::high_resolution_clock::now();
+      chrono::duration<double, milli> duration = end - start;
+      cout << "\n Sorting completed in " << duration.count()
+           << " milliseconds.\n";
+      cout << "Estimated Time Complexity of Radix Sort: O(n*d) \n";
+      cout << "Estimated space used of Radix Sort: O(n) \n";
+
+      cout << "\nSample of joined data (after sorting by date): " << endl;
+      for (int i = 0; i < min(5, joinedSize); i++) {
+        joinedArray[i].print();
+      }
+      delete[] joinedArray;
     }
   }
 
-  // Clean up
-  if (choice == 2) {
-    delete[] transArray;
-    delete[] reviewArray;
+  else {
+    if (choice == 1) {
+      auto start = chrono::high_resolution_clock::now();
+      radixSort::radixsort(&transactionList, transCount);
+      auto end = chrono::high_resolution_clock::now();
+      chrono::duration<double, milli> duration = end - start;
+      cout << "\n Sorting completed in " << duration.count()
+           << " milliseconds.\n";
+      cout << "Estimated Time Complexity of Radix Sort: O(n*d) \n";
+      cout << "Estimated space used of Radix Sort: O(n) \n";
+    } else {
+      auto start = chrono::high_resolution_clock::now();
+      radixSort::radixsort(transArray, transCount);
+      auto end = chrono::high_resolution_clock::now();
+      chrono::duration<double, milli> duration = end - start;
+      cout << "\n Sorting completed in " << duration.count()
+           << " milliseconds.\n";
+      cout << "Estimated Time Complexity of Radix Sort: O(n*d) \n";
+      cout << "Estimated space used of Radix Sort: O(n) \n";
+    }
   }
+
+  // Question 2
+  // filter transactions based on the category and payment method
+  int catChoice;
+  int paymentChoice;
+  cout << "Choose a category to filter: " << endl;
+  cout << "\t1. Automotive\n\t2. Books\n\t3. Groceries\n\t4. Sports\n\t5. "
+          "Toys\n\t6. Beauty\n\t7. Furniture\n\t8. Electronics\n\t9. "
+          "Fashion\n\t10. Home Appliances"
+       << endl;
+  cout << "Category: ";
+  cin >> catChoice;
+
+  cout << "Choose a payment method to filter: " << endl;
+  cout << "\t1. Bank Transfer\n\t2. PayPal\n\t3. Debit Card\n\t4. Cash on "
+          "Delivery\n\t5. "
+          "Credit Card"
+       << endl;
+  cout << "Payment Method: ";
+  cin >> paymentChoice;
+
+  choice == 1
+      ? linearSearch(catChoice, paymentChoice, transCount, transactionList)
+      : linearSearch(catChoice, paymentChoice, transCount, transArray);
+  cout << endl;
+
+  // Question 3: which words are most frequently used in the reviews rated 1
+  // star?
+
+  if (choice == 1) {
+    processOneStarReviews(reviewList);
+  } else {
+    LinkList<reviews> tempReviewList;
+    for (int i = 0; i < reviewCount; i++) {
+      tempReviewList.addData(reviewArray[i]);
+    }
+    processOneStarReviews(tempReviewList);
+  }
+
+  // displayReviewsArray(reviewArray, reviewCount);
+  delete[] transArray;
+  delete[] reviewArray;
+
+  bubblesort::displaySortedByDate(transactionList); // kai
+  int size = 0;
+  transactions *sortedArray =
+      bubblesort::getSortedArrayByDate(transactionList, size);
+
+  jumpSearch::searchMenu(sortedArray, size); // kai
+
+  oneStarReview::analyzeTopWords(reviewList); // kai
+
+  cout << endl;
 
   return 0;
 }
