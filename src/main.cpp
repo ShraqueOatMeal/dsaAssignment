@@ -75,6 +75,16 @@ int main(int argc, char *argv[]) {
   LinkList<reviews> reviewList;
   LinkList<transactions> transactionList;
 
+  ifstream uncleanedTransactionFile("../data/transactions.csv");
+  ifstream uncleanedReviewFile("../data/reviews.csv");
+
+  cleanData(uncleanedTransactionFile,
+           "../data/transactions_cleaned.csv");
+  cleanData(uncleanedReviewFile, "../data/reviews_cleaned.csv");
+
+  uncleanedTransactionFile.close();
+  uncleanedReviewFile.close();
+
   ifstream transactionFile("../data/transactions_cleaned.csv");
   ifstream reviewFile("../data/reviews_cleaned.csv");
 
