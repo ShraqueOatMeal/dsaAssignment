@@ -1,6 +1,7 @@
 #include "WordFrequency.h"
 #include "LinkList.h"
 #include "reviews.h"
+#include <chrono>
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -156,7 +157,13 @@ void processOneStarReviews(LinkList<reviews> &reviewList) {
     current = current->next;
   }
 
+  auto start = chrono::high_resolution_clock::now();
   radixsort(&wordFrequencyList, wordCount);
+  auto end = chrono::high_resolution_clock::now();
+  chrono::duration<double, milli> duration = end - start;
+  cout << "\n Sorting completed in " << duration.count() << " milliseconds.\n";
+  cout << "Estimated Time Complexity of Radix Sort: O(n*d) \n";
+  cout << "Estimated space used of Radix Sort: O(n) \n";
 
   displayTopWords(wordFrequencyList, 10);
 }
