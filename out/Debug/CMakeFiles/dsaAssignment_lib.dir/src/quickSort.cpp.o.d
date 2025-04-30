@@ -1,8 +1,8 @@
 CMakeFiles/dsaAssignment_lib.dir/src/quickSort.cpp.o: \
  /home/loh-yen-kuan/Coding/dsaAssignment/src/quickSort.cpp \
  /usr/include/stdc-predef.h \
- /home/loh-yen-kuan/Coding/dsaAssignment/src/../include/quickSort.hpp \
- /home/loh-yen-kuan/Coding/dsaAssignment/src/../include/LinkList.h \
+ /home/loh-yen-kuan/Coding/dsaAssignment/include/quickSort.hpp \
+ /home/loh-yen-kuan/Coding/dsaAssignment/include/LinkList.h \
  /usr/include/c++/14/iostream /usr/include/c++/14/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/14/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/14/bits/os_defines.h \
@@ -154,6 +154,6 @@ CMakeFiles/dsaAssignment_lib.dir/src/quickSort.cpp.o: \
  /usr/include/c++/14/bits/basic_ios.tcc \
  /usr/include/c++/14/bits/ostream.tcc /usr/include/c++/14/istream \
  /usr/include/c++/14/bits/istream.tcc \
- /home/loh-yen-kuan/Coding/dsaAssignment/src/../include/reviews.h \
- /home/loh-yen-kuan/Coding/dsaAssignment/src/../include/transactions.h \
+ /home/loh-yen-kuan/Coding/dsaAssignment/include/reviews.h \
+ /home/loh-yen-kuan/Coding/dsaAssignment/include/transactions.h \
  /usr/include/c++/14/sstream /usr/include/c++/14/bits/sstream.tcc

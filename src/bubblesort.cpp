@@ -1,4 +1,5 @@
 #include "bubblesort.h"
+#include "JoinedData.h"
 #include "LinkList.h"
 #include "transactions.h"
 #include <chrono>
@@ -36,7 +37,41 @@ transactions *toArray(LinkList<transactions> &list, int &size) {
   return arr;
 }
 
+mergedData *toArray(LinkList<mergedData> &list, int &size) {
+  Node<mergedData> *current = list.getHead();
+  size = 0;
+
+  while (current) {
+    size++;
+    current = current->next;
+  }
+
+  mergedData *arr = new mergedData[size];
+
+  current = list.getHead();
+  int index = 0;
+  while (current) {
+    arr[index++] = current->data;
+    current = current->next;
+  }
+
+  return arr;
+}
+
 void bubblesort::bubbleSortByDate(transactions *arr, int size) {
+  for (int i = 0; i < size; i++) {
+    for (int j = 0; j < size - i - 1; j++) {
+      int date1 = convertDateToInt(arr[j].date);
+      int date2 = convertDateToInt(arr[j + 1].date);
+
+      if (date1 > date2) {
+        swap(arr[j], arr[j + 1]);
+      }
+    }
+  }
+}
+
+void bubblesort::bubbleSortByDate(mergedData *arr, int size) {
   for (int i = 0; i < size; i++) {
     for (int j = 0; j < size - i - 1; j++) {
       int date1 = convertDateToInt(arr[j].date);
@@ -75,6 +110,32 @@ transactions *bubblesort::getSortedArrayByDate(LinkList<transactions> &list,
 void bubblesort::displaySortedByDate(LinkList<transactions> &list) {
   int size = 0;
   transactions *arr = toArray(list, size);
+
+  // Start timing
+  auto start = chrono::high_resolution_clock::now();
+
+  bubbleSortByDate(arr, size); // Sorting
+
+  // End timing
+  auto end = chrono::high_resolution_clock::now();
+  chrono::duration<double, milli> duration = end - start;
+
+  cout << "Transactions sorted by date (Bubble Sort):\n";
+  for (int i = 0; i < size; i++) {
+    arr[i].print();
+  }
+
+  cout << "\n Sorting completed in " << duration.count() << " milliseconds.\n";
+  cout << "Estimated Time Complexity of Bubble Sort: O(n^2) \n";
+  cout << "Estimated space used of Bubble Sort: O(1) (in-place sorting)"
+       << endl;
+
+  delete[] arr;
+}
+
+void bubblesort::displaySortedByDate(LinkList<mergedData> &list) {
+  int size = 0;
+  mergedData *arr = toArray(list, size);
 
   // Start timing
   auto start = chrono::high_resolution_clock::now();
