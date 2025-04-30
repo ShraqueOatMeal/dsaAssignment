@@ -102,6 +102,7 @@ int main(int argc, char *argv[]) {
 
   int transCount = rowsNum(transactionFile);
   int reviewCount = rowsNum(reviewFile);
+  cout << "transCount: " << transCount << endl;
 
   // reset the file pointer AFTER counting rows
   transactionFile.clear();
@@ -226,7 +227,11 @@ int main(int argc, char *argv[]) {
       cout << "\nLeft join completed. Total records: " << joinedSize << endl;
       cout << "\nSample of joined data (before sorting): " << endl;
 
-      for (int i = 0; i < min(8, joinedSize); i++) {
+      // for (int i = 0; i < min(5, joinedSize); i++) {
+      //   joinedArray[i].print();
+      // }
+
+      for (int i = 0; i < joinedSize; i++) {
         joinedArray[i].print();
       }
 
@@ -234,7 +239,7 @@ int main(int argc, char *argv[]) {
       radixSort::radixsort(joinedArray, joinedSize);
 
       cout << "\nSample of joined data (after sorting by date): " << endl;
-      for (int i = 0; i < min(8, joinedSize); i++) {
+      for (int i = 0; i < min(5, joinedSize); i++) {
         joinedArray[i].print();
       }
       delete[] joinedArray;
@@ -318,9 +323,6 @@ void loadTransaction(ifstream &transactionFile,
 
   string line;
 
-  // Skip Header
-  getline(transactionFile, line);
-
   while (getline(transactionFile, line)) {
     stringstream ss(line);
     string custID, prod, cat, priceStr, date, paymentMethod;
@@ -347,11 +349,7 @@ void loadTransaction(ifstream &transactionFile,
 // load array
 void loadTransaction(ifstream &transactionFile, transactions *transArray,
                      int size) {
-
   string line;
-
-  // Skip Header
-  getline(transactionFile, line);
 
   int index = 0;
 
@@ -390,9 +388,6 @@ void displayTransactionArr(transactions *transArr, int size) {
 // load link list
 void loadReview(ifstream &reviewFile, LinkList<reviews> &reviewList) {
   string line;
-
-  // Skip Header
-  getline(reviewFile, line);
 
   // Read Reviews
   while (getline(reviewFile, line)) {
@@ -525,9 +520,6 @@ void linearSearch(int catChoice, int paymentChoice, int size,
 // load array
 void loadReview(ifstream &reviewFile, reviews *reviewArray, int size) {
   string line;
-
-  // Skip Header
-  getline(reviewFile, line);
 
   int index = 0;
 

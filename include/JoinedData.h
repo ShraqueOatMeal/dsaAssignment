@@ -35,7 +35,7 @@ public:
                              LinkList<mergedData> &joinedList);
   static void innerJoinArrays(transactions *transArray, int transCount,
                               reviews *reviewArray, int reviewCount,
-                              mergedData *mergedArray, int mergedCount);
+                              mergedData *mergedArray, int &mergedCount);
   static void leftJoinLists(LinkList<transactions> &transactionList,
                             LinkList<reviews> &reviewList,
                             LinkList<mergedData> &joinedList);

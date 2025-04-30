@@ -46,7 +46,7 @@ void JoinedData::innerJoinLists(LinkList<transactions> &transactionList,
 
 void JoinedData::innerJoinArrays(transactions *transArray, int transCount,
                                  reviews *reviewArray, int reviewCount,
-                                 mergedData *mergedArray, int mergedCount) {
+                                 mergedData *mergedArray, int &mergedCount) {
   mergedCount = 0;
 
   for (int i = 0; i < transCount; i++) {
@@ -101,6 +101,7 @@ void JoinedData::leftJoinLists(LinkList<transactions> &transactionList,
         joinedList.addData(joinedRecord);
       }
       reviewCurrent = reviewCurrent->next;
+      break;
     }
 
     // If no matching review found, still add the transaction with null/default
@@ -154,6 +155,7 @@ void JoinedData::leftJoinArrays(transactions *transArray, int transCount,
         mergedArray[mergedCount].review = reviewArray[j].review;
 
         mergedCount++;
+        break;
       }
     }
 
@@ -169,10 +171,9 @@ void JoinedData::leftJoinArrays(transactions *transArray, int transCount,
       mergedArray[mergedCount].paymentMethod = transArray[i].paymentMethod;
 
       // Set default values for review data
-      mergedArray[mergedCount].prodID = ""; // Assuming this is a string type
-      mergedArray[mergedCount].rating = 0;  // Assuming this is a numeric type
-      mergedArray[mergedCount].review = ""; // Assuming this is a string type
-
+      mergedArray[mergedCount].prodID = "";
+      mergedArray[mergedCount].rating = 0;
+      mergedArray[mergedCount].review = "";
       mergedCount++;
     }
   }
