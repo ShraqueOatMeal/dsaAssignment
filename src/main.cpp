@@ -1,13 +1,13 @@
-#include "../include/JoinedData.h"
-#include "../include/LinkList.h"
-#include "../include/WordFrequency.h"
-#include "../include/bubblesort.h"
-#include "../include/jumpsearch.h"
-#include "../include/oneStarReview.h"
-#include "../include/radixSort.h"
-#include "../include/reviews.h"
-#include "../include/insertionSort.hpp"
-#include "../include/transactions.h"
+#include "JoinedData.h"
+#include "LinkList.h"
+#include "WordFrequency.h"
+#include "bubblesort.h"
+#include "insertionSort.hpp"
+// #include "jumpsearch.h"
+// #include "oneStarReview.h"
+#include "radixSort.h"
+#include "reviews.h"
+#include "transactions.h"
 #include <chrono>
 #include <fstream>
 #include <iomanip>
@@ -686,7 +686,7 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
         bubblesort::displaySortedByDate(mergedList);
         break;
       case 2:
-        insertionSort::insertionsort(mergedList);
+        insertionSort::insertionsort(&mergedList);
         break;
       case 3: {
         auto start = chrono::high_resolution_clock::now();
@@ -728,7 +728,7 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
         bubblesort::displaySortedByDate(mergedList);
         break;
       case 2:
-        insertionSort::insertionsort(mergedList);
+        insertionSort::insertionsort(&mergedList);
         break;
       case 3: {
         auto start = chrono::high_resolution_clock::now();

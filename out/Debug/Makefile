@@ -214,6 +214,30 @@ src/bubblesort.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/bubblesort.cpp.s
 .PHONY : src/bubblesort.cpp.s
 
+src/insertionSort.o: src/insertionSort.cpp.o
+.PHONY : src/insertionSort.o
+
+# target to build an object file
+src/insertionSort.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/insertionSort.cpp.o
+.PHONY : src/insertionSort.cpp.o
+
+src/insertionSort.i: src/insertionSort.cpp.i
+.PHONY : src/insertionSort.i
+
+# target to preprocess a source file
+src/insertionSort.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/insertionSort.cpp.i
+.PHONY : src/insertionSort.cpp.i
+
+src/insertionSort.s: src/insertionSort.cpp.s
+.PHONY : src/insertionSort.s
+
+# target to generate assembly for a file
+src/insertionSort.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/insertionSort.cpp.s
+.PHONY : src/insertionSort.cpp.s
+
 src/jumpsearch.o: src/jumpsearch.cpp.o
 .PHONY : src/jumpsearch.o
 
@@ -286,30 +310,6 @@ src/oneStarReview.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/oneStarReview.cpp.s
 .PHONY : src/oneStarReview.cpp.s
 
-src/quickSort.o: src/quickSort.cpp.o
-.PHONY : src/quickSort.o
-
-# target to build an object file
-src/quickSort.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/quickSort.cpp.o
-.PHONY : src/quickSort.cpp.o
-
-src/quickSort.i: src/quickSort.cpp.i
-.PHONY : src/quickSort.i
-
-# target to preprocess a source file
-src/quickSort.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/quickSort.cpp.i
-.PHONY : src/quickSort.cpp.i
-
-src/quickSort.s: src/quickSort.cpp.s
-.PHONY : src/quickSort.s
-
-# target to generate assembly for a file
-src/quickSort.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/quickSort.cpp.s
-.PHONY : src/quickSort.cpp.s
-
 src/radixSort.o: src/radixSort.cpp.o
 .PHONY : src/radixSort.o
 
@@ -353,6 +353,9 @@ help:
 	@echo "... src/bubblesort.o"
 	@echo "... src/bubblesort.i"
 	@echo "... src/bubblesort.s"
+	@echo "... src/insertionSort.o"
+	@echo "... src/insertionSort.i"
+	@echo "... src/insertionSort.s"
 	@echo "... src/jumpsearch.o"
 	@echo "... src/jumpsearch.i"
 	@echo "... src/jumpsearch.s"
@@ -362,9 +365,6 @@ help:
 	@echo "... src/oneStarReview.o"
 	@echo "... src/oneStarReview.i"
 	@echo "... src/oneStarReview.s"
-	@echo "... src/quickSort.o"
-	@echo "... src/quickSort.i"
-	@echo "... src/quickSort.s"
 	@echo "... src/radixSort.o"
 	@echo "... src/radixSort.i"
 	@echo "... src/radixSort.s"
