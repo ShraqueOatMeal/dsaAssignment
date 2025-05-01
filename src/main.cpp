@@ -84,16 +84,16 @@ void checkNegativeReviews(int choice, LinkList<reviews> &reviewList,
 // System will run in here
 int main(int argc, char *argv[]) {
   // Data cleaning (unchanged)
-  ifstream uncleanedTransactionFile("../data/transactions.csv");
-  ifstream uncleanedReviewFile("../data/reviews.csv");
-  cleanData(uncleanedTransactionFile, "../data/transactions_cleaned.csv");
-  cleanData(uncleanedReviewFile, "../data/reviews_cleaned.csv");
+  ifstream uncleanedTransactionFile("../../data/transactions.csv");
+  ifstream uncleanedReviewFile("../../data/reviews.csv");
+  cleanData(uncleanedTransactionFile, "../../data/transactions_cleaned.csv");
+  cleanData(uncleanedReviewFile, "../../data/reviews_cleaned.csv");
   uncleanedTransactionFile.close();
   uncleanedReviewFile.close();
 
   // Open cleaned files
-  ifstream transactionFile("../data/transactions_cleaned.csv");
-  ifstream reviewFile("../data/reviews_cleaned.csv");
+  ifstream transactionFile("../../data/transactions_cleaned.csv");
+  ifstream reviewFile("../../data/reviews_cleaned.csv");
 
   // Count rows
   int transCount = rowsNum(transactionFile);
@@ -107,21 +107,6 @@ int main(int argc, char *argv[]) {
   reviewFile.clear();
   reviewFile.seekg(0);
   getline(reviewFile, dummyLine); // Skip header
-
-  // Declare and initialize reviewList and reviewArray
-  LinkList<reviews> reviewList;
-  reviews* reviewArray = nullptr;
-
-  // Initialize reviewCount (previously referred to as count)
-  int reviewCount = rowsNum(reviewFile);
-
-  // Allocate memory for reviewArray
-  reviewArray = new reviews[reviewCount];
-
-  // Analyze top words
-  oneStarReview::analyzeTopWords(reviewList);       // for linked list
-  oneStarReview::analyzeTopWords(reviewArray, reviewCount); // for array
-
 
   // Choose data structure
   cout << "Choose a mode to run:" << endl;
