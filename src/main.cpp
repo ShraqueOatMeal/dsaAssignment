@@ -1,14 +1,12 @@
-#include "../include/JoinedData.h"
-#include "../include/LinkList.h"
-#include "../include/WordFrequency.h"
-#include "../include/bubblesort.h"
-#include "../include/insertionSort.hpp"
-#include "../include/jumpsearch.h"
-#include "../include/binarySearch.hpp"
-#include "../include/oneStarReview.h"
-#include "../include/radixSort.h"
-#include "../include/reviews.h"
-#include "../include/transactions.h"
+#include "JoinedData.h"
+#include "LinkList.h"
+#include "WordFrequency.h"
+#include "bubblesort.h"
+#include "insertionSort.hpp"
+// #include "jumpsearch.h"
+#include "radixSort.h"
+#include "reviews.h"
+#include "transactions.h"
 #include <chrono>
 #include <fstream>
 #include <iomanip>
@@ -24,6 +22,9 @@ void loadTransaction(ifstream &transactionFile,
 void loadTransaction(ifstream &transactionFile, transactions *transArray,
                      int size);
 void displayTransactionArr(transactions *transArray, int size);
+
+// void processOneStarReviews(LinkList<reviews>& reviewList);
+// void processOneStarReviews(reviews* reviewArray, int reviewCount);
 
 void loadReview(ifstream &reviewFile, LinkList<reviews> &reviewList);
 void loadReview(ifstream &reviewFile, reviews *reviewArray, int size);
@@ -81,7 +82,8 @@ void filterByCategoryAndPayment(int choice,
                                 LinkList<transactions> &transactionList,
                                 transactions *transArray, int transCount);
 void checkNegativeReviews(int choice, LinkList<reviews> &reviewList,
-                          reviews *reviewArray, int reviewCount);
+                          reviews *reviewArray,
+                          int reviewCount); // discard //ltr
 // System will run in here
 int main(int argc, char *argv[]) {
   // Data cleaning (unchanged)
@@ -790,9 +792,7 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
       cout << "\nSorting transaction data..." << endl;
       switch (sortChoice) {
       case 1:
-        bubblesort::displaySortedByDate(
-            transactionList); // Note: This seems incorrect in original; should
-                              // be transArray
+        bubblesort::displaySortedByDate(transArray, transCount); // Adjusted
         break;
       case 2:
         auto start = chrono::high_resolution_clock::now();
@@ -828,7 +828,7 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
       cout << "\nSorting joined data by date..." << endl;
       switch (sortChoice) {
       case 1:
-        // bubblesort::displaySortedByDate(joinedArray); // Adjust as needed
+        bubblesort::displaySortedByDate(joinedArray, joinedSize); // Adjusting
         break;
       case 2:
         auto start = chrono::high_resolution_clock::now();
@@ -869,7 +869,7 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
       cout << "\nSorting joined data by date..." << endl;
       switch (sortChoice) {
       case 1:
-        // bubblesort::displaySortedByDate(joinedArray); // Adjust as needed
+        bubblesort::displaySortedByDate(joinedArray, joinedSize); // Adjusting
         break;
       case 2:
         auto start = chrono::high_resolution_clock::now();
@@ -923,10 +923,28 @@ void filterByCategoryAndPayment(int choice,
   int paymentChoice;
   cin >> paymentChoice;
 
+  cout << "\nChoose a search algorithm for word frequencies:" << endl;
+  cout << "\t1. Linear Search\n\t2. Binary Search\n\t3. Jump Search";
+  cout << "Search Algorithm: ";
+  int searchChoice;
+  cin >> searchChoice;
+
   if (choice == 1) {
-    linearSearch(catChoice, paymentChoice, transCount, transactionList);
+    if (searchChoice == 1) {
+      linearSearch(catChoice, paymentChoice, transCount, transactionList);
+    } else if (searchChoice == 2) {
+      // TODO: binary search
+    } else if (searchChoice == 3) {
+      // TODO: jump search
+    }
   } else if (choice == 2) {
-    linearSearch(catChoice, paymentChoice, transCount, transArray);
+    if (searchChoice == 1) {
+      linearSearch(catChoice, paymentChoice, transCount, transArray);
+    } else if (searchChoice == 2) {
+      // TODO: binary search
+    } else if (searchChoice == 3) {
+      // TODO: jump search
+    }
   } else {
     cout << "\nInvalid mode choice" << endl;
   }
@@ -934,14 +952,22 @@ void filterByCategoryAndPayment(int choice,
 
 void checkNegativeReviews(int choice, LinkList<reviews> &reviewList,
                           reviews *reviewArray, int reviewCount) {
+
+  cout << "Choose sorting algorithm for word frequencies:" << endl;
+  cout << "1. Bubble Sort  2. Insertion Sort  3. Radix Sort: ";
+  int sortChoice;
+  cin >> sortChoice;
+
+  cout << "\nChoose a search algorithm for word frequencies:" << endl;
+  cout << "\t1. Linear Search\n\t2. Binary Search\n\t3. Jump Search";
+  cout << "Search Algorithm: ";
+  int searchChoice;
+  cin >> searchChoice;
+
   if (choice == 1) {
-    processOneStarReviews(reviewList);
+    processOneStarReviews(reviewList, sortChoice, searchChoice);
   } else if (choice == 2) {
-    LinkList<reviews> tempReviewList;
-    for (int i = 0; i < reviewCount; i++) {
-      tempReviewList.addData(reviewArray[i]);
-    }
-    processOneStarReviews(tempReviewList);
+    processOneStarReviews(reviewArray, reviewCount, sortChoice, searchChoice);
   } else {
     cout << "Invalid mode choice" << endl;
   }

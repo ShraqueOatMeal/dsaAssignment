@@ -155,6 +155,10 @@ CMakeFiles/dsaAssignment_lib.dir/src/WordFrequency.cpp.o: \
  /usr/include/c++/14/bits/ostream.tcc /usr/include/c++/14/istream \
  /usr/include/c++/14/bits/istream.tcc \
  /home/loh-yen-kuan/Coding/dsaAssignment/include/reviews.h \
+ /home/loh-yen-kuan/Coding/dsaAssignment/include/insertionSort.hpp \
+ /home/loh-yen-kuan/Coding/dsaAssignment/include/JoinedData.h \
+ /home/loh-yen-kuan/Coding/dsaAssignment/include/transactions.h \
+ /home/loh-yen-kuan/Coding/dsaAssignment/include/oneStarReview.h \
  /usr/include/c++/14/chrono /usr/include/c++/14/bits/chrono.h \
  /usr/include/c++/14/ratio /usr/include/c++/14/cstdint \
  /usr/lib/gcc/x86_64-linux-gnu/14/include/stdint.h /usr/include/stdint.h \
