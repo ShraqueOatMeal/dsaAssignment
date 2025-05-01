@@ -15,6 +15,19 @@ int convertDateToInt(const string &date) {
     return year * 10000 + month * 100 + day;
 }
 
+void bubblesort::bubbleSortByDate(transactions* arr, int size) {
+    for (int i = 0; i < size - 1; i++) {
+        for (int j = 0; j < size - i - 1; j++) {
+            int date1 = convertDateToInt(arr[j].date);
+            int date2 = convertDateToInt(arr[j + 1].date);
+            if (date1 > date2) {
+                swap(arr[j], arr[j + 1]);
+            }
+        }
+    }
+}
+
+
 // Bubble sort on linked list of mergedData
 void bubblesort::bubbleSortByDate(LinkList<mergedData>& list) {
     bool swapped;
@@ -43,7 +56,7 @@ void bubblesort::bubbleSortByDate(LinkList<mergedData>& list) {
 }
 
 // Bubble sort on of Arrays of mergedData
-void bubblesort::displaySortedByDateA(mergedData* arr, int size) {
+void bubblesort::displaySortedByDate(mergedData* arr, int size) {
     auto start = chrono::high_resolution_clock::now();
 
     // Sort using Bubble Sort
@@ -65,6 +78,7 @@ void bubblesort::displaySortedByDateA(mergedData* arr, int size) {
         arr[i].print();
     }
 
+    cout << "Bubble Sort (Arrays of Merged Data) completed.\n";
     cout << "\nSorting completed in " << duration.count() << " milliseconds.\n";
     cout << "Estimated Time Complexity of Bubble Sort: O(n^2)\n";
     cout << "Estimated Space Complexity: O(1)\n";
@@ -88,6 +102,7 @@ void bubblesort::displaySortedByDate(LinkList<mergedData>& list) {
         current = current->next;
     }
 
+    cout << "Bubble Sort (Link List of Merge Data) completed.\n";
     cout << "\nSorting completed in " << duration.count() << " milliseconds.\n";
     cout << "Estimated Time Complexity of Bubble Sort: O(n^2)\n";
     cout << "Estimated Space Complexity: O(1) - in-place on linked list\n";
@@ -136,6 +151,7 @@ void bubblesort::displaySortedByDate(LinkList<transactions>& list) {
         current = current->next;
     }
 
+    cout << "Bubble Sort (Link List of Transactions) completed.\n";
     cout << "\nSorting completed in " << duration.count() << " milliseconds.\n";
     cout << "Estimated Time Complexity of Bubble Sort: O(n^2)\n";
     cout << "Estimated Space Complexity: O(1)\n";
@@ -154,6 +170,7 @@ void bubblesort::displaySortedByDate(transactions* arr, int size) {
         arr[i].print();
     }
 
+    cout << "Bubble Sort (Array of Transactions) completed.\n";
     cout << "\nSorting completed in " << duration.count() << " milliseconds.\n";
     cout << "Estimated Time Complexity of Bubble Sort: O(n^2)\n";
     cout << "Estimated Space Complexity: O(1)\n";

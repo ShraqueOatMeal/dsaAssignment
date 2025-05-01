@@ -3,6 +3,8 @@
 #include <cstring>
 #include <cctype>
 #include <chrono>  
+#include "reviews.h"
+#include "LinkList.h"
 using namespace std;
 
 const int MAX_WORDS = 1000;
@@ -84,7 +86,7 @@ void oneStarReview::analyzeTopWords(LinkList<reviews>& reviewList) {
     auto end = high_resolution_clock::now();  //  End timing
     auto duration = duration_cast<milliseconds>(end - start);
 
-    cout << "\n==== Top 10 Frequent Words in 1-Star Reviews ====\n";
+    cout << "\n==== Top 10 Frequent Words in 1-Star Reviews (Link-List) ====\n";
     int limit = (wordCount < 10) ? wordCount : 10;
     for (int i = 0; i < limit; i++) {
         cout << words[i] << ": " << freq[i] << endl;
