@@ -1,13 +1,14 @@
-#include "JoinedData.h"
-#include "LinkList.h"
-#include "WordFrequency.h"
-#include "bubblesort.h"
-#include "insertionSort.hpp"
-// #include "jumpsearch.h"
-// #include "oneStarReview.h"
-#include "radixSort.h"
-#include "reviews.h"
-#include "transactions.h"
+#include "../include/JoinedData.h"
+#include "../include/LinkList.h"
+#include "../include/WordFrequency.h"
+#include "../include/bubblesort.h"
+#include "../include/insertionSort.hpp"
+#include "../include/jumpsearch.h"
+#include "../include/binarySearch.hpp"
+#include "../include/oneStarReview.h"
+#include "../include/radixSort.h"
+#include "../include/reviews.h"
+#include "../include/transactions.h"
 #include <chrono>
 #include <fstream>
 #include <iomanip>
@@ -108,13 +109,13 @@ int main(int argc, char *argv[]) {
   reviewFile.seekg(0);
   getline(reviewFile, dummyLine); // Skip header
 
-  // Choose data structure
-  cout << "Choose a mode to run:" << endl;
-  cout << "\t1. Linked List" << endl;
-  cout << "\t2. Array" << endl;
-  cout << "Mode: ";
-  int choice;
-  cin >> choice;
+  // // Choose data structure
+  // cout << "Choose a mode to run:" << endl;
+  // cout << "\t1. Linked List" << endl;
+  // cout << "\t2. Array" << endl;
+  // cout << "Mode: ";
+  // int choice;
+  // cin >> choice;
 
   // Data structures
   LinkList<transactions> transactionList;
@@ -122,55 +123,70 @@ int main(int argc, char *argv[]) {
   transactions *transArray = nullptr;
   reviews *reviewArray = nullptr;
 
-  // Load data based on choice
-  if (choice == 1) {
-    loadTransaction(transactionFile, transactionList);
-    loadReview(reviewFile, reviewList);
-  } else if (choice == 2) {
-    transArray = new transactions[transCount];
-    reviewArray = new reviews[reviewCount];
-    loadTransaction(transactionFile, transArray, transCount);
-    loadReview(reviewFile, reviewArray, reviewCount);
-  } else {
-    cout << "Invalid mode choice" << endl;
-    return 1;
-  }
+  // Albert Testing start
+  loadTransaction(transactionFile, transactionList);
+  loadReview(reviewFile, reviewList);
+  
+  transArray = new transactions[transCount];
+  reviewArray = new reviews[reviewCount];
+  loadTransaction(transactionFile, transArray, transCount);
+  loadReview(reviewFile, reviewArray, reviewCount);
 
-  // Main menu loop
-  bool exit = false;
-  while (!exit) {
-    displayMainMenu();
-    int funcChoice;
-    cin >> funcChoice;
+  calculateElectronicsCreditPercentage(transArray, transCount);
+  calculateBadReviewsCommonSentences(reviewArray, transCount);
+  calculateElectronicsCreditPercentage(transactionList);
+  calculateBadReviewsCommonSentences(reviewList);
+  // Albert Testing end
 
-    switch (funcChoice) {
-    case 1:
-      sortByDateMenu(choice, transactionList, reviewList, transArray,
-                     reviewArray, transCount, reviewCount);
-      break;
-    case 2:
-      filterByCategoryAndPayment(choice, transactionList, transArray,
-                                 transCount);
-      break;
-    case 3:
-      checkNegativeReviews(choice, reviewList, reviewArray, reviewCount);
-      break;
-    case 4:
-      exit = true;
-      break;
-    default:
-      cout << "Invalid choice, please try again." << endl;
-      break;
-    }
-  }
+  // // Load data based on choice
+  // if (choice == 1) {
+  //   loadTransaction(transactionFile, transactionList);
+  //   loadReview(reviewFile, reviewList);
+  // } else if (choice == 2) {
+  //   transArray = new transactions[transCount];
+  //   reviewArray = new reviews[reviewCount];
+  //   loadTransaction(transactionFile, transArray, transCount);
+  //   loadReview(reviewFile, reviewArray, reviewCount);
+  // } else {
+  //   cout << "Invalid mode choice" << endl;
+  //   return 1;
+  // }
 
-  // Clean up
-  if (choice == 2) {
-    delete[] transArray;
-    delete[] reviewArray;
-  }
+  // // Main menu loop
+  // bool exit = false;
+  // while (!exit) {
+  //   displayMainMenu();
+  //   int funcChoice;
+  //   cin >> funcChoice;
 
-  return 0;
+  //   switch (funcChoice) {
+  //   case 1:
+  //     sortByDateMenu(choice, transactionList, reviewList, transArray,
+  //                    reviewArray, transCount, reviewCount);
+  //     break;
+  //   case 2:
+  //     filterByCategoryAndPayment(choice, transactionList, transArray,
+  //                                transCount);
+  //     break;
+  //   case 3:
+  //     checkNegativeReviews(choice, reviewList, reviewArray, reviewCount);
+  //     break;
+  //   case 4:
+  //     exit = true;
+  //     break;
+  //   default:
+  //     cout << "Invalid choice, please try again." << endl;
+  //     break;
+  //   }
+  // }
+
+  // // Clean up
+  // if (choice == 2) {
+  //   delete[] transArray;
+  //   delete[] reviewArray;
+  // }
+
+  // return 0;
 }
 
 // Methods
@@ -652,7 +668,12 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
         bubblesort::displaySortedByDate(transactionList);
         break;
       case 2:
+        auto start = chrono::high_resolution_clock::now();
         insertionSort::insertionsort(&transactionList);
+        auto end = chrono::high_resolution_clock::now();
+        chrono::duration<double, milli> duration = end - start;
+        cout << "\nSorting completed in " << duration.count()
+             << " milliseconds." << endl;
         break;
       case 3: {
         auto start = chrono::high_resolution_clock::now();
@@ -686,7 +707,12 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
         bubblesort::displaySortedByDate(mergedList);
         break;
       case 2:
+        auto start = chrono::high_resolution_clock::now();
         insertionSort::insertionsort(&mergedList);
+        auto end = chrono::high_resolution_clock::now();
+        chrono::duration<double, milli> duration = end - start;
+        cout << "\nSorting completed in " << duration.count()
+             << " milliseconds." << endl;
         break;
       case 3: {
         auto start = chrono::high_resolution_clock::now();
@@ -728,7 +754,12 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
         bubblesort::displaySortedByDate(mergedList);
         break;
       case 2:
+        auto start = chrono::high_resolution_clock::now();
         insertionSort::insertionsort(&mergedList);
+        auto end = chrono::high_resolution_clock::now();
+        chrono::duration<double, milli> duration = end - start;
+        cout << "\nSorting completed in " << duration.count()
+             << " milliseconds." << endl;
         break;
       case 3: {
         auto start = chrono::high_resolution_clock::now();
@@ -764,7 +795,12 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
                               // be transArray
         break;
       case 2:
+        auto start = chrono::high_resolution_clock::now();
         insertionSort::insertionsort(transArray, transCount);
+        auto end = chrono::high_resolution_clock::now();
+        chrono::duration<double, milli> duration = end - start;
+        cout << "\nSorting completed in " << duration.count()
+             << " milliseconds." << endl;
         break;
       case 3: {
         auto start = chrono::high_resolution_clock::now();
@@ -795,7 +831,12 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
         // bubblesort::displaySortedByDate(joinedArray); // Adjust as needed
         break;
       case 2:
-        // quickSort::displaySortedByDate(joinedArray);
+        auto start = chrono::high_resolution_clock::now();
+        insertionSort::insertionsort(joinedArray, joinedSize);
+        auto end = chrono::high_resolution_clock::now();
+        chrono::duration<double, milli> duration = end - start;
+        cout << "\nSorting completed in " << duration.count()
+             << " milliseconds." << endl;
         break;
       case 3: {
         auto start = chrono::high_resolution_clock::now();
@@ -831,7 +872,12 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
         // bubblesort::displaySortedByDate(joinedArray); // Adjust as needed
         break;
       case 2:
-        // quickSort::displaySortedByDate(joinedArray);
+        auto start = chrono::high_resolution_clock::now();
+        insertionSort::insertionsort(joinedArray, joinedSize);
+        auto end = chrono::high_resolution_clock::now();
+        chrono::duration<double, milli> duration = end - start;
+        cout << "\nSorting completed in " << duration.count()
+             << " milliseconds." << endl;
         break;
       case 3: {
         auto start = chrono::high_resolution_clock::now();

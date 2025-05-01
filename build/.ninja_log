@@ -9,3 +9,17 @@
 8	1013	7676905840523815	CMakeFiles/dsaAssignment.dir/src/main.cpp.obj	391db71c6424c1a9
 1223	1449	7676892158326207	libdsaAssignment_lib.a	755ec878660829b5
 1015	1391	7676905850578641	dsaAssignment.exe	149d7a360c3df4c8
+29	529	7677831195044267	CMakeFiles/dsaAssignment_lib.dir/src/insertionSort.cpp.obj	225c6f708ff50400
+8	530	7677831194824237	CMakeFiles/dsaAssignment_lib.dir/src/WordFrequency.cpp.obj	e8f068251538dd0c
+17	535	7677831194924238	CMakeFiles/dsaAssignment_lib.dir/src/bubblesort.cpp.obj	adeaff3cb53f37ec
+535	667	7677831200100121	libdsaAssignment_lib.a	8fa6c10ed3217228
+44	668	7677831195199360	CMakeFiles/dsaAssignment.dir/src/main.cpp.obj	391db71c6424c1a9
+668	851	7677831201431266	dsaAssignment.exe	149d7a360c3df4c8
+4	501	7677835451343810	CMakeFiles/dsaAssignment.dir/src/main.cpp.obj	391db71c6424c1a9
+502	620	7677835456317032	dsaAssignment.exe	149d7a360c3df4c8
+4	528	7677857751442605	CMakeFiles/dsaAssignment.dir/src/main.cpp.obj	391db71c6424c1a9
+529	669	7677857756691329	dsaAssignment.exe	149d7a360c3df4c8
+16	389	7677993942942654	CMakeFiles/dsaAssignment_lib.dir/src/insertionSort.cpp.obj	225c6f708ff50400
+15	158	7677994250369109	libdsaAssignment_lib.a	8fa6c10ed3217228
+4	559	7677994250253230	CMakeFiles/dsaAssignment.dir/src/main.cpp.obj	391db71c6424c1a9
+4	564	7677994559287442	CMakeFiles/dsaAssignment.dir/src/main.cpp.obj	391db71c6424c1a9
