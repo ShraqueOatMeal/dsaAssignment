@@ -143,13 +143,6 @@ void bubblesort::displaySortedByDate(LinkList<transactions> &list) {
 }
 
 void bubblesort::bubbleSortByDate(transactions *arr, int size) {
-  auto start = chrono::high_resolution_clock::now();
-
-  bubbleSortByDate(arr, size); // In-place sort
-
-  auto end = chrono::high_resolution_clock::now();
-  chrono::duration<double, milli> duration = end - start;
-
   for (int i = 0; i < size - 1; ++i) {
     for (int j = 0; j < size - i - 1; ++j) {
       int date1 = convertDateToInt(arr[j].date);
@@ -158,11 +151,6 @@ void bubblesort::bubbleSortByDate(transactions *arr, int size) {
         swap(arr[j], arr[j + 1]);
       }
     }
-
-    cout << "Bubble Sort (Array of Transactions) completed.\n";
-    cout << "\nSorting completed in " << duration.count() << " milliseconds.\n";
-    cout << "Estimated Time Complexity of Bubble Sort: O(n^2)\n";
-    cout << "Estimated Space Complexity: O(1)\n";
   }
 }
 
