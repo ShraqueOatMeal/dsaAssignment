@@ -203,15 +203,21 @@ void binarySearch::calculateBadReviewsCommonSentences(reviews *reviewArray, int 
 // Calculate the percentage of selected purchases with payment method chosen
 void binarySearch::calculatedPurchasesPaymentMethodPercentage(LinkList<transactions> &transactionList, int size, 
     const string selectedCat, const string selectedPaymentMethod){
+        cout << selectedCat << endl;
+        cout << selectedPaymentMethod << endl;
         cout << "Hello" << endl;
         insertionSortCategory(&transactionList);
+
         cout << "Hello" << endl;
+
         
         Node<transactions> *current = transactionList.getHead();
         int categoryCount = 0;
         int categoryPaymentCount = 0;
 
         while (current != nullptr) {
+            cout << current->data.cat << endl;
+            cout << current->data.paymentMethod << endl;
             if (current->data.cat == selectedCat) {
                 categoryCount++;
                 if (current->data.paymentMethod == selectedPaymentMethod) {
@@ -226,7 +232,8 @@ void binarySearch::calculatedPurchasesPaymentMethodPercentage(LinkList<transacti
             return;
         }
         double percentage = (static_cast<double>(categoryPaymentCount) / categoryCount) * 100.0;
-    
+
+        cout<< "hey" << endl;
         cout << "Total purchases in " << selectedCat << ": " << categoryCount << endl;
         cout << "Total purchases in " << selectedCat << " with payment method " << selectedPaymentMethod << ": " << categoryPaymentCount << endl;
         cout << "Percentage of purchases in " << selectedCat << " with payment method " << selectedPaymentMethod << ": " << percentage << "%" << endl;

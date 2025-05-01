@@ -894,7 +894,7 @@ void filterByCategoryAndPayment(int choice,
     if (searchChoice == 1) {
       linearSearch(catChoice, paymentChoice, transCount, transactionList);
     } else if (searchChoice == 2) {
-      // binarysearch(transactionList, transCount, catChoice, paymentChoice);
+      binarysearch(transactionList, transCount, catChoice, paymentChoice);
     } else if (searchChoice == 3) {
       // TODO: jump search
     }
@@ -902,7 +902,7 @@ void filterByCategoryAndPayment(int choice,
     if (searchChoice == 1) {
       linearSearch(catChoice, paymentChoice, transCount, transArray);
     } else if (searchChoice == 2) {
-      // binarysearch(transArray, transCount, catChoice, paymentChoice);
+      binarysearch(transArray, transCount, catChoice, paymentChoice);
     } else if (searchChoice == 3) {
       // TODO: jump search
     }
@@ -996,7 +996,7 @@ void binarysearch(transactions *transArray, int size, int catChoice, int payment
         cout << "Unknown Payment Method Choice" << endl;
         break;
     }
-    cout << "Hello" << endl;
+    
     binarySearch::calculatedPurchasesPaymentMethodPercentage(transArray, size, selectedCat, selectedPaymentMethod);
 }
 
@@ -1060,6 +1060,6 @@ switch (paymentChoice) {
       cout << "Unknown Payment Method Choice" << endl;
       break;
   }
-cout << "Hello" << endl;
+
 binarySearch::calculatedPurchasesPaymentMethodPercentage(transactionList, size, selectedCat, selectedPaymentMethod);
 }
