@@ -9,152 +9,153 @@ using namespace std;
 
 // Convert DD/MM/YYYY string to integer format YYYYMMDD
 int convertDateToInt(const string &date) {
-  int day = stoi(date.substr(0, 2));
-  int month = stoi(date.substr(3, 2));
-  int year = stoi(date.substr(6, 4));
-  return year * 10000 + month * 100 + day;
+    int day = stoi(date.substr(0, 2));
+    int month = stoi(date.substr(3, 2));
+    int year = stoi(date.substr(6, 4));
+    return year * 10000 + month * 100 + day;
 }
 
-// Helper: Convert linked list to array
-transactions *toArray(LinkList<transactions> &list, int &size) {
-  Node<transactions> *current = list.getHead();
-  size = 0;
+// Bubble sort on linked list of mergedData
+void bubblesort::bubbleSortByDate(LinkList<mergedData>& list) {
+    bool swapped;
+    Node<mergedData>* ptr1;
+    Node<mergedData>* lptr = nullptr;
 
-  while (current) {
-    size++;
-    current = current->next;
-  }
+    if (list.getHead() == nullptr)
+        return;
 
-  transactions *arr = new transactions[size];
+    do {
+        swapped = false;
+        ptr1 = list.getHead();
 
-  current = list.getHead();
-  int index = 0;
-  while (current) {
-    arr[index++] = current->data;
-    current = current->next;
-  }
+        while (ptr1->next != lptr) {
+            int date1 = convertDateToInt(ptr1->data.date);
+            int date2 = convertDateToInt(ptr1->next->data.date);
 
-  return arr;
+            if (date1 > date2) {
+                swap(ptr1->data, ptr1->next->data);
+                swapped = true;
+            }
+            ptr1 = ptr1->next;
+        }
+        lptr = ptr1;
+    } while (swapped);
 }
 
-mergedData *toArray(LinkList<mergedData> &list, int &size) {
-  Node<mergedData> *current = list.getHead();
-  size = 0;
+// Bubble sort on of Arrays of mergedData
+void bubblesort::displaySortedByDateA(mergedData* arr, int size) {
+    auto start = chrono::high_resolution_clock::now();
 
-  while (current) {
-    size++;
-    current = current->next;
-  }
-
-  mergedData *arr = new mergedData[size];
-
-  current = list.getHead();
-  int index = 0;
-  while (current) {
-    arr[index++] = current->data;
-    current = current->next;
-  }
-
-  return arr;
-}
-
-void bubblesort::bubbleSortByDate(transactions *arr, int size) {
-  for (int i = 0; i < size; i++) {
-    for (int j = 0; j < size - i - 1; j++) {
-      int date1 = convertDateToInt(arr[j].date);
-      int date2 = convertDateToInt(arr[j + 1].date);
-
-      if (date1 > date2) {
-        swap(arr[j], arr[j + 1]);
-      }
+    // Sort using Bubble Sort
+    for (int i = 0; i < size - 1; i++) {
+        for (int j = 0; j < size - i - 1; j++) {
+            int date1 = convertDateToInt(arr[j].date);
+            int date2 = convertDateToInt(arr[j + 1].date);
+            if (date1 > date2) {
+                swap(arr[j], arr[j + 1]);
+            }
+        }
     }
-  }
-}
 
-void bubblesort::bubbleSortByDate(mergedData *arr, int size) {
-  for (int i = 0; i < size; i++) {
-    for (int j = 0; j < size - i - 1; j++) {
-      int date1 = convertDateToInt(arr[j].date);
-      int date2 = convertDateToInt(arr[j + 1].date);
+    auto end = chrono::high_resolution_clock::now();
+    chrono::duration<double, milli> duration = end - start;
 
-      if (date1 > date2) {
-        swap(arr[j], arr[j + 1]);
-      }
+    cout << "\nJoined data (array) sorted by date (Bubble Sort):\n";
+    for (int i = 0; i < size; ++i) {
+        arr[i].print();
     }
-  }
+
+    cout << "\nSorting completed in " << duration.count() << " milliseconds.\n";
+    cout << "Estimated Time Complexity of Bubble Sort: O(n^2)\n";
+    cout << "Estimated Space Complexity: O(1)\n";
 }
 
-transactions *bubblesort::getSortedArrayByDate(LinkList<transactions> &list,
-                                               int &size) {
-  Node<transactions> *current = list.getHead();
-  size = 0;
 
-  while (current) {
-    size++;
-    current = current->next;
-  }
 
-  transactions *arr = new transactions[size];
-  current = list.getHead();
-  int index = 0;
-  while (current) {
-    arr[index++] = current->data;
-    current = current->next;
-  }
+// Display and sort mergedData linked list
+void bubblesort::displaySortedByDate(LinkList<mergedData>& list) {
+    auto start = chrono::high_resolution_clock::now();
 
-  bubbleSortByDate(arr, size); // Sort in place
-  return arr;
+    bubbleSortByDate(list); // Sort in-place using linked list logic
+
+    auto end = chrono::high_resolution_clock::now();
+    chrono::duration<double, milli> duration = end - start;
+
+    cout << "\nJoined data sorted by date (Bubble Sort - Linked List):\n";
+    Node<mergedData>* current = list.getHead();
+    while (current != nullptr) {
+        current->data.print();
+        current = current->next;
+    }
+
+    cout << "\nSorting completed in " << duration.count() << " milliseconds.\n";
+    cout << "Estimated Time Complexity of Bubble Sort: O(n^2)\n";
+    cout << "Estimated Space Complexity: O(1) - in-place on linked list\n";
 }
 
-// Display sorted transactions by date
-void bubblesort::displaySortedByDate(LinkList<transactions> &list) {
-  int size = 0;
-  transactions *arr = toArray(list, size);
+// Bubble sort on linked list of transactions
+void bubblesort::bubbleSortByDate(LinkList<transactions>& list) {
+    bool swapped;
+    Node<transactions>* ptr1;
+    Node<transactions>* lptr = nullptr;
 
-  // Start timing
-  auto start = chrono::high_resolution_clock::now();
+    if (list.getHead() == nullptr)
+        return;
 
-  bubbleSortByDate(arr, size); // Sorting
+    do {
+        swapped = false;
+        ptr1 = list.getHead();
 
-  // End timing
-  auto end = chrono::high_resolution_clock::now();
-  chrono::duration<double, milli> duration = end - start;
+        while (ptr1->next != lptr) {
+            int date1 = convertDateToInt(ptr1->data.date);
+            int date2 = convertDateToInt(ptr1->next->data.date);
 
-  cout << "Transactions sorted by date (Bubble Sort):\n";
-  for (int i = 0; i < size; i++) {
-    arr[i].print();
-  }
-
-  cout << "\n Sorting completed in " << duration.count() << " milliseconds.\n";
-  cout << "Estimated Time Complexity of Bubble Sort: O(n^2) \n";
-  cout << "Estimated space used of Bubble Sort: O(1) (in-place sorting)"
-       << endl;
-
-  delete[] arr;
+            if (date1 > date2) {
+                swap(ptr1->data, ptr1->next->data);
+                swapped = true;
+            }
+            ptr1 = ptr1->next;
+        }
+        lptr = ptr1;
+    } while (swapped);
 }
 
-void bubblesort::displaySortedByDate(LinkList<mergedData> &list) {
-  int size = 0;
-  mergedData *arr = toArray(list, size);
+// Display and sort transactions from linked list
+void bubblesort::displaySortedByDate(LinkList<transactions>& list) {
+    auto start = chrono::high_resolution_clock::now();
 
-  // Start timing
-  auto start = chrono::high_resolution_clock::now();
+    bubbleSortByDate(list);  // In-place sort
 
-  bubbleSortByDate(arr, size); // Sorting
+    auto end = chrono::high_resolution_clock::now();
+    chrono::duration<double, milli> duration = end - start;
 
-  // End timing
-  auto end = chrono::high_resolution_clock::now();
-  chrono::duration<double, milli> duration = end - start;
+    cout << "\nTransactions sorted by date (Bubble Sort - Linked List):\n";
+    Node<transactions>* current = list.getHead();
+    while (current != nullptr) {
+        current->data.print();
+        current = current->next;
+    }
 
-  cout << "Transactions sorted by date (Bubble Sort):\n";
-  for (int i = 0; i < size; i++) {
-    arr[i].print();
-  }
-
-  cout << "\n Sorting completed in " << duration.count() << " milliseconds.\n";
-  cout << "Estimated Time Complexity of Bubble Sort: O(n^2) \n";
-  cout << "Estimated space used of Bubble Sort: O(1) (in-place sorting)"
-       << endl;
-
-  delete[] arr;
+    cout << "\nSorting completed in " << duration.count() << " milliseconds.\n";
+    cout << "Estimated Time Complexity of Bubble Sort: O(n^2)\n";
+    cout << "Estimated Space Complexity: O(1)\n";
 }
+
+void bubblesort::displaySortedByDate(transactions* arr, int size) {
+    auto start = chrono::high_resolution_clock::now();
+
+    bubbleSortByDate(arr, size);  // sort the original array
+
+    auto end = chrono::high_resolution_clock::now();
+    chrono::duration<double, milli> duration = end - start;
+
+    cout << "\nTransactions (array) sorted by date (Bubble Sort):\n";
+    for (int i = 0; i < size; ++i) {
+        arr[i].print();
+    }
+
+    cout << "\nSorting completed in " << duration.count() << " milliseconds.\n";
+    cout << "Estimated Time Complexity of Bubble Sort: O(n^2)\n";
+    cout << "Estimated Space Complexity: O(1)\n";
+}
+

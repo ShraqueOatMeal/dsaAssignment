@@ -95,3 +95,53 @@ void oneStarReview::analyzeTopWords(LinkList<reviews>& reviewList) {
     cout << " Estimated Time Complexity of Bubble Sort: O(n^2) \n";
     cout << " Estimated Space Complexity of Bubble Sort: O(n) for storing " << wordCount << " words\n";
 }
+
+void oneStarReview::analyzeTopWords(reviews* reviewArray, int reviewCount) {
+    using namespace chrono;
+    auto start = high_resolution_clock::now();
+
+    char words[MAX_WORDS][MAX_WORD_LENGTH];
+    int freq[MAX_WORDS] = {0};
+    int wordCount = 0;
+
+    for (int i = 0; i < reviewCount; i++) {
+        if (reviewArray[i].rating == 1) {
+            char buffer[1000];
+            strncpy(buffer, reviewArray[i].review.c_str(), 999);
+            buffer[999] = '\0';  // Ensure null termination
+
+            char* token = strtok(buffer, " ");
+            while (token != nullptr) {
+                cleanWord(token);
+                if (strlen(token) > 0) {
+                    int pos = findWord(words, wordCount, token);
+                    if (pos == -1 && wordCount < MAX_WORDS) {
+                        strncpy(words[wordCount], token, MAX_WORD_LENGTH - 1);
+                        words[wordCount][MAX_WORD_LENGTH - 1] = '\0';
+                        freq[wordCount] = 1;
+                        wordCount++;
+                    } else if (pos != -1) {
+                        freq[pos]++;
+                    }
+                }
+                token = strtok(nullptr, " ");
+            }
+        }
+    }
+
+    bubbleSortWordsByFrequency(words, freq, wordCount);
+
+    auto end = high_resolution_clock::now();
+    auto duration = duration_cast<milliseconds>(end - start);
+
+    cout << "\n==== Top 10 Frequent Words in 1-Star Reviews (Array) ====\n";
+    int limit = (wordCount < 10) ? wordCount : 10;
+    for (int i = 0; i < limit; i++) {
+        cout << words[i] << ": " << freq[i] << endl;
+    }
+
+    cout << "\n Execution time: " << duration.count() << " milliseconds.\n";
+    cout << " Estimated Time Complexity of Bubble Sort: O(n^2) \n";
+    cout << " Estimated Space Complexity of Bubble Sort: O(n) for storing " << wordCount << " words\n";
+}
+
