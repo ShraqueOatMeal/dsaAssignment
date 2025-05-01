@@ -640,9 +640,9 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
   cin >> processChoice;
 
   cout << "\nChoose a sorting algorithm:" << endl;
-  cout << "1. Bubble Sort" << endl;
-  cout << "2. Insertion Sort" << endl;
-  cout << "3. Radix Sort" << endl;
+  cout << "\t1. Bubble Sort" << endl;
+  cout << "\t2. Insertion Sort" << endl;
+  cout << "\t3. Radix Sort" << endl;
   cout << "Sorting Algorithm: ";
   int sortChoice;
   cin >> sortChoice;
@@ -880,7 +880,7 @@ void filterByCategoryAndPayment(int choice,
 
   cout << "\nChoose a search algorithm for word frequencies:" << endl;
   cout << "\t1. Linear Search\n\t2. Binary Search\n\t3. Jump Search";
-  cout << "Search Algorithm: ";
+  cout << "\nSearch Algorithm: ";
   int searchChoice;
   cin >> searchChoice;
 
@@ -909,13 +909,14 @@ void checkNegativeReviews(int choice, LinkList<reviews> &reviewList,
                           reviews *reviewArray, int reviewCount) {
 
   cout << "Choose sorting algorithm for word frequencies:" << endl;
-  cout << "1. Bubble Sort  2. Insertion Sort  3. Radix Sort: ";
+  cout << "1. Bubble Sort\n2. Insertion Sort\n3. Radix Sort" << endl;
+  cout << "\nSorting Algorithm: ";
   int sortChoice;
   cin >> sortChoice;
 
   cout << "\nChoose a search algorithm for word frequencies:" << endl;
   cout << "\t1. Linear Search\n\t2. Binary Search\n\t3. Jump Search";
-  cout << "Search Algorithm: ";
+  cout << "\nSearch Algorithm: ";
   int searchChoice;
   cin >> searchChoice;
 
