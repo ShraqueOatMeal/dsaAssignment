@@ -18,4 +18,7 @@ void countSort(LinkList<WordFrequency> *wordList, int n, int exp);
 void radixsort(LinkList<WordFrequency> *wordList, int n);
 string cleanWord(const string &word);
 void displayTopWords(const LinkList<WordFrequency> &wordList, int n);
-void processOneStarReviews(LinkList<reviews> &reviewList);
+void processOneStarReviews(LinkList<reviews> &reviewList, int sortChoice,
+                           int searchChoice);
+void processOneStarReviews(reviews *reviewArray, int reviewCount,
+                           int sortChoice, int searchChoice);

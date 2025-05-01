@@ -4,8 +4,6 @@
 #include "bubblesort.h"
 #include "insertionSort.hpp"
 // #include "jumpsearch.h"
-// #include "oneStarReview.h"
-#include "oneStarReview.h"
 #include "radixSort.h"
 #include "reviews.h"
 #include "transactions.h"
@@ -158,9 +156,7 @@ int main(int argc, char *argv[]) {
                                  transCount);
       break;
     case 3:
-      // checkNegativeReviews(choice, reviewList, reviewArray, reviewCount);
-      oneStarReview::analyzeTopWords(reviewList);
-      oneStarReview::analyzeTopWords(reviewArray, reviewCount);
+      checkNegativeReviews(choice, reviewList, reviewArray, reviewCount);
       break;
     case 4:
       exit = true;
@@ -882,10 +878,28 @@ void filterByCategoryAndPayment(int choice,
   int paymentChoice;
   cin >> paymentChoice;
 
+  cout << "\nChoose a search algorithm for word frequencies:" << endl;
+  cout << "\t1. Linear Search\n\t2. Binary Search\n\t3. Jump Search";
+  cout << "Search Algorithm: ";
+  int searchChoice;
+  cin >> searchChoice;
+
   if (choice == 1) {
-    linearSearch(catChoice, paymentChoice, transCount, transactionList);
+    if (searchChoice == 1) {
+      linearSearch(catChoice, paymentChoice, transCount, transactionList);
+    } else if (searchChoice == 2) {
+      // TODO: binary search
+    } else if (searchChoice == 3) {
+      // TODO: jump search
+    }
   } else if (choice == 2) {
-    linearSearch(catChoice, paymentChoice, transCount, transArray);
+    if (searchChoice == 1) {
+      linearSearch(catChoice, paymentChoice, transCount, transArray);
+    } else if (searchChoice == 2) {
+      // TODO: binary search
+    } else if (searchChoice == 3) {
+      // TODO: jump search
+    }
   } else {
     cout << "\nInvalid mode choice" << endl;
   }
@@ -893,14 +907,22 @@ void filterByCategoryAndPayment(int choice,
 
 void checkNegativeReviews(int choice, LinkList<reviews> &reviewList,
                           reviews *reviewArray, int reviewCount) {
+
+  cout << "Choose sorting algorithm for word frequencies:" << endl;
+  cout << "1. Bubble Sort  2. Insertion Sort  3. Radix Sort: ";
+  int sortChoice;
+  cin >> sortChoice;
+
+  cout << "\nChoose a search algorithm for word frequencies:" << endl;
+  cout << "\t1. Linear Search\n\t2. Binary Search\n\t3. Jump Search";
+  cout << "Search Algorithm: ";
+  int searchChoice;
+  cin >> searchChoice;
+
   if (choice == 1) {
-    processOneStarReviews(reviewList);
+    processOneStarReviews(reviewList, sortChoice, searchChoice);
   } else if (choice == 2) {
-    LinkList<reviews> tempReviewList;
-    for (int i = 0; i < reviewCount; i++) {
-      tempReviewList.addData(reviewArray[i]);
-    }
-    processOneStarReviews(tempReviewList);
+    processOneStarReviews(reviewArray, reviewCount, sortChoice, searchChoice);
   } else {
     cout << "Invalid mode choice" << endl;
   }
