@@ -24,6 +24,9 @@ void loadTransaction(ifstream &transactionFile, transactions *transArray,
                      int size);
 void displayTransactionArr(transactions *transArray, int size);
 
+// void processOneStarReviews(LinkList<reviews>& reviewList);
+// void processOneStarReviews(reviews* reviewArray, int reviewCount);
+
 void loadReview(ifstream &reviewFile, LinkList<reviews> &reviewList);
 void loadReview(ifstream &reviewFile, reviews *reviewArray, int size);
 void displayReviewsArray(reviews *reviewArray, int size);
@@ -80,7 +83,8 @@ void filterByCategoryAndPayment(int choice,
                                 LinkList<transactions> &transactionList,
                                 transactions *transArray, int transCount);
 void checkNegativeReviews(int choice, LinkList<reviews> &reviewList,
-                          reviews *reviewArray, int reviewCount);
+                          reviews *reviewArray,
+                          int reviewCount); // discard //ltr
 // System will run in here
 int main(int argc, char *argv[]) {
   // Data cleaning (unchanged)
@@ -153,7 +157,9 @@ int main(int argc, char *argv[]) {
                                  transCount);
       break;
     case 3:
-      checkNegativeReviews(choice, reviewList, reviewArray, reviewCount);
+      // checkNegativeReviews(choice, reviewList, reviewArray, reviewCount);
+      oneStarReview::analyzeTopWords(reviewList);
+      oneStarReview::analyzeTopWords(reviewArray, reviewCount);
       break;
     case 4:
       exit = true;
@@ -759,9 +765,7 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
       cout << "\nSorting transaction data..." << endl;
       switch (sortChoice) {
       case 1:
-        bubblesort::displaySortedByDate(
-            transactionList); // Note: This seems incorrect in original; should
-                              // be transArray
+        bubblesort::displaySortedByDate(transArray, transCount); // Adjusted
         break;
       case 2:
         insertionSort::insertionsort(transArray, transCount);
@@ -792,7 +796,7 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
       cout << "\nSorting joined data by date..." << endl;
       switch (sortChoice) {
       case 1:
-        // bubblesort::displaySortedByDate(joinedArray); // Adjust as needed
+        bubblesort::displaySortedByDate(joinedArray, joinedSize); // Adjusting
         break;
       case 2:
         // quickSort::displaySortedByDate(joinedArray);
@@ -828,7 +832,7 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
       cout << "\nSorting joined data by date..." << endl;
       switch (sortChoice) {
       case 1:
-        // bubblesort::displaySortedByDate(joinedArray); // Adjust as needed
+        bubblesort::displaySortedByDate(joinedArray, joinedSize); // Adjusting
         break;
       case 2:
         // quickSort::displaySortedByDate(joinedArray);

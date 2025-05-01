@@ -30,7 +30,7 @@ void jumpSearch::searchMenu(transactions* arr, int size, int catChoice, int paym
         default: cout << "Invalid payment method.\n"; return;
     }
 
-    cout << "\nJump Search → Category: " << selectedCat << ", Payment Method: " << selectedPaymentMethod << "\n";
+    cout << "\nJump Search (Array) Category: " << selectedCat << ", Payment Method: " << selectedPaymentMethod << "\n";
 
     auto start = chrono::high_resolution_clock::now();
 
@@ -58,7 +58,8 @@ void jumpSearch::searchMenu(transactions* arr, int size, int catChoice, int paym
         cout << "Percentage: " << fixed << setprecision(2) << percentage << "%\n";
     }
 
-    cout << "Execution time: " << duration.count() << " ms\n";
+    cout << "Jump Search (Array) completed.\n";
+    cout << "Execution time: " << duration.count() << " ms\n ";
     cout << "Estimated Time Complexity: O(n)\n";
     cout << "Estimated Space Complexity: O(1)\n";
 }
@@ -90,7 +91,7 @@ void jumpSearch::searchMenu(LinkList<transactions>& list, int catChoice, int pay
         default: cout << "Invalid payment method.\n"; return;
     }
 
-    cout << "\nJump Search (Linked List) → Category: " << selectedCat
+    cout << "\nJump Search (Linked List) Category: " << selectedCat
          << ", Payment Method: " << selectedPaymentMethod << "\n";
 
     auto start = chrono::high_resolution_clock::now();
@@ -122,6 +123,7 @@ void jumpSearch::searchMenu(LinkList<transactions>& list, int catChoice, int pay
         cout << "Percentage: " << fixed << setprecision(2) << percentage << "%\n";
     }
 
+    cout << "Jump Search (Linked List) completed.\n";
     cout << "Execution time: " << duration.count() << " ms\n";
     cout << "Estimated Time Complexity: O(n)\n";
     cout << "Estimated Space Complexity: O(1)\n";
