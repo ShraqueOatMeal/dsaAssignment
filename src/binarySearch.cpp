@@ -1,57 +1,176 @@
 #include "binarySearch.hpp"
-#include "insertionSort.cpp"
 #include <iostream>
 using namespace std;
 
-// ============================ARRAY==========================
+// Insertion Sort for category in transactions array (question 2)
+void insertionSortCategory(transactions *transArray, int size){
+    for (int i = 1; i < size; i++) {
+        transactions key = transArray[i];
+        int j = i - 1;
+  
+      // Move elements of transArray[0..i-1], that are greater than key,
+      // to one position ahead of their current position
+        while (j >= 0 && transArray[j].cat > key.cat) {
+            transArray[j + 1] = transArray[j];
+            j = j - 1;
+        }
+        transArray[j + 1] = key; // Place the key in its correct position
+    }
+}
+  
+// Insertion Sort for reviews in reviews array (question 3)
+void insertionSortReview(reviews *reviewArray, int size) {
+    for (int i = 1; i < size; i++) {
+        reviews key = reviewArray[i];
+        int j = i - 1;
+  
+      // Move elements of reviewArray[0..i-1], that are greater than key,
+      // to one position ahead of their current position
+      while (j >= 0 && reviewArray[j].rating > key.rating) {
+            reviewArray[j + 1] = reviewArray[j];
+            j = j - 1;
+        }
+        reviewArray[j + 1] = key; // Place the key in its correct position
+    }
+}
 
-// Calculate the percentage of Electronics purchases made with a Credit Card
-void binarySearch::calculateElectronicsCreditPercentage(transactions *arr, int size) {
-    insertionSort::insertionSortCategory(arr, size); // Sort the array by category
-    int electronics_total = 0;
-    int electronics_credit = 0;
+Node<transactions> *insertIntoSortedList(Node<transactions> *sorted, Node<transactions> *newNode) {
+    if (sorted == nullptr || newNode->data.cat > sorted->data.cat) {
+      // Insert at the beginning of the sorted list
+      newNode->next = sorted;
+      return newNode;
+    }
+  
+    Node<transactions> *current = sorted;
+    while (current->next != nullptr &&
+           current->next->data.cat > newNode->data.cat) {
+      current = current->next;
+    }
+  
+    // Insert newNode after current
+    newNode->next = current->next;
+    current->next = newNode;
+  
+    return sorted;
+  }
 
-    cout << "\n=== Electronics Transactions ===\n";
+Node<reviews> *insertIntoSortedList(Node<reviews> *sorted, Node<reviews> *newNode) {
+    if (sorted == nullptr || newNode->data.rating > sorted->data.rating) {
+        // Insert at the beginning of the sorted list
+        newNode->next = sorted;
+        return newNode;
+    }
+  
+    Node<reviews> *current = sorted;
+    while (current->next != nullptr && current->next->data.rating > newNode->data.rating) {
+        current = current->next;
+    }
+  
+    // Insert newNode after current
+    newNode->next = current->next;
+    current->next = newNode;
+  
+    return sorted;
+}
+  
+// Insertion Sort for category in transactions linked list (question 2)
+void insertionSortCategory(LinkList<transactions> *transactionList) {
+    if (transactionList->getHead() == nullptr || transactionList->getHead()->next == nullptr) {// List is empty or has only one element, no sorting needed
+      return;
+    }
+  
+    Node<transactions> *sorted = nullptr; // Start with an empty sorted list
+    Node<transactions> *current =
+        transactionList->getHead(); // Current node to be inserted
+  
+    while (current != nullptr) {
+        Node<transactions> *next = current->next; // Save the next node
+        sorted = insertIntoSortedList(sorted, current); // Insert current into the sorted list
+        current = next;       // Move to the next node
+    }
+  
+    // Update the head of the original list to point to the sorted list
+    transactionList->setHead(sorted);
+}
+  
+// Insertion Sort for reviews in reviews linked list (question 3)
+void insertionSortReview(LinkList<reviews> *reviewsList) {
+    if (reviewsList->getHead() == nullptr ||
+        reviewsList->getHead()->next == nullptr) {
+        // List is empty or has only one element, no sorting needed
+        return;
+    }
+  
+    Node<reviews> *sorted = nullptr; // Start with an empty sorted list
+    Node<reviews> *current =
+        reviewsList->getHead(); // Current node to be inserted
+  
+    while (current != nullptr) {
+        Node<reviews> *next = current->next; // Save the next node
+        sorted = insertIntoSortedList(
+            sorted, current); // Insert current into the sorted list
+        current = next;       // Move to the next node
+    }
+  
+    // Update the head of the original list to point to the sorted list
+    reviewsList->setHead(sorted);
+}
+  
+
+// ===========================ARRAY==========================
+// Calculate the percentage of selected purchases with payment method chosen
+void binarySearch::calculatedPurchasesPaymentMethodPercentage(transactions *transArray, int size, 
+    const string selectedCat, const string selectedPaymentMethod){
+    cout << "Hello" << endl;
+    insertionSortCategory(transArray, size);
+    cout << "Hello" << endl;
+
+    int categoryCount = 0;
+    int categoryPaymentCount = 0;
 
     for (int i = 0; i < size; i++) {
-        if (arr[i].cat == "Electronics") {
-            electronics_total++;
-            arr[i].print();
-            if (arr[i].paymentMethod == "Credit Card") {
-                electronics_credit++;
+        if (transArray[i].cat == selectedCat) {
+            categoryCount++;
+            if (transArray[i].paymentMethod == selectedPaymentMethod) {
+                categoryPaymentCount++;
             }
         }
     }
 
-    cout << "\n=== Electronics Purchases with Credit Card ===\n";
-    if (electronics_total == 0) {
-        cout << "No Electronics purchases found. (0%)\n";
-    } else {
-        double percentage = (electronics_credit * 100.0) / electronics_total;
-        cout << "Total Electronics Purchases: " << electronics_total << endl;
-        cout << "With Credit Card: " << electronics_credit << endl;
-        cout << "Percentage: " << percentage << "%\n";
+    if (categoryCount == 0) {
+        cout << "No purchases found for the selected category." << endl;
+        return;
     }
+        
+    double percentage = (static_cast<double>(categoryPaymentCount) / categoryCount) * 100.0;
+
+    cout << "Total purchases in " << selectedCat << ": " << categoryCount << endl;
+    cout << "Total purchases in " << selectedCat << " with payment method " << selectedPaymentMethod << ": " << categoryPaymentCount << endl;
+    cout << "Percentage of purchases in " << selectedCat << " with payment method " << selectedPaymentMethod << ": " << percentage << "%" << endl;
 }
 
-// Calculate the most common 1-star reviews
-void binarySearch::calculateBadReviewsCommonSentences(reviews *arr, int size) {
+// Calculate the rating of bad reviews
+void binarySearch::calculateBadReviewsCommonSentences(reviews *reviewArray, int size) {
+    cout << "Hello" << endl;
+    insertionSortReview(reviewArray, size);
+    cout << "Hello" << endl;
+
     const int MAX_REVIEWS = 100; 
-    string reviews[MAX_REVIEWS]; // Array to store unique review sentences
+    string ReviewNode[MAX_REVIEWS]; // Array to store unique review sentences
     int frequencies[MAX_REVIEWS] = {0}; // Array to store frequencies of each review
-    int uniqueCount = 0; // Number of unique reviews found
+    int uniqueCount = 0; // Number of unique ReviewNode found
     int badReviewsCount = 0;
 
     cout << "\n=== Bad Reviews ===\n";
 
     for (int i = 0; i < size; i++) {
-        if (arr[i].rating == 1) { // Check if the review has a 1-star rating
+        if (reviewArray[i].rating == 1) { // Check if the review has a 1-star rating
             badReviewsCount++;
-            arr[i].print(); // Display the matching review
+            reviewArray[i].print(); // Display the matching review
 
             bool found = false;
             for (int j = 0; j < uniqueCount; j++) {
-                if (reviews[j] == arr[i].reviewText) {
+                if (ReviewNode[j] == reviewArray[i].review) {
                     frequencies[j]++;
                     found = true;
                     break;
@@ -59,7 +178,7 @@ void binarySearch::calculateBadReviewsCommonSentences(reviews *arr, int size) {
             }
 
             if (!found && uniqueCount < MAX_REVIEWS) {
-                reviews[uniqueCount] = arr[i].reviewText;
+                ReviewNode[uniqueCount] = reviewArray[i].review;
                 frequencies[uniqueCount] = 1;
                 uniqueCount++;
             }
@@ -68,103 +187,88 @@ void binarySearch::calculateBadReviewsCommonSentences(reviews *arr, int size) {
 
     cout << "\n=== Bad Reviews Summary ===\n";
     if (badReviewsCount == 0) {
-        cout << "No bad reviews found.\n";
+        cout << "No bad ReviewNode found.\n";
     } else {
         cout << "Total Bad Reviews: " << badReviewsCount << endl;
 
         // Display the most common review sentences
         cout << "\nMost Common 1-Star Review Sentences:\n";
         for (int i = 0; i < uniqueCount; i++) {
-            cout << "\"" << reviews[i] << "\": " << frequencies[i] << " occurrences\n";
+            cout << "\"" << ReviewNode[i] << "\": " << frequencies[i] << " occurrences\n";
         }
     }
 }
 
-// ============================LINKED LIST==========================
+// ===========================LINKED LIST==========================
+// Calculate the percentage of selected purchases with payment method chosen
+void binarySearch::calculatedPurchasesPaymentMethodPercentage(LinkList<transactions> &transactionList, int size, 
+    const string selectedCat, const string selectedPaymentMethod){
+        cout << "Hello" << endl;
+        insertionSortCategory(&transactionList);
+        cout << "Hello" << endl;
+        
+        Node<transactions> *current = transactionList.getHead();
+        int categoryCount = 0;
+        int categoryPaymentCount = 0;
 
-// Calculate the percentage of Electronics purchases made with a Credit Card
-void binarySearch::calculateElectronicsCreditPercentage(LinkList<transactions> &arr) {
-    insertionSort::insertionSortCategory(arr); // Sort the linked list by category
-    Node<transactions> *current = arr.getHead();
-    int electronics_total = 0;
-    int electronics_credit = 0;
-
-    cout << "\n=== Electronics Transactions ===\n";
-
-    while (current != nullptr) {
-        if (current->data.cat == "Electronics") {
-            electronics_total++;
-            current->data.print(); // Display the matching transaction
-            if (current->data.paymentMethod == "Credit Card") {
-                electronics_credit++;
+        while (current != nullptr) {
+            if (current->data.cat == selectedCat) {
+                categoryCount++;
+                if (current->data.paymentMethod == selectedPaymentMethod) {
+                    categoryPaymentCount++;
+                }
             }
+            current = current->next;
         }
-        current = current->next;
+
+        if (categoryCount == 0) {
+            cout << "No purchases found for the selected category." << endl;
+            return;
+        }
+        double percentage = (static_cast<double>(categoryPaymentCount) / categoryCount) * 100.0;
+    
+        cout << "Total purchases in " << selectedCat << ": " << categoryCount << endl;
+        cout << "Total purchases in " << selectedCat << " with payment method " << selectedPaymentMethod << ": " << categoryPaymentCount << endl;
+        cout << "Percentage of purchases in " << selectedCat << " with payment method " << selectedPaymentMethod << ": " << percentage << "%" << endl;
+        
     }
 
-    cout << "\n=== Electronics Purchases with Credit Card ===\n";
-    if (electronics_total == 0) {
-        cout << "No Electronics purchases found. (0%)\n";
-    } else {
-        double percentage = (electronics_credit * 100.0) / electronics_total;
-        cout << "Total Electronics Purchases: " << electronics_total << endl;
-        cout << "With Credit Card: " << electronics_credit << endl;
-        cout << "Percentage: " << percentage << "%\n";
-    }
-}
+// Calculate the percentage of selected purchases with payment method chosen
+void binarySearch::calculateBadReviewsCommonSentences(LinkList<reviews> &reviewList) {
+    // Sort the reviews list using insertion sort based on the rating
+    cout << "Hello" << endl;
+    insertionSortReview(&reviewList);
+    cout << "Hello" << endl;
 
-// Calculate the most common 1-star reviews in a linked list
-void binarySearch::calculateBadReviewsCommonSentences(LinkList<reviews> &arr) {
-    Node<transactions> *current = arr.getHead();
-    ReviewNode *reviewHead = nullptr;
+    Node<reviews> *current = reviewList.getHead();
+    int badReviewCount = 0;
 
     cout << "\n=== Bad Reviews ===\n";
 
+    // Traverse the linked list and process bad reviews
     while (current != nullptr) {
         if (current->data.rating == 1) {
-            current->data.print();
-
-            // Check if the review is already in the linked list
-            ReviewNode *reviewCurrent = reviewHead;
-            bool found = false;
-            while (reviewCurrent != nullptr) {
-                if (reviewCurrent->reviewText == current->data.reviewText) {
-                    reviewCurrent->frequency++;
-                    found = true;
-                    break;
-                }
-                reviewCurrent = reviewCurrent->next;
-            }
-
-            // If the review is not found, add it to the linked list
-            if (!found) {
-                ReviewNode *newNode = new ReviewNode(current->data.reviewText);
-                newNode->next = reviewHead;
-                reviewHead = newNode;
-            }
+            cout << "Review " << (badReviewCount + 1) << ": " << current->data.review << endl;
+            badReviewCount++;
         }
         current = current->next;
     }
 
-    cout << "\n=== Bad Reviews Summary ===\n";
-    if (!reviewHead) {
-        cout << "No bad reviews found.\n";
-    } else {
-        int totalBadReviews = 0;
-        ReviewNode *temp = reviewHead;
-        while (temp != nullptr) {
-            totalBadReviews += temp->frequency;
-            cout << "\"" << temp->reviewText << "\": " << temp->frequency << " occurrences\n";
-            temp = temp->next;
-        }
-        cout << "Total Bad Reviews: " << totalBadReviews << endl;
+    if (badReviewCount == 0) {
+        cout << "No bad reviews found." << endl;
+        return;
     }
 
-    // Free the linked list memory
-    while (reviewHead != nullptr) {
-        ReviewNode *temp = reviewHead;
-        reviewHead = reviewHead->next;
-        delete temp;
+    cout << "\nTotal bad reviews: " << badReviewCount << endl;
+
+    cout << "Bad Reviews:" << endl;
+    for (int i = 0; i < badReviewCount; i++) {
+        cout << "Review " << (i + 1) << ": " << current->data.review << endl;
     }
+    cout << "Total bad reviews: " << badReviewCount << endl;
+    cout << "Common sentences in bad reviews:" << endl;
+    for (int i = 0; i < badReviewCount; i++) {
+        cout << current->data.review << endl;
+    }
+    cout << "Total common sentences: " << badReviewCount << endl;
 }
-

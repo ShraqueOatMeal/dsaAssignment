@@ -71,37 +71,7 @@ void insertionSort::insertionsort(mergedData *joinedDataArray, int size) {
   }
 }
 
-// Insertion Sort for category in transactions array (question 2)
-void insertionSortCategory(transactions *transArray, int size){
-  for (int i = 1; i < size; i++) {
-    transactions key = transArray[i];
-    int j = i - 1;
 
-    // Move elements of transArray[0..i-1], that are greater than key,
-    // to one position ahead of their current position
-    while (j >= 0 && transArray[j].cat > key.cat) {
-      transArray[j + 1] = transArray[j];
-      j = j - 1;
-    }
-    transArray[j + 1] = key; // Place the key in its correct position
-  }
-}
-
-// Insertion Sort for reviews in reviews array (question 3)
-void insertionSortReview(reviews *reviewArray, int size) {
-  for (int i = 1; i < size; i++) {
-    reviews key = reviewArray[i];
-    int j = i - 1;
-
-    // Move elements of reviewArray[0..i-1], that are greater than key,
-    // to one position ahead of their current position
-    while (j >= 0 && reviewArray[j].rating > key.rating) {
-      reviewArray[j + 1] = reviewArray[j];
-      j = j - 1;
-    }
-    reviewArray[j + 1] = key; // Place the key in its correct position
-  }
-}
 
 // ==========================LINKED LIST==========================
 // Insertion Sort for linked list
@@ -148,25 +118,6 @@ void insertionSort::insertionsort(LinkList<reviews> *reviewsList) {
 
   // Update the head of the original list to point to the sorted list
   reviewsList->setHead(sorted);
-}
-
-Node<mergedData> *
-insertionSort::insertIntoSortedList(Node<mergedData> *sorted, Node<mergedData> *newNode) {
-  if (!sorted || compareDates(newNode->data.date, sorted->data.date)) {
-    newNode->next = sorted;
-    return newNode;
-  }
-
-  Node<mergedData> *current = sorted;
-  while (current->next &&
-         !compareDates(newNode->data.date, current->next->data.date)) {
-    current = current->next;
-  }
-
-  newNode->next = current->next;
-  current->next = newNode;
-
-  return sorted;
 }
 
 // Inserting JoinedData into sorted linked list
@@ -234,48 +185,22 @@ Node<reviews> *insertionSort::insertIntoSortedList(Node<reviews> *sorted, Node<r
   return sorted;
 }
 
-// Insertion Sort for category in transactions linked list (question 2)
-void insertionSort::insertionSortCategory(LinkList<transactions> *transactionList) {
-  if (transactionList->getHead() == nullptr ||
-      transactionList->getHead()->next == nullptr) {
-    // List is empty or has only one element, no sorting needed
-    return;
+Node<mergedData> *insertionSort::insertIntoSortedList(Node<mergedData> *sorted, Node<mergedData> *newNode) {
+  if (!sorted || compareDates(newNode->data.date, sorted->data.date)) {
+    newNode->next = sorted;
+    return newNode;
   }
 
-  Node<transactions> *sorted = nullptr; // Start with an empty sorted list
-  Node<transactions> *current =
-      transactionList->getHead(); // Current node to be inserted
-
-  while (current != nullptr) {
-    Node<transactions> *next = current->next; // Save the next node
-    sorted = insertIntoSortedList(
-        sorted, current); // Insert current into the sorted list
-    current = next;       // Move to the next node
+  Node<mergedData> *current = sorted;
+  while (current->next &&
+         !compareDates(newNode->data.date, current->next->data.date)) {
+    current = current->next;
   }
 
-  // Update the head of the original list to point to the sorted list
-  transactionList->setHead(sorted);
+  newNode->next = current->next;
+  current->next = newNode;
+
+  return sorted;
 }
 
-// Insertion Sort for reviews in reviews linked list (question 3)
-void insertionSort::insertionSortReview(LinkList<reviews> *reviewsList) {
-  if (reviewsList->getHead() == nullptr ||
-      reviewsList->getHead()->next == nullptr) {
-    // List is empty or has only one element, no sorting needed
-    return;
-  }
 
-  Node<reviews> *sorted = nullptr; // Start with an empty sorted list
-  Node<reviews> *current =
-      reviewsList->getHead(); // Current node to be inserted
-
-  while (current != nullptr) {
-    Node<reviews> *next = current->next; // Save the next node
-    sorted = insertIntoSortedList(
-        sorted, current); // Insert current into the sorted list
-    current = next;       // Move to the next node
-  }
-
-  // Update the head of the original list to point to the sorted list
-  reviewsList->setHead(sorted);
-}

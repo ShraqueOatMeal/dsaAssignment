@@ -1,12 +1,13 @@
-#include "JoinedData.h"
-#include "LinkList.h"
-#include "WordFrequency.h"
-#include "bubblesort.h"
-#include "insertionSort.hpp"
-// #include "jumpsearch.h"
-#include "radixSort.h"
-#include "reviews.h"
-#include "transactions.h"
+#include "../include/JoinedData.h"
+#include "../include/LinkList.h"
+#include "../include/WordFrequency.h"
+#include "../include/bubblesort.h"
+#include "../include/insertionSort.hpp"
+#include "../include/binarySearch.hpp"
+// #include "../include/jumpsearch.h"
+#include "../include/radixSort.h"
+#include "../include/reviews.h"
+#include "../include/transactions.h"
 #include <chrono>
 #include <fstream>
 #include <iomanip>
@@ -35,6 +36,9 @@ void linearSearch(int catChoice, int paymentChoice, int size,
 
 void linearSearch(int catChoice, int paymentChoice, int size,
                   LinkList<transactions> &transactionList);
+
+void binarysearch(transactions *transArray, int size, int catChoice, int paymentChoice);
+void binarysearch(LinkList<transactions> &transactionList, int size, int catChoice, int paymentChoice);
 
 int rowsNum(ifstream &file);
 
@@ -84,6 +88,8 @@ void filterByCategoryAndPayment(int choice,
 void checkNegativeReviews(int choice, LinkList<reviews> &reviewList,
                           reviews *reviewArray,
                           int reviewCount); // discard //ltr
+
+
 // System will run in here
 int main(int argc, char *argv[]) {
   // Data cleaning (unchanged)
@@ -111,13 +117,13 @@ int main(int argc, char *argv[]) {
   reviewFile.seekg(0);
   getline(reviewFile, dummyLine); // Skip header
 
-  // // Choose data structure
-  // cout << "Choose a mode to run:" << endl;
-  // cout << "\t1. Linked List" << endl;
-  // cout << "\t2. Array" << endl;
-  // cout << "Mode: ";
-  // int choice;
-  // cin >> choice;
+  // Choose data structure
+  cout << "Choose a mode to run:" << endl;
+  cout << "\t1. Linked List" << endl;
+  cout << "\t2. Array" << endl;
+  cout << "Mode: ";
+  int choice;
+  cin >> choice;
 
   // Data structures
   LinkList<transactions> transactionList;
@@ -125,70 +131,55 @@ int main(int argc, char *argv[]) {
   transactions *transArray = nullptr;
   reviews *reviewArray = nullptr;
 
-  // Albert Testing start
-  loadTransaction(transactionFile, transactionList);
-  loadReview(reviewFile, reviewList);
-  
-  transArray = new transactions[transCount];
-  reviewArray = new reviews[reviewCount];
-  loadTransaction(transactionFile, transArray, transCount);
-  loadReview(reviewFile, reviewArray, reviewCount);
+  // Load data based on choice
+  if (choice == 1) {
+    loadTransaction(transactionFile, transactionList);
+    loadReview(reviewFile, reviewList);
+  } else if (choice == 2) {
+    transArray = new transactions[transCount];
+    reviewArray = new reviews[reviewCount];
+    loadTransaction(transactionFile, transArray, transCount);
+    loadReview(reviewFile, reviewArray, reviewCount);
+  } else {
+    cout << "Invalid mode choice" << endl;
+    return 1;
+  }
 
-  calculateElectronicsCreditPercentage(transArray, transCount);
-  calculateBadReviewsCommonSentences(reviewArray, transCount);
-  calculateElectronicsCreditPercentage(transactionList);
-  calculateBadReviewsCommonSentences(reviewList);
-  // Albert Testing end
+  // Main menu loop
+  bool exit = false;
+  while (!exit) {
+    displayMainMenu();
+    int funcChoice;
+    cin >> funcChoice;
 
-  // // Load data based on choice
-  // if (choice == 1) {
-  //   loadTransaction(transactionFile, transactionList);
-  //   loadReview(reviewFile, reviewList);
-  // } else if (choice == 2) {
-  //   transArray = new transactions[transCount];
-  //   reviewArray = new reviews[reviewCount];
-  //   loadTransaction(transactionFile, transArray, transCount);
-  //   loadReview(reviewFile, reviewArray, reviewCount);
-  // } else {
-  //   cout << "Invalid mode choice" << endl;
-  //   return 1;
-  // }
+    switch (funcChoice) {
+    case 1:
+      sortByDateMenu(choice, transactionList, reviewList, transArray,
+                     reviewArray, transCount, reviewCount);
+      break;
+    case 2:
+      filterByCategoryAndPayment(choice, transactionList, transArray,
+                                 transCount);
+      break;
+    case 3:
+      checkNegativeReviews(choice, reviewList, reviewArray, reviewCount);
+      break;
+    case 4:
+      exit = true;
+      break;
+    default:
+      cout << "Invalid choice, please try again." << endl;
+      break;
+    }
+  }
 
-  // // Main menu loop
-  // bool exit = false;
-  // while (!exit) {
-  //   displayMainMenu();
-  //   int funcChoice;
-  //   cin >> funcChoice;
+  // Clean up
+  if (choice == 2) {
+    delete[] transArray;
+    delete[] reviewArray;
+  }
 
-  //   switch (funcChoice) {
-  //   case 1:
-  //     sortByDateMenu(choice, transactionList, reviewList, transArray,
-  //                    reviewArray, transCount, reviewCount);
-  //     break;
-  //   case 2:
-  //     filterByCategoryAndPayment(choice, transactionList, transArray,
-  //                                transCount);
-  //     break;
-  //   case 3:
-  //     checkNegativeReviews(choice, reviewList, reviewArray, reviewCount);
-  //     break;
-  //   case 4:
-  //     exit = true;
-  //     break;
-  //   default:
-  //     cout << "Invalid choice, please try again." << endl;
-  //     break;
-  //   }
-  // }
-
-  // // Clean up
-  // if (choice == 2) {
-  //   delete[] transArray;
-  //   delete[] reviewArray;
-  // }
-
-  // return 0;
+  return 0;
 }
 
 // Methods
@@ -655,9 +646,9 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
   cin >> processChoice;
 
   cout << "\nChoose a sorting algorithm:" << endl;
-  cout << "1. Bubble Sort" << endl;
-  cout << "2. Insertion Sort" << endl;
-  cout << "3. Radix Sort" << endl;
+  cout << "\t1. Bubble Sort" << endl;
+  cout << "\t2. Insertion Sort" << endl;
+  cout << "\t3. Radix Sort" << endl;
   cout << "Sorting Algorithm: ";
   int sortChoice;
   cin >> sortChoice;
@@ -811,15 +802,15 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
         bubblesort::displaySortedByDate(joinedArray, joinedSize); // Adjusting
         break;
       case 2:
-        auto start = chrono::high_resolution_clock::now();
         insertionSort::insertionsort(joinedArray, joinedSize);
+        break;
+      case 3: {
+        auto start = chrono::high_resolution_clock::now();
+        radixSort::radixsort(joinedArray, joinedSize);
         auto end = chrono::high_resolution_clock::now();
         chrono::duration<double, milli> duration = end - start;
         cout << "\nSorting completed in " << duration.count()
              << " milliseconds." << endl;
-        break;
-      case 3: {
-        radixSort::radixsort(joinedArray, joinedSize);
         break;
       }
       default:
@@ -895,7 +886,7 @@ void filterByCategoryAndPayment(int choice,
 
   cout << "\nChoose a search algorithm for word frequencies:" << endl;
   cout << "\t1. Linear Search\n\t2. Binary Search\n\t3. Jump Search";
-  cout << "Search Algorithm: ";
+  cout << "\nSearch Algorithm: ";
   int searchChoice;
   cin >> searchChoice;
 
@@ -903,7 +894,7 @@ void filterByCategoryAndPayment(int choice,
     if (searchChoice == 1) {
       linearSearch(catChoice, paymentChoice, transCount, transactionList);
     } else if (searchChoice == 2) {
-      // TODO: binary search
+      // binarysearch(transactionList, transCount, catChoice, paymentChoice);
     } else if (searchChoice == 3) {
       // TODO: jump search
     }
@@ -911,7 +902,7 @@ void filterByCategoryAndPayment(int choice,
     if (searchChoice == 1) {
       linearSearch(catChoice, paymentChoice, transCount, transArray);
     } else if (searchChoice == 2) {
-      // TODO: binary search
+      // binarysearch(transArray, transCount, catChoice, paymentChoice);
     } else if (searchChoice == 3) {
       // TODO: jump search
     }
@@ -924,13 +915,14 @@ void checkNegativeReviews(int choice, LinkList<reviews> &reviewList,
                           reviews *reviewArray, int reviewCount) {
 
   cout << "Choose sorting algorithm for word frequencies:" << endl;
-  cout << "1. Bubble Sort  2. Insertion Sort  3. Radix Sort: ";
+  cout << "1. Bubble Sort\n2. Insertion Sort\n3. Radix Sort" << endl;
+  cout << "\nSorting Algorithm: ";
   int sortChoice;
   cin >> sortChoice;
 
   cout << "\nChoose a search algorithm for word frequencies:" << endl;
   cout << "\t1. Linear Search\n\t2. Binary Search\n\t3. Jump Search";
-  cout << "Search Algorithm: ";
+  cout << "\nSearch Algorithm: ";
   int searchChoice;
   cin >> searchChoice;
 
@@ -941,4 +933,133 @@ void checkNegativeReviews(int choice, LinkList<reviews> &reviewList,
   } else {
     cout << "Invalid mode choice" << endl;
   }
+}
+
+// Using Binary Search to calculate the percentage of purchases by payment method
+void binarysearch(transactions *transArray, int size, int catChoice, int paymentChoice){
+  string selectedCat;
+  string selectedPaymentMethod;
+  
+  switch (catChoice) {
+    case Automotive:
+        selectedCat = "Automotive";
+    break;
+    case Books:
+        selectedCat = "Books";
+        break;
+    case Groceries:
+        selectedCat = "Groceries";
+        break;
+    case Sports:
+        selectedCat = "Sports";
+        break;
+    case Toys:
+        selectedCat = "Toys";
+        break;
+    case Beauty:
+        selectedCat = "Beauty";
+        break;
+    case Furniture:
+        selectedCat = "Furniture";
+        break;
+    case Electronics:
+        selectedCat = "Electronics";
+        break;
+    case Fashion:
+        selectedCat = "Fashion";
+        break;
+    case HomeAppliances:
+        selectedCat = "Home Appliances";
+        break;
+    default:
+        cout << "Unknown Category Choice" << endl;
+        break;
+    }
+
+    switch (paymentChoice) {
+    case BankTransfer:
+        selectedPaymentMethod = "Bank Transfer";
+        break;
+    case PayPal:
+        selectedPaymentMethod = "PayPal";
+        break;
+    case DebitCard:
+        selectedPaymentMethod = "Debit Card";
+        break;
+    case COD:
+        selectedPaymentMethod = "Cash on Delivery";
+        break;
+    case CreditCard:
+        selectedPaymentMethod = "Credit Card";
+        break;
+    default:
+        cout << "Unknown Payment Method Choice" << endl;
+        break;
+    }
+    cout << "Hello" << endl;
+    binarySearch::calculatedPurchasesPaymentMethodPercentage(transArray, size, selectedCat, selectedPaymentMethod);
+}
+
+void binarysearch(LinkList<transactions> &transactionList, int size, int catChoice, int paymentChoice){
+  string selectedCat;
+  string selectedPaymentMethod;
+  
+  switch (catChoice) {
+    case Automotive:
+        selectedCat = "Automotive";
+    break;
+    case Books:
+        selectedCat = "Books";
+        break;
+    case Groceries:
+        selectedCat = "Groceries";
+        break;
+    case Sports:
+        selectedCat = "Sports";
+        break;
+    case Toys:
+        selectedCat = "Toys";
+        break;
+    case Beauty:
+        selectedCat = "Beauty";
+        break;
+    case Furniture:
+        selectedCat = "Furniture";
+        break;
+    case Electronics:
+        selectedCat = "Electronics";
+        break;
+    case Fashion:
+        selectedCat = "Fashion";
+        break;
+    case HomeAppliances:
+        selectedCat = "Home Appliances";
+        break;
+    default:
+        cout << "Unknown Category Choice" << endl;
+        break;
+    }
+
+switch (paymentChoice) {
+  case BankTransfer:
+      selectedPaymentMethod = "Bank Transfer";
+      break;
+  case PayPal:
+      selectedPaymentMethod = "PayPal";
+      break;
+  case DebitCard:
+      selectedPaymentMethod = "Debit Card";
+      break;
+  case COD:
+      selectedPaymentMethod = "Cash on Delivery";
+      break;
+  case CreditCard:
+      selectedPaymentMethod = "Credit Card";
+      break;
+  default:
+      cout << "Unknown Payment Method Choice" << endl;
+      break;
+  }
+cout << "Hello" << endl;
+binarySearch::calculatedPurchasesPaymentMethodPercentage(transactionList, size, selectedCat, selectedPaymentMethod);
 }

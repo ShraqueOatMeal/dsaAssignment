@@ -46,5 +46,11 @@
   "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -I\"C:/Users/Albert Leonardus/OneDrive/Dokumen/GitHub/dsaAssignment/include\" -g -std=gnu++17 -o CMakeFiles\\dsaAssignment_lib.dir\\src\\insertionSort.cpp.obj -c \"C:\\Users\\Albert Leonardus\\OneDrive\\Dokumen\\GitHub\\dsaAssignment\\src\\insertionSort.cpp\"",
   "file": "C:\\Users\\Albert Leonardus\\OneDrive\\Dokumen\\GitHub\\dsaAssignment\\src\\insertionSort.cpp",
   "output": "CMakeFiles\\dsaAssignment_lib.dir\\src\\insertionSort.cpp.obj"
+},
+{
+  "directory": "C:/Users/Albert Leonardus/OneDrive/Dokumen/GitHub/dsaAssignment/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -I\"C:/Users/Albert Leonardus/OneDrive/Dokumen/GitHub/dsaAssignment/include\" -g -std=gnu++17 -o CMakeFiles\\dsaAssignment_lib.dir\\src\\binarySearch.cpp.obj -c \"C:\\Users\\Albert Leonardus\\OneDrive\\Dokumen\\GitHub\\dsaAssignment\\src\\binarySearch.cpp\"",
+  "file": "C:\\Users\\Albert Leonardus\\OneDrive\\Dokumen\\GitHub\\dsaAssignment\\src\\binarySearch.cpp",
+  "output": "CMakeFiles\\dsaAssignment_lib.dir\\src\\binarySearch.cpp.obj"
 }
 ]
