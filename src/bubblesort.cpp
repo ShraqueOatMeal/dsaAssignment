@@ -143,6 +143,13 @@ void bubblesort::displaySortedByDate(LinkList<transactions> &list) {
 }
 
 void bubblesort::bubbleSortByDate(transactions *arr, int size) {
+  auto start = chrono::high_resolution_clock::now();
+
+  bubbleSortByDate(arr, size); // In-place sort
+
+  auto end = chrono::high_resolution_clock::now();
+  chrono::duration<double, milli> duration = end - start;
+
   for (int i = 0; i < size - 1; ++i) {
     for (int j = 0; j < size - i - 1; ++j) {
       int date1 = convertDateToInt(arr[j].date);
