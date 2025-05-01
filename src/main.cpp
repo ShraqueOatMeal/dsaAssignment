@@ -670,12 +670,7 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
         bubblesort::displaySortedByDate(transactionList);
         break;
       case 2:
-        auto start = chrono::high_resolution_clock::now();
         insertionSort::insertionsort(&transactionList);
-        auto end = chrono::high_resolution_clock::now();
-        chrono::duration<double, milli> duration = end - start;
-        cout << "\nSorting completed in " << duration.count()
-             << " milliseconds." << endl;
         break;
       case 3: {
         auto start = chrono::high_resolution_clock::now();
@@ -709,12 +704,7 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
         bubblesort::displaySortedByDate(mergedList);
         break;
       case 2:
-        auto start = chrono::high_resolution_clock::now();
         insertionSort::insertionsort(&mergedList);
-        auto end = chrono::high_resolution_clock::now();
-        chrono::duration<double, milli> duration = end - start;
-        cout << "\nSorting completed in " << duration.count()
-             << " milliseconds." << endl;
         break;
       case 3: {
         auto start = chrono::high_resolution_clock::now();
@@ -756,12 +746,7 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
         bubblesort::displaySortedByDate(mergedList);
         break;
       case 2:
-        auto start = chrono::high_resolution_clock::now();
         insertionSort::insertionsort(&mergedList);
-        auto end = chrono::high_resolution_clock::now();
-        chrono::duration<double, milli> duration = end - start;
-        cout << "\nSorting completed in " << duration.count()
-             << " milliseconds." << endl;
         break;
       case 3: {
         auto start = chrono::high_resolution_clock::now();
@@ -795,12 +780,7 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
         bubblesort::displaySortedByDate(transArray, transCount); // Adjusted
         break;
       case 2:
-        auto start = chrono::high_resolution_clock::now();
         insertionSort::insertionsort(transArray, transCount);
-        auto end = chrono::high_resolution_clock::now();
-        chrono::duration<double, milli> duration = end - start;
-        cout << "\nSorting completed in " << duration.count()
-             << " milliseconds." << endl;
         break;
       case 3: {
         auto start = chrono::high_resolution_clock::now();
@@ -839,12 +819,7 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
              << " milliseconds." << endl;
         break;
       case 3: {
-        auto start = chrono::high_resolution_clock::now();
         radixSort::radixsort(joinedArray, joinedSize);
-        auto end = chrono::high_resolution_clock::now();
-        chrono::duration<double, milli> duration = end - start;
-        cout << "\nSorting completed in " << duration.count()
-             << " milliseconds." << endl;
         break;
       }
       default:
@@ -872,12 +847,7 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
         bubblesort::displaySortedByDate(joinedArray, joinedSize); // Adjusting
         break;
       case 2:
-        auto start = chrono::high_resolution_clock::now();
         insertionSort::insertionsort(joinedArray, joinedSize);
-        auto end = chrono::high_resolution_clock::now();
-        chrono::duration<double, milli> duration = end - start;
-        cout << "\nSorting completed in " << duration.count()
-             << " milliseconds." << endl;
         break;
       case 3: {
         auto start = chrono::high_resolution_clock::now();
