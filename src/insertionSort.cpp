@@ -28,14 +28,12 @@ void insertionSort::insertionsort(transactions *transArray, int size) {
   for (int i = 1; i < size; i++) {
     transactions key = transArray[i];
     int j = i - 1;
-
-    // Move elements of transArray[0..i-1], that are greater than key,
-    // to one position ahead of their current position
+    
     while (j >= 0 && compareDates(transArray[j].date, key.date)) {
       transArray[j + 1] = transArray[j];
       j = j - 1;
     }
-    transArray[j + 1] = key; // Place the key in its correct position
+    transArray[j + 1] = key; 
   }
 }
 
@@ -45,13 +43,11 @@ void insertionSort::insertionsort(reviews *reviewArray, int size) {
     reviews key = reviewArray[i];
     int j = i - 1;
 
-    // Move elements of reviewArray[0..i-1], that are greater than key,
-    // to one position ahead of their current position
     while (j >= 0 && reviewArray[j].rating > key.rating) {
       reviewArray[j + 1] = reviewArray[j];
       j = j - 1;
     }
-    reviewArray[j + 1] = key; // Place the key in its correct position
+    reviewArray[j + 1] = key; 
   }
 }
 
@@ -61,13 +57,11 @@ void insertionSort::insertionsort(mergedData *joinedDataArray, int size) {
     mergedData key = joinedDataArray[i];
     int j = i - 1;
 
-    // Move elements of joinedDataArray[0..i-1], that are greater than key,
-    // to one position ahead of their current position
     while (j >= 0 && compareDates(joinedDataArray[j].date, key.date)) {
       joinedDataArray[j + 1] = joinedDataArray[j];
       j = j - 1;
     }
-    joinedDataArray[j + 1] = key; // Place the key in its correct position
+    joinedDataArray[j + 1] = key; 
   }
 }
 
@@ -76,7 +70,10 @@ void insertionSort::insertionsort(WordFrequency *wordArray, int size) {
   for (int i = 1; i < size; i++) {
       WordFrequency key = wordArray[i];
       int j = i - 1;
-      while (j >= 0 && wordArray[j].count < key.count) {
+
+      // Sort by count (descending), then by rating (ascending)
+      while (j >= 0 && 
+        (wordArray[j].count < key.count || wordArray[j].count == key.count)) {
           wordArray[j + 1] = wordArray[j];
           j--;
       }
@@ -84,11 +81,27 @@ void insertionSort::insertionsort(WordFrequency *wordArray, int size) {
   }
 }
 
+// Insertion Sort for transactions array by category and payment method
+void insertionSort::Category_PaymentMethod(transactions *transArray, int size) {
+    for (int i = 1; i < size; i++) {
+        transactions key = transArray[i];
+        int j = i - 1;
+        
+        while (j >= 0 && 
+              (transArray[j].cat > key.cat || 
+              (transArray[j].cat == key.cat && transArray[j].paymentMethod > key.paymentMethod))) {
+            transArray[j + 1] = transArray[j];
+            j = j - 1;
+        }
+        transArray[j + 1] = key; 
+    }
+}
+
 // ==========================LINKED LIST==========================
+
 // Insertion Sort for linked list
 void insertionSort::insertionsort(LinkList<transactions> *transactionList) {
-  if (transactionList->getHead() == nullptr ||
-      transactionList->getHead()->next == nullptr) {
+  if (transactionList->getHead() == nullptr || transactionList->getHead()->next == nullptr) {
     // List is empty or has only one element, no sorting needed
     return;
   }

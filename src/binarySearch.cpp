@@ -18,36 +18,69 @@ int binarySearch::calculatedPurchasesPaymentMethodPercentage(transactions *trans
     int left = 0;
     int right = size - 1;
     int count = 0;
+    int total = 0;
 
-    // Perform binary search to find the first occurrence
+    // Calculate total transactions under the selected category
+    for (int i = 0; i < size; i++) {
+        if (transArray[i].cat == selectedCat) {
+            total++;
+        }
+    }
+
+    // Find the first occurrence
+    int first = -1;
+    left = 0;
+    right = size - 1;
     while (left <= right) {
         int mid = left + (right - left) / 2;
         if (transArray[mid].cat == selectedCat && transArray[mid].paymentMethod == selectedPaymentMethod) {
-            // Count all occurrences of the matching element
-            int temp = mid;
-            while (temp >= 0 && transArray[temp].cat == selectedCat && transArray[temp].paymentMethod == selectedPaymentMethod) {
-                count++;
-                temp--;
-            }
-            temp = mid + 1;
-            while (temp < size && transArray[temp].cat == selectedCat && transArray[temp].paymentMethod == selectedPaymentMethod) {
-                count++;
-                temp++;
-            }
-            break;
-        } else if (transArray[mid].cat < selectedCat || (transArray[mid].cat == selectedCat && transArray[mid].paymentMethod < selectedPaymentMethod)) {
+            first = mid;
+            right = mid - 1; // Continue searching in the left half
+        } else if (transArray[mid].cat < selectedCat || 
+                  (transArray[mid].cat == selectedCat && transArray[mid].paymentMethod < selectedPaymentMethod)) {
             left = mid + 1;
         } else {
             right = mid - 1;
         }
     }
-    // Calculate percentage
-    double percentage = calculatePercentage(count, size);
+
+    // Find the last occurrence
+    int last = -1;
+    left = 0;
+    right = size - 1;
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+        if (transArray[mid].cat == selectedCat && transArray[mid].paymentMethod == selectedPaymentMethod) {
+            last = mid;
+            left = mid + 1; // Continue searching in the right half
+        } else if (transArray[mid].cat < selectedCat || 
+                  (transArray[mid].cat == selectedCat && transArray[mid].paymentMethod < selectedPaymentMethod)) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+
+    // Calculate count
+    if (first != -1 && last != -1) {
+        count = last - first + 1;
+    }
+
+    // Handle case where no matches are found
+    if (count == 0) {
+        cout << "No matching transactions found for Category: " << selectedCat
+             << " and Payment Method: " << selectedPaymentMethod << endl;
+        return 0;
+    }
+
+    // Print results
+    double percentage = calculatePercentage(count, total);
     cout << "Category: " << selectedCat << endl;
     cout << "Payment Method: " << selectedPaymentMethod << endl;
     cout << "Transactions in category: " << count << endl;
-    cout << "Transactions with payment method: " << count << endl;
+    cout << "Total Transactions under " << selectedCat << ": " << total << endl;
     cout << "Percentage: " << fixed << setprecision(2) << percentage << "%" << endl;
+
     return count;
 }
 
@@ -81,7 +114,6 @@ int binarySearch::calculateBadReviewsCommonWords(reviews *reviewArray, int size)
     }
     return count; // Return the count of bad reviews
 }
-
 
 // // ===========================LINKED LIST==========================
 // // Calculate the percentage of selected purchases with payment method chosen
@@ -126,9 +158,11 @@ void binarySearch::calculatedPurchasesPaymentMethodPercentage(LinkList<transacti
 
     // Traverse the linked list
     while (current != nullptr) {
-        total++; // Increment total transaction count
-        if (current->data.cat == selectedCat && current->data.paymentMethod == selectedPaymentMethod) {
-            count++; // Increment count of matching transactions
+        if (current->data.cat == selectedCat) {
+            total++; // Increment total count of transactions in the category
+            if (current->data.paymentMethod == selectedPaymentMethod) {
+                count++; // Increment count of matching transactions
+            }
         }
         current = current->next; // Move to the next node
     }
@@ -140,7 +174,7 @@ void binarySearch::calculatedPurchasesPaymentMethodPercentage(LinkList<transacti
     cout << "Category: " << selectedCat << endl;
     cout << "Payment Method: " << selectedPaymentMethod << endl;
     cout << "Transactions in category: " << count << endl;
-    cout << "Total Transactions: " << total << endl;
+    cout << "Total Transactions under " << selectedCat << ": " << total << endl;
     cout << "Percentage: " << fixed << setprecision(2) << percentage << "%" << endl;
 }
 
@@ -192,4 +226,4 @@ int binarySearch::calculateBadReviewsCommonWords(LinkList<reviews>& reviewList, 
     }
 
     return count;
-}
+} 

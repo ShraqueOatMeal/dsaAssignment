@@ -996,7 +996,7 @@ void binarysearch(transactions *transArray, int size, int catChoice, int payment
         cout << "Unknown Payment Method Choice" << endl;
         break;
     }
-    
+    insertionSort::Category_PaymentMethod(transArray, size);
     binarySearch::calculatedPurchasesPaymentMethodPercentage(transArray, size, selectedCat, selectedPaymentMethod);
 }
 

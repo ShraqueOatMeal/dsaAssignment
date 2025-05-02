@@ -37,6 +37,8 @@ public:
   static void insertionsort(reviews *reviewArray, int size);
   static void insertionsort(mergedData *JoinedData, int size);
   static void insertionsort(WordFrequency *wordArray, int size);
+  static void Category_PaymentMethod(transactions *transArray, int size);
+  
 
   // Helper functions
   static bool compareDates(const string &date1, const string &date2);

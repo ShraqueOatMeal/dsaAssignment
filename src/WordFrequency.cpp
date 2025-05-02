@@ -312,7 +312,6 @@ void processOneStarReviews(reviews *reviewArray, int reviewCount,
   }
   if (sortChoice == 2) {
     insertionSort::insertionsort(wordFrequencyArray, wordCount);
-    
   } else if (sortChoice == 3) {
     radixsort(wordFrequencyArray, wordCount);    // Sorts in ascending order
     reverseArray(wordFrequencyArray, wordCount); // Reverses to descending order
