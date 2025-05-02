@@ -286,30 +286,6 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment.dir/build.make CMakeFiles/dsaAssignment.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
-src/oneStarReview.o: src/oneStarReview.cpp.o
-.PHONY : src/oneStarReview.o
-
-# target to build an object file
-src/oneStarReview.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/oneStarReview.cpp.o
-.PHONY : src/oneStarReview.cpp.o
-
-src/oneStarReview.i: src/oneStarReview.cpp.i
-.PHONY : src/oneStarReview.i
-
-# target to preprocess a source file
-src/oneStarReview.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/oneStarReview.cpp.i
-.PHONY : src/oneStarReview.cpp.i
-
-src/oneStarReview.s: src/oneStarReview.cpp.s
-.PHONY : src/oneStarReview.s
-
-# target to generate assembly for a file
-src/oneStarReview.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/oneStarReview.cpp.s
-.PHONY : src/oneStarReview.cpp.s
-
 src/radixSort.o: src/radixSort.cpp.o
 .PHONY : src/radixSort.o
 
@@ -362,9 +338,6 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
-	@echo "... src/oneStarReview.o"
-	@echo "... src/oneStarReview.i"
-	@echo "... src/oneStarReview.s"
 	@echo "... src/radixSort.o"
 	@echo "... src/radixSort.i"
 	@echo "... src/radixSort.s"

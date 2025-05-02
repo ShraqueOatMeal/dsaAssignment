@@ -3,13 +3,12 @@
 // #include "insertionSort.hpp"
 #include "reviews.h"
 #include <chrono>
+#include <cmath>
 #include <iostream>
 #include <sstream>
 #include <string>
-#include <cmath>
 
 using namespace std;
-
 
 int jumpSearch(WordFrequency arr[], int wordCount, const std::string &target);
 
@@ -117,135 +116,146 @@ void displayTopWords(const LinkList<WordFrequency> &wordList, int n) {
 }
 
 void processOneStarReviews(LinkList<reviews> &reviewList, int sortChoice,
-  int searchChoice) {
-LinkList<WordFrequency> wordFrequencyList;
-Node<reviews> *current = reviewList.getHead();
+                           int searchChoice) {
+  LinkList<WordFrequency> wordFrequencyList;
+  Node<reviews> *current = reviewList.getHead();
 
-cout << "\nAnalyzing words in 1-star reviews...\n" << endl;
+  cout << "\nAnalyzing words in 1-star reviews...\n" << endl;
 
-int wordCount = 0;
+  int wordCount = 0;
+  auto searchStart = chrono::high_resolution_clock::now();
+  auto searchEnd = chrono::high_resolution_clock::now();
 
-while (current != nullptr) {
-if (current->data.rating == 1) {
-string reviewText = current->data.review;
-istringstream iss(reviewText);
-string word;
+  while (current != nullptr) {
+    if (current->data.rating == 1) {
+      string reviewText = current->data.review;
+      istringstream iss(reviewText);
+      string word;
 
-// Extract words
-while (iss >> word) {
-word = cleanWord(word);
-if (word.empty() || word.length() < 3) continue;
+      // Extract words
+      while (iss >> word) {
+        word = cleanWord(word);
+        if (word.empty() || word.length() < 3)
+          continue;
 
-// Check if word already exists
-bool found = false;
+        // Check if word already exists
+        bool found = false;
 
-if (searchChoice == 1) {
-Node<WordFrequency> *wordNode = wordFrequencyList.getHead();
-while (wordNode != nullptr) {
-if (wordNode->data.word == word) {
-wordNode->data.count++;
-found = true;
-break;
+        searchStart = chrono::high_resolution_clock::now();
+        if (searchChoice == 1) {
+          Node<WordFrequency> *wordNode = wordFrequencyList.getHead();
+          while (wordNode != nullptr) {
+            if (wordNode->data.word == word) {
+              wordNode->data.count++;
+              found = true;
+              break;
+            }
+            wordNode = wordNode->next;
+          }
+        } else if (searchChoice == 2) {
+          // TODO: binary search
+        } else if (searchChoice == 3) {
+          int stepSize = sqrt(wordCount);
+          int steps = 0;
+          Node<WordFrequency> *cur = wordFrequencyList.getHead();
+          Node<WordFrequency> *prev = nullptr;
+
+          while (cur != nullptr && cur->next != nullptr &&
+                 cur->data.word < word && steps < wordCount) {
+            prev = cur;
+            for (int i = 0; i < stepSize && cur->next != nullptr; i++) {
+              cur = cur->next;
+              steps++;
+            }
+          }
+
+          Node<WordFrequency> *scan =
+              (prev != nullptr) ? prev : wordFrequencyList.getHead();
+          while (scan != nullptr && scan != cur->next) {
+            if (scan->data.word == word) {
+              scan->data.count++;
+              found = true;
+              break;
+            }
+            scan = scan->next;
+          }
+        }
+        searchEnd = chrono::high_resolution_clock::now();
+
+        // Insert if not found
+        if (!found) {
+          WordFrequency newWord(word);
+          Node<WordFrequency> *temp = wordFrequencyList.getHead();
+          Node<WordFrequency> *prevInsert = nullptr;
+
+          while (temp != nullptr && temp->data.word < word) {
+            prevInsert = temp;
+            temp = temp->next;
+          }
+
+          Node<WordFrequency> *newNode = new Node<WordFrequency>(newWord);
+          if (prevInsert == nullptr) {
+            newNode->next = wordFrequencyList.getHead();
+            wordFrequencyList.setHead(newNode);
+          } else {
+            newNode->next = prevInsert->next;
+            prevInsert->next = newNode;
+          }
+
+          wordCount++;
+        }
+      }
+    }
+
+    current = current->next;
+  }
+
+  // Sorting logic
+  auto start = chrono::high_resolution_clock::now();
+  if (sortChoice == 1) {
+    // Bubble sort by frequency (descending)
+    bool swapped;
+    Node<WordFrequency> *ptr1;
+    Node<WordFrequency> *lptr = nullptr;
+
+    if (wordFrequencyList.getHead() != nullptr) {
+      do {
+        swapped = false;
+        ptr1 = wordFrequencyList.getHead();
+
+        while (ptr1->next != lptr) {
+          if (ptr1->data.count < ptr1->next->data.count) {
+            swap(ptr1->data, ptr1->next->data);
+            swapped = true;
+          }
+          ptr1 = ptr1->next;
+        }
+        lptr = ptr1;
+      } while (swapped);
+    }
+  } else if (sortChoice == 2) {
+    // TODO: insertion sort
+  } else if (sortChoice == 3) {
+    radixsort(&wordFrequencyList, wordCount);
+  }
+  auto end = chrono::high_resolution_clock::now();
+
+  chrono::duration<double, milli> searchDuration = searchEnd - searchStart;
+  chrono::duration<double, milli> duration = end - start;
+  cout << "\nSearch completed in " << searchDuration.count()
+       << " milliseconds.\n";
+  cout << "\nSorting completed in " << duration.count() << " milliseconds.\n";
+  cout << "Time Complexity of ";
+  if (sortChoice == 1)
+    cout << "Bubble Sort: O(n^2)\n";
+  else if (sortChoice == 2)
+    cout << "Insertion Sort: O(n^2)\n";
+  else if (sortChoice == 3)
+    cout << "Radix Sort: O(n*d)\n";
+  cout << "Estimated Space Complexity: O(n)\n";
+
+  displayTopWords(wordFrequencyList, 10);
 }
-wordNode = wordNode->next;
-}
-} else if (searchChoice == 2) {
-// TODO: binary search
-} else if (searchChoice == 3) {
-int stepSize = sqrt(wordCount);
-int steps = 0;
-Node<WordFrequency> *cur = wordFrequencyList.getHead();
-Node<WordFrequency> *prev = nullptr;
-
-while (cur != nullptr && cur->next != nullptr && cur->data.word < word && steps < wordCount) {
-prev = cur;
-for (int i = 0; i < stepSize && cur->next != nullptr; i++) {
-cur = cur->next;
-steps++;
-}
-}
-
-Node<WordFrequency> *scan = (prev != nullptr) ? prev : wordFrequencyList.getHead();
-while (scan != nullptr && scan != cur->next) {
-if (scan->data.word == word) {
-scan->data.count++;
-found = true;
-break;
-}
-scan = scan->next;
-}
-}
-
-// Insert if not found
-if (!found) {
-WordFrequency newWord(word);
-Node<WordFrequency> *temp = wordFrequencyList.getHead();
-Node<WordFrequency> *prevInsert = nullptr;
-
-while (temp != nullptr && temp->data.word < word) {
-prevInsert = temp;
-temp = temp->next;
-}
-
-Node<WordFrequency> *newNode = new Node<WordFrequency>(newWord);
-if (prevInsert == nullptr) {
-newNode->next = wordFrequencyList.getHead();
-wordFrequencyList.setHead(newNode);
-} else {
-newNode->next = prevInsert->next;
-prevInsert->next = newNode;
-}
-
-wordCount++;
-}
-}
-}
-
-current = current->next;
-}
-
-// Sorting logic
-auto start = chrono::high_resolution_clock::now();
-if (sortChoice == 1) {
-// Bubble sort by frequency (descending)
-bool swapped;
-Node<WordFrequency> *ptr1;
-Node<WordFrequency> *lptr = nullptr;
-
-if (wordFrequencyList.getHead() != nullptr) {
-do {
-swapped = false;
-ptr1 = wordFrequencyList.getHead();
-
-while (ptr1->next != lptr) {
-if (ptr1->data.count < ptr1->next->data.count) {
-swap(ptr1->data, ptr1->next->data);
-swapped = true;
-}
-ptr1 = ptr1->next;
-}
-lptr = ptr1;
-} while (swapped);
-}
-} else if (sortChoice == 2) {
-// TODO: insertion sort
-} else if (sortChoice == 3) {
-radixsort(&wordFrequencyList, wordCount);
-}
-auto end = chrono::high_resolution_clock::now();
-
-chrono::duration<double, milli> duration = end - start;
-cout << "\nSorting completed in " << duration.count() << " milliseconds.\n";
-cout << "Estimated Time Complexity of ";
-if (sortChoice == 1) cout << "Bubble Sort: O(n^2)\n";
-else if (sortChoice == 3) cout << "Radix Sort: O(n*d)\n";
-cout << "Estimated Space Complexity: O(n)\n";
-
-displayTopWords(wordFrequencyList, 10);
-}
-
-
-
 
 // Array
 int getMaxFrequency(WordFrequency *arr, int n) {
@@ -324,6 +334,8 @@ void processOneStarReviews(reviews *reviewArray, int reviewCount,
   int wordCount = 0;
 
   cout << "\nAnalyzing words in 1-star reviews...\n" << endl;
+  auto searchStart = chrono::high_resolution_clock::now();
+  auto searchEnd = chrono::high_resolution_clock::now();
 
   // Process each review in the array
   for (int i = 0; i < reviewCount; i++) {
@@ -341,6 +353,7 @@ void processOneStarReviews(reviews *reviewArray, int reviewCount,
 
         // Check if word exists in the array
         bool found = false;
+        searchStart = chrono::high_resolution_clock::now();
         if (searchChoice == 1) {
           for (int j = 0; j < wordCount; j++) {
             if (wordFrequencyArray[j].word == word) {
@@ -352,14 +365,13 @@ void processOneStarReviews(reviews *reviewArray, int reviewCount,
         } else if (searchChoice == 2) {
           // TODO: binary search
         } else if (searchChoice == 3) {
-          // TODO: jump search //Array
           int pos = jumpSearch(wordFrequencyArray, wordCount, word);
           if (pos != -1) {
             wordFrequencyArray[pos].count++;
             found = true;
           }
-
         }
+        searchEnd = chrono::high_resolution_clock::now();
 
         // Add new word if not found and space is available
         if (!found && wordCount < MAX_WORDS) {
@@ -374,8 +386,6 @@ void processOneStarReviews(reviews *reviewArray, int reviewCount,
   // Sort the word frequency array
   auto start = chrono::high_resolution_clock::now();
   if (sortChoice == 1) {
-    //TODO: bubble sort Array
-    // Bubble Sort in descending order by frequency
     for (int i = 0; i < wordCount - 1; i++) {
       for (int j = 0; j < wordCount - i - 1; j++) {
         if (wordFrequencyArray[j].count < wordFrequencyArray[j + 1].count) {
@@ -384,9 +394,7 @@ void processOneStarReviews(reviews *reviewArray, int reviewCount,
         }
       }
     }
-    displayTopWordsArray(wordFrequencyArray, wordCount, 10); //remove afrter
-
-
+    displayTopWordsArray(wordFrequencyArray, wordCount, 10); // remove afrter
   }
   if (sortChoice == 2) {
     // TODO: insertion sort
@@ -396,18 +404,21 @@ void processOneStarReviews(reviews *reviewArray, int reviewCount,
     reverseArray(wordFrequencyArray, wordCount); // Reverses to descending order
   }
   auto end = chrono::high_resolution_clock::now();
+  chrono::duration<double, milli> searchDuration = searchEnd - searchStart;
   chrono::duration<double, milli> duration = end - start;
 
-
+  cout << "\nSearch completed in " << searchDuration.count()
+       << " milliseconds.\n";
   cout << "\nSorting completed in " << duration.count() << " milliseconds.\n";
   cout << "Estimated Time Complexity of ";
-  if (sortChoice == 1) cout << "Bubble Sort: O(n^2)\n";
-  else if (sortChoice == 3) cout << "Radix Sort: O(n*d)\n";
+  if (sortChoice == 1)
+    cout << "Bubble Sort: O(n^2)\n";
+  else if (sortChoice == 2)
+    cout << "Insertion Sort: O(n^2)\n";
+  else if (sortChoice == 3)
+    cout << "Radix Sort: O(n*d)\n";
   cout << "Estimated Space Complexity: O(n)\n";
-
-  //prob need to change this output
 }
-
 
 int jumpSearch(WordFrequency arr[], int wordCount, const string &target) {
   int step = sqrt(wordCount);
@@ -416,7 +427,8 @@ int jumpSearch(WordFrequency arr[], int wordCount, const string &target) {
   while (prev < wordCount && arr[min(step, wordCount) - 1].word < target) {
     prev = step;
     step += sqrt(wordCount);
-    if (prev >= wordCount) return -1;
+    if (prev >= wordCount)
+      return -1;
   }
 
   for (int i = prev; i < min(step, wordCount); i++) {

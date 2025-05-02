@@ -23,8 +23,8 @@ void loadTransaction(ifstream &transactionFile, transactions *transArray,
                      int size);
 void displayTransactionArr(transactions *transArray, int size);
 
-void processOneStarReviews(LinkList<reviews>& reviewList);
-void processOneStarReviews(reviews* reviewArray, int reviewCount);
+void processOneStarReviews(LinkList<reviews> &reviewList);
+void processOneStarReviews(reviews *reviewArray, int reviewCount);
 
 void loadReview(ifstream &reviewFile, LinkList<reviews> &reviewList);
 void loadReview(ifstream &reviewFile, reviews *reviewArray, int size);
@@ -87,16 +87,16 @@ void checkNegativeReviews(int choice, LinkList<reviews> &reviewList,
 // System will run in here
 int main(int argc, char *argv[]) {
   // Data cleaning (unchanged)
-  ifstream uncleanedTransactionFile("../data/transactions.csv");
-  ifstream uncleanedReviewFile("../data/reviews.csv");
-  cleanData(uncleanedTransactionFile, "../data/transactions_cleaned.csv");
-  cleanData(uncleanedReviewFile, "../data/reviews_cleaned.csv");
+  ifstream uncleanedTransactionFile("../../data/transactions.csv");
+  ifstream uncleanedReviewFile("../../data/reviews.csv");
+  cleanData(uncleanedTransactionFile, "../../data/transactions_cleaned.csv");
+  cleanData(uncleanedReviewFile, "../../data/reviews_cleaned.csv");
   uncleanedTransactionFile.close();
   uncleanedReviewFile.close();
 
   // Open cleaned files
-  ifstream transactionFile("../data/transactions_cleaned.csv");
-  ifstream reviewFile("../data/reviews_cleaned.csv");
+  ifstream transactionFile("../../data/transactions_cleaned.csv");
+  ifstream reviewFile("../../data/reviews_cleaned.csv");
 
   // Count rows
   int transCount = rowsNum(transactionFile);
@@ -150,6 +150,7 @@ int main(int argc, char *argv[]) {
     case 1:
       sortByDateMenu(choice, transactionList, reviewList, transArray,
                      reviewArray, transCount, reviewCount);
+      cout << transCount << endl;
       break;
     case 2:
       filterByCategoryAndPayment(choice, transactionList, transArray,
