@@ -5,13 +5,20 @@ using namespace std;
 
 class binarySearch {
 public:
-    static int calculatedPurchasesPaymentMethodPercentage(transactions *transArray, const string &selectedCat, const string &selectedPaymentMethod);
-    // static void calculatedPurchasesPaymentMethodPercentage(LinkList<transactions> &transactionList, int size, 
-    //     const string selectedCat, const string selectedPaymentMethod);
-    // static void calculateBadReviewsCommonWords(LinkList<reviews> &reviewList);
+    // Helper function to calculate the percentage of selected purchases with payment method chosen
+    static double calculatePercentage(int count, int total);
     
-    // static void calculatedPurchasesPaymentMethodPercentage(transactions *transArray, int size, 
-    //     const string selectedCat, const string selectedPaymentMethod);
-    // static void calculateBadReviewsCommonWords(reviews *reviewArray, int size);
-  
+    // Linked List
+    static Node<transactions> *findMiddle(Node<transactions> *head, Node<transactions>* end);
+    static Node<transactions> *binarySearchLinkedList(Node<transactions> *start, Node<transactions> *end, const string &selectedCat, const string &selectedPaymentMethod);
+    static void calculatedPurchasesPaymentMethodPercentage(LinkList<transactions>& transactionList, const string& selectedCat, const string& selectedPaymentMethod);
+    
+    static Node<reviews> *findMiddle(Node<reviews> *head, Node<reviews>* end);
+    static Node<reviews>* binarySearchLinkedList(Node<reviews>* start, Node<reviews>* end, int rating);
+    static int calculateBadReviewsCommonWords(LinkList<reviews>& reviewList, int rating);
+    
+    // Array
+    static int calculatedPurchasesPaymentMethodPercentage(transactions *transArray, int size, const string &selectedCat, const string &selectedPaymentMethod);
+    static int calculateBadReviewsCommonWords(reviews *reviewArray, int size);
+    
 };

@@ -153,7 +153,7 @@ void processOneStarReviews(LinkList<reviews> &reviewList, int sortChoice,
             wordNode = wordNode->next;
           }
         } else if (searchChoice == 2) {
-          binarySearch::calculateBadReviewsCommonWords(reviewList);
+          binarySearch::calculateBadReviewsCommonWords(reviewList, 1);
         } else if (searchChoice == 3) {
           // TODO: jump search
           // oneStarReview::analyzeTopWords(reviewList);

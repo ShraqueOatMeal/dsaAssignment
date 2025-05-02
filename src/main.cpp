@@ -1,13 +1,13 @@
-#include "../include/JoinedData.h"
-#include "../include/LinkList.h"
-#include "../include/WordFrequency.h"
-#include "../include/bubblesort.h"
-#include "../include/insertionSort.hpp"
-#include "../include/binarySearch.hpp"
-// #include "../include/jumpsearch.h"
-#include "../include/radixSort.h"
-#include "../include/reviews.h"
-#include "../include/transactions.h"
+#include "JoinedData.h"
+#include "LinkList.h"
+#include "WordFrequency.h"
+#include "bubblesort.h"
+#include "insertionSort.hpp"
+#include "binarySearch.hpp"
+// #include "jumpsearch.h"
+#include "radixSort.h"
+#include "reviews.h"
+#include "transactions.h"
 #include <chrono>
 #include <fstream>
 #include <iomanip>
@@ -93,16 +93,16 @@ void checkNegativeReviews(int choice, LinkList<reviews> &reviewList,
 // System will run in here
 int main(int argc, char *argv[]) {
   // Data cleaning (unchanged)
-  ifstream uncleanedTransactionFile("../../data/transactions.csv");
-  ifstream uncleanedReviewFile("../../data/reviews.csv");
-  cleanData(uncleanedTransactionFile, "../../data/transactions_cleaned.csv");
-  cleanData(uncleanedReviewFile, "../../data/reviews_cleaned.csv");
+  ifstream uncleanedTransactionFile("../data/transactions.csv");
+  ifstream uncleanedReviewFile("../data/reviews.csv");
+  cleanData(uncleanedTransactionFile, "../data/transactions_cleaned.csv");
+  cleanData(uncleanedReviewFile, "../data/reviews_cleaned.csv");
   uncleanedTransactionFile.close();
   uncleanedReviewFile.close();
 
   // Open cleaned files
-  ifstream transactionFile("../../data/transactions_cleaned.csv");
-  ifstream reviewFile("../../data/reviews_cleaned.csv");
+  ifstream transactionFile("../data/transactions_cleaned.csv");
+  ifstream reviewFile("../data/reviews_cleaned.csv");
 
   // Count rows
   int transCount = rowsNum(transactionFile);
@@ -1061,5 +1061,5 @@ switch (paymentChoice) {
       break;
   }
 
-binarySearch::calculatedPurchasesPaymentMethodPercentage(transactionList, size, selectedCat, selectedPaymentMethod);
+binarySearch::calculatedPurchasesPaymentMethodPercentage(transactionList, selectedCat, selectedPaymentMethod);
 }
