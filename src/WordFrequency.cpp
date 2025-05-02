@@ -394,7 +394,6 @@ void processOneStarReviews(reviews *reviewArray, int reviewCount,
         }
       }
     }
-    displayTopWordsArray(wordFrequencyArray, wordCount, 10); // remove afrter
   }
   if (sortChoice == 2) {
     // TODO: insertion sort
@@ -418,6 +417,7 @@ void processOneStarReviews(reviews *reviewArray, int reviewCount,
   else if (sortChoice == 3)
     cout << "Radix Sort: O(n*d)\n";
   cout << "Estimated Space Complexity: O(n)\n";
+  displayTopWordsArray(wordFrequencyArray, wordCount, 10);
 }
 
 int jumpSearch(WordFrequency arr[], int wordCount, const string &target) {

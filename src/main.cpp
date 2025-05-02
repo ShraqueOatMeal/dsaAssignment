@@ -150,7 +150,6 @@ int main(int argc, char *argv[]) {
     case 1:
       sortByDateMenu(choice, transactionList, reviewList, transArray,
                      reviewArray, transCount, reviewCount);
-      cout << transCount << endl;
       break;
     case 2:
       filterByCategoryAndPayment(choice, transactionList, transArray,
@@ -780,6 +779,10 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
       default:
         cout << "\nUnknown sorting algorithm" << endl;
         break;
+      }
+      cout << "\nSample of joined data (after sorting):" << endl;
+      for (int i = 0; i < min(5, transCount); i++) {
+        transArray[i].print();
       }
     } else if (processChoice == 2) {
       mergedData *joinedArray = new mergedData[transCount * reviewCount];
