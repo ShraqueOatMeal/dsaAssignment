@@ -9,8 +9,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/dsaAssignment_lib.dir/src/insertionSort.cpp.o.d"
   "CMakeFiles/dsaAssignment_lib.dir/src/jumpsearch.cpp.o"
   "CMakeFiles/dsaAssignment_lib.dir/src/jumpsearch.cpp.o.d"
-  "CMakeFiles/dsaAssignment_lib.dir/src/oneStarReview.cpp.o"
-  "CMakeFiles/dsaAssignment_lib.dir/src/oneStarReview.cpp.o.d"
   "CMakeFiles/dsaAssignment_lib.dir/src/radixSort.cpp.o"
   "CMakeFiles/dsaAssignment_lib.dir/src/radixSort.cpp.o.d"
   "libdsaAssignment_lib.a"
