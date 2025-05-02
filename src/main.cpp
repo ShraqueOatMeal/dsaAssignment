@@ -3,7 +3,7 @@
 #include "WordFrequency.h"
 #include "bubblesort.h"
 #include "insertionSort.hpp"
-// #include "jumpsearch.h"
+#include "jumpsearch.h"
 #include "radixSort.h"
 #include "reviews.h"
 #include "transactions.h"
@@ -23,8 +23,8 @@ void loadTransaction(ifstream &transactionFile, transactions *transArray,
                      int size);
 void displayTransactionArr(transactions *transArray, int size);
 
-// void processOneStarReviews(LinkList<reviews>& reviewList);
-// void processOneStarReviews(reviews* reviewArray, int reviewCount);
+void processOneStarReviews(LinkList<reviews>& reviewList);
+void processOneStarReviews(reviews* reviewArray, int reviewCount);
 
 void loadReview(ifstream &reviewFile, LinkList<reviews> &reviewList);
 void loadReview(ifstream &reviewFile, reviews *reviewArray, int size);
@@ -87,16 +87,16 @@ void checkNegativeReviews(int choice, LinkList<reviews> &reviewList,
 // System will run in here
 int main(int argc, char *argv[]) {
   // Data cleaning (unchanged)
-  ifstream uncleanedTransactionFile("../../data/transactions.csv");
-  ifstream uncleanedReviewFile("../../data/reviews.csv");
-  cleanData(uncleanedTransactionFile, "../../data/transactions_cleaned.csv");
-  cleanData(uncleanedReviewFile, "../../data/reviews_cleaned.csv");
+  ifstream uncleanedTransactionFile("../data/transactions.csv");
+  ifstream uncleanedReviewFile("../data/reviews.csv");
+  cleanData(uncleanedTransactionFile, "../data/transactions_cleaned.csv");
+  cleanData(uncleanedReviewFile, "../data/reviews_cleaned.csv");
   uncleanedTransactionFile.close();
   uncleanedReviewFile.close();
 
   // Open cleaned files
-  ifstream transactionFile("../../data/transactions_cleaned.csv");
-  ifstream reviewFile("../../data/reviews_cleaned.csv");
+  ifstream transactionFile("../data/transactions_cleaned.csv");
+  ifstream reviewFile("../data/reviews_cleaned.csv");
 
   // Count rows
   int transCount = rowsNum(transactionFile);
@@ -890,7 +890,7 @@ void filterByCategoryAndPayment(int choice,
     } else if (searchChoice == 2) {
       // TODO: binary search
     } else if (searchChoice == 3) {
-      // TODO: jump search
+      jumpSearch::searchMenu(transactionList, catChoice, paymentChoice);
     }
   } else if (choice == 2) {
     if (searchChoice == 1) {
@@ -898,7 +898,7 @@ void filterByCategoryAndPayment(int choice,
     } else if (searchChoice == 2) {
       // TODO: binary search
     } else if (searchChoice == 3) {
-      // TODO: jump search
+      jumpSearch::searchMenu(transArray, transCount, catChoice, paymentChoice);
     }
   } else {
     cout << "\nInvalid mode choice" << endl;
