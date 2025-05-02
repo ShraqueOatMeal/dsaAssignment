@@ -71,7 +71,18 @@ void insertionSort::insertionsort(mergedData *joinedDataArray, int size) {
   }
 }
 
-
+// Insertion Sort for word frequency array
+void insertionSort::insertionsort(WordFrequency *wordArray, int size) {
+  for (int i = 1; i < size; i++) {
+      WordFrequency key = wordArray[i];
+      int j = i - 1;
+      while (j >= 0 && wordArray[j].count < key.count) {
+          wordArray[j + 1] = wordArray[j];
+          j--;
+      }
+      wordArray[j + 1] = key;
+  }
+}
 
 // ==========================LINKED LIST==========================
 // Insertion Sort for linked list
@@ -141,6 +152,32 @@ void insertionSort::insertionsort(LinkList<mergedData> *JoinedDataList) {
 
   // Update the head of the original list to point to the sorted list
   JoinedDataList->setHead(sorted);
+}
+
+// Insertion Sort for word frequency linked list
+void insertionSort::insertionsort(LinkList<WordFrequency> *wordList) {
+  if (!wordList || !wordList->getHead()) return;
+
+  Node<WordFrequency> *sorted = nullptr;
+  Node<WordFrequency> *current = wordList->getHead();
+
+  while (current != nullptr) {
+      Node<WordFrequency> *next = current->next;
+      if (!sorted || sorted->data.count <= current->data.count) {
+          current->next = sorted;
+          sorted = current;
+      } else {
+          Node<WordFrequency> *temp = sorted;
+          while (temp->next != nullptr && temp->next->data.count > current->data.count) {
+              temp = temp->next;
+          }
+          current->next = temp->next;
+          temp->next = current;
+      }
+      current = next;
+  }
+
+  wordList->setHead(sorted);
 }
 
 // Helper function to insert a node into a sorted singly linked list

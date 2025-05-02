@@ -1,5 +1,8 @@
 #include "binarySearch.hpp"
 #include <iostream>
+#include <sstream>
+#include <string>
+#include <algorithm>
 using namespace std;
 
 // Insertion Sort for category in transactions array (question 2)
@@ -121,9 +124,9 @@ void insertionSortReview(LinkList<reviews> *reviewsList) {
 // Calculate the percentage of selected purchases with payment method chosen
 void binarySearch::calculatedPurchasesPaymentMethodPercentage(transactions *transArray, int size, 
     const string selectedCat, const string selectedPaymentMethod){
-    cout << "Hello" << endl;
+    
     insertionSortCategory(transArray, size);
-    cout << "Hello" << endl;
+    
 
     int categoryCount = 0;
     int categoryPaymentCount = 0;
@@ -150,51 +153,96 @@ void binarySearch::calculatedPurchasesPaymentMethodPercentage(transactions *tran
 }
 
 // Calculate the rating of bad reviews
-void binarySearch::calculateBadReviewsCommonSentences(reviews *reviewArray, int size) {
-    cout << "Hello" << endl;
-    insertionSortReview(reviewArray, size);
-    cout << "Hello" << endl;
+void binarySearch::calculateBadReviewsCommonWords(reviews *reviewArray, int size) {
+    insertionSortReview(reviewArray, size); // Sort reviews by rating
 
-    const int MAX_REVIEWS = 100; 
-    string ReviewNode[MAX_REVIEWS]; // Array to store unique review sentences
-    int frequencies[MAX_REVIEWS] = {0}; // Array to store frequencies of each review
-    int uniqueCount = 0; // Number of unique ReviewNode found
+    const int MAX_WORDS = 100; // Maximum number of unique words
+    string words[MAX_WORDS];   // Array to store unique words
+    int frequencies[MAX_WORDS] = {0}; // Array to store word frequencies
+    int uniqueWordCount = 0;   // Number of unique words found
     int badReviewsCount = 0;
+
+    // List of stop words to exclude
+    const string stopWords[] = {"in", "an", "the", "not", "and", "is", "of", "to", "a", "it"};
+    const int stopWordsCount = sizeof(stopWords) / sizeof(stopWords[0]);
 
     cout << "\n=== Bad Reviews ===\n";
 
+    // Process each review in the array
     for (int i = 0; i < size; i++) {
         if (reviewArray[i].rating == 1) { // Check if the review has a 1-star rating
             badReviewsCount++;
-            reviewArray[i].print(); // Display the matching review
+            cout << "Review " << badReviewsCount << ": " << reviewArray[i].review << endl;
 
-            bool found = false;
-            for (int j = 0; j < uniqueCount; j++) {
-                if (ReviewNode[j] == reviewArray[i].review) {
-                    frequencies[j]++;
-                    found = true;
-                    break;
+            // Split the review into words
+            stringstream ss(reviewArray[i].review);
+            string word;
+            while (ss >> word) {
+                // Remove punctuation from the word
+                word.erase(remove_if(word.begin(), word.end(), ::ispunct), word.end());
+                transform(word.begin(), word.end(), word.begin(), ::tolower); // Convert to lowercase
+
+                // Check if the word is a stop word
+                bool isStopWord = false;
+                for (int j = 0; j < stopWordsCount; j++) {
+                    if (word == stopWords[j]) {
+                        isStopWord = true;
+                        break;
+                    }
                 }
-            }
 
-            if (!found && uniqueCount < MAX_REVIEWS) {
-                ReviewNode[uniqueCount] = reviewArray[i].review;
-                frequencies[uniqueCount] = 1;
-                uniqueCount++;
+                // Skip stop words
+                if (isStopWord) {
+                    continue;
+                }
+
+                // Check if the word is already in the array
+                bool found = false;
+                for (int j = 0; j < uniqueWordCount; j++) {
+                    if (words[j] == word) {
+                        frequencies[j]++;
+                        found = true;
+                        break;
+                    }
+                }
+
+                // If the word is not found, add it to the array
+                if (!found && uniqueWordCount < MAX_WORDS) {
+                    words[uniqueWordCount] = word;
+                    frequencies[uniqueWordCount] = 1;
+                    uniqueWordCount++;
+                }
             }
         }
     }
 
     cout << "\n=== Bad Reviews Summary ===\n";
     if (badReviewsCount == 0) {
-        cout << "No bad ReviewNode found.\n";
+        cout << "No bad reviews found.\n";
     } else {
         cout << "Total Bad Reviews: " << badReviewsCount << endl;
 
-        // Display the most common review sentences
-        cout << "\nMost Common 1-Star Review Sentences:\n";
-        for (int i = 0; i < uniqueCount; i++) {
-            cout << "\"" << ReviewNode[i] << "\": " << frequencies[i] << " occurrences\n";
+        // Sort the words by frequency in descending order
+        for (int i = 0; i < uniqueWordCount - 1; i++) {
+            for (int j = i + 1; j < uniqueWordCount; j++) {
+                if (frequencies[i] < frequencies[j]) {
+                    // Swap frequencies
+                    int tempFreq = frequencies[i];
+                    frequencies[i] = frequencies[j];
+                    frequencies[j] = tempFreq;
+
+                    // Swap corresponding words
+                    string tempWord = words[i];
+                    words[i] = words[j];
+                    words[j] = tempWord;
+                }
+            }
+        }
+
+        // Display the top 10 most common words
+        cout << "\nMost Common Words in 1-Star Reviews:\n";
+        for (int i = 0; i < min(10, uniqueWordCount); i++) {
+            cout << "\"" << words[i] << "\": " << frequencies[i] << " occurrences\n";
         }
     }
 }
@@ -205,10 +253,10 @@ void binarySearch::calculatedPurchasesPaymentMethodPercentage(LinkList<transacti
     const string selectedCat, const string selectedPaymentMethod){
         cout << selectedCat << endl;
         cout << selectedPaymentMethod << endl;
-        cout << "Hello" << endl;
+        
         insertionSortCategory(&transactionList);
 
-        cout << "Hello" << endl;
+        
 
         
         Node<transactions> *current = transactionList.getHead();
@@ -241,41 +289,97 @@ void binarySearch::calculatedPurchasesPaymentMethodPercentage(LinkList<transacti
     }
 
 // Calculate the percentage of selected purchases with payment method chosen
-void binarySearch::calculateBadReviewsCommonSentences(LinkList<reviews> &reviewList) {
-    // Sort the reviews list using insertion sort based on the rating
-    cout << "Hello" << endl;
+void binarySearch::calculateBadReviewsCommonWords(LinkList<reviews> &reviewList) {
     insertionSortReview(&reviewList);
-    cout << "Hello" << endl;
-
     Node<reviews> *current = reviewList.getHead();
-    int badReviewCount = 0;
+    const int MAX_WORDS = 100; // Maximum number of unique words
+    string words[MAX_WORDS];   // Array to store unique words
+    int frequencies[MAX_WORDS] = {0}; // Array to store word frequencies
+    int uniqueWordCount = 0;   // Number of unique words found
+    int badReviewsCount = 0;
+
+    // List of stop words to exclude
+    const string stopWords[] = {"in", "an", "the", "not", "and", "is", "of", "to", "a", "it"};
+    const int stopWordsCount = sizeof(stopWords) / sizeof(stopWords[0]);
 
     cout << "\n=== Bad Reviews ===\n";
 
     // Traverse the linked list and process bad reviews
     while (current != nullptr) {
-        if (current->data.rating == 1) {
-            cout << "Review " << (badReviewCount + 1) << ": " << current->data.review << endl;
-            badReviewCount++;
+        if (current->data.rating == 1) { // Check if the review has a 1-star rating
+            badReviewsCount++;
+            cout << "Review " << badReviewsCount << ": " << current->data.review << endl;
+
+            // Split the review into words
+            stringstream ss(current->data.review);
+            string word;
+            while (ss >> word) {
+                // Remove punctuation from the word
+                word.erase(remove_if(word.begin(), word.end(), ::ispunct), word.end());
+                transform(word.begin(), word.end(), word.begin(), ::tolower); // Convert to lowercase
+
+                // Check if the word is a stop word
+                bool isStopWord = false;
+                for (int i = 0; i < stopWordsCount; i++) {
+                    if (word == stopWords[i]) {
+                        isStopWord = true;
+                        break;
+                    }
+                }
+
+                // Skip stop words
+                if (isStopWord) {
+                    continue;
+                }
+
+                // Check if the word is already in the array
+                bool found = false;
+                for (int i = 0; i < uniqueWordCount; i++) {
+                    if (words[i] == word) {
+                        frequencies[i]++;
+                        found = true;
+                        break;
+                    }
+                }
+
+                // If the word is not found, add it to the array
+                if (!found && uniqueWordCount < MAX_WORDS) {
+                    words[uniqueWordCount] = word;
+                    frequencies[uniqueWordCount] = 1;
+                    uniqueWordCount++;
+                }
+            }
         }
         current = current->next;
     }
 
-    if (badReviewCount == 0) {
-        cout << "No bad reviews found." << endl;
-        return;
-    }
+    cout << "\n=== Bad Reviews Summary ===\n";
+    if (badReviewsCount == 0) {
+        cout << "No bad reviews found.\n";
+    } else {
+        cout << "Total Bad Reviews: " << badReviewsCount << endl;
 
-    cout << "\nTotal bad reviews: " << badReviewCount << endl;
+        // Sort the words by frequency in descending order
+        for (int i = 0; i < uniqueWordCount - 1; i++) {
+            for (int j = i + 1; j < uniqueWordCount; j++) {
+                if (frequencies[i] < frequencies[j]) {
+                    // Swap frequencies
+                    int tempFreq = frequencies[i];
+                    frequencies[i] = frequencies[j];
+                    frequencies[j] = tempFreq;
 
-    cout << "Bad Reviews:" << endl;
-    for (int i = 0; i < badReviewCount; i++) {
-        cout << "Review " << (i + 1) << ": " << current->data.review << endl;
+                    // Swap corresponding words
+                    string tempWord = words[i];
+                    words[i] = words[j];
+                    words[j] = tempWord;
+                }
+            }
+        }
+
+        // Display the top 10 most common words
+        cout << "\nMost Common Words in 1-Star Reviews:\n";
+        for (int i = 0; i < min(10, uniqueWordCount); i++) {
+            cout << "\"" << words[i] << "\": " << frequencies[i] << " occurrences\n";
+        }
     }
-    cout << "Total bad reviews: " << badReviewCount << endl;
-    cout << "Common sentences in bad reviews:" << endl;
-    for (int i = 0; i < badReviewCount; i++) {
-        cout << current->data.review << endl;
-    }
-    cout << "Total common sentences: " << badReviewCount << endl;
 }
