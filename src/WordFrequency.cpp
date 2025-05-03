@@ -289,6 +289,7 @@ void processOneStarReviews(reviews *reviewArray, int reviewCount,
             }
           }
         } else if (searchChoice == 2) {
+          insertionSort::insertionsort(reviewArray, reviewCount);
           binarySearch::calculateBadReviewsCommonWords(reviewArray, reviewCount);
         } else if (searchChoice == 3) {
           // TODO: jump search

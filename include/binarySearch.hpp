@@ -1,5 +1,6 @@
 #pragma once
 #include "JoinedData.h"
+#include "WordFrequency.h" 
 using namespace std;
 
 
@@ -11,7 +12,7 @@ public:
     // Linked List
     static Node<transactions> *findMiddle(Node<transactions> *head, Node<transactions>* end);
     static Node<transactions> *binarySearchLinkedList(Node<transactions> *start, Node<transactions> *end, const string &selectedCat, const string &selectedPaymentMethod);
-    static void calculatedPurchasesPaymentMethodPercentage(LinkList<transactions>& transactionList, const string& selectedCat, const string& selectedPaymentMethod);
+    static void calculatePurchasesPaymentMethodPercentage(LinkList<transactions>& transactionList, const string &selectedCat, const string &selectedPaymentMethod);
     
     static Node<reviews> *findMiddle(Node<reviews> *head, Node<reviews>* end);
     static Node<reviews>* binarySearchLinkedList(Node<reviews>* start, Node<reviews>* end, int rating);

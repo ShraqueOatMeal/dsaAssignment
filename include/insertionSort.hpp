@@ -23,6 +23,7 @@ class insertionSort {
                                              Node<reviews> *newNode);
   static Node<mergedData> *insertIntoSortedList(Node<mergedData> *sorted,
                                                 Node<mergedData> *newNode);
+  static Node<transactions> *insertIntoSortedListByCategoryPaymentMethod(Node<transactions> *sorted, Node<transactions> *newNode);
 
 public:
   // Sorting for linked list
@@ -30,6 +31,8 @@ public:
   static void insertionsort(LinkList<reviews> *reviewsList);
   static void insertionsort(LinkList<mergedData> *JoinedDataList);
   static void insertionsort(LinkList<WordFrequency> *wordList);
+  static void Category_PaymentMethod(LinkList<transactions> *transactionList);
+  
 
   
   // Sorting for array

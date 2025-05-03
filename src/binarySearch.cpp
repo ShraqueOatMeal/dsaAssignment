@@ -117,12 +117,16 @@ int binarySearch::calculateBadReviewsCommonWords(reviews *reviewArray, int size)
 
 // // ===========================LINKED LIST==========================
 // // Calculate the percentage of selected purchases with payment method chosen
-Node<transactions> *findMiddle(Node<transactions> *start, Node<transactions> *end) {
-    if (start == nullptr || start == end) {
+Node<transactions> *binarySearch::findMiddle(Node<transactions>* start, Node<transactions>* end) {
+    if (start == nullptr) {
         return nullptr;
     }
-    Node<transactions> *slow = start;
-    Node<transactions> *fast = start;
+    if (start == end) {
+        return start; // Base case: only one node
+    }
+    Node<transactions>* slow = start;
+    Node<transactions>* fast = start;
+
     while (fast != end && fast->next != end) {
         slow = slow->next;
         fast = fast->next->next;
@@ -130,41 +134,49 @@ Node<transactions> *findMiddle(Node<transactions> *start, Node<transactions> *en
     return slow;
 }
 
-Node<transactions>* binarySearchLinkedList(Node<transactions>* start, Node<transactions>* end, const string& selectedCat, const string& selectedPaymentMethod) {
-    if (start == nullptr || start == end) {
-        return nullptr; // Base case: empty list or no match
-    }
-
-    // Find the middle node
-    Node<transactions>* mid = findMiddle(start, end);
-
-    // Compare the middle node's data with the target
-    if (mid->data.cat == selectedCat && mid->data.paymentMethod == selectedPaymentMethod) {
-        return mid; // Match found
-    } else if (mid->data.cat < selectedCat || (mid->data.cat == selectedCat && mid->data.paymentMethod < selectedPaymentMethod)) {
-        // Search in the right half
-        return binarySearchLinkedList(mid->next, end, selectedCat, selectedPaymentMethod);
-    } else {
-        // Search in the left half
-        return binarySearchLinkedList(start, mid, selectedCat, selectedPaymentMethod);
-    }
-}
-
-void binarySearch::calculatedPurchasesPaymentMethodPercentage(LinkList<transactions>& transactionList, const string& selectedCat, const string& selectedPaymentMethod) {
+void binarySearch::calculatePurchasesPaymentMethodPercentage(LinkList<transactions> &transactionList, const string &selectedCat, const string &selectedPaymentMethod) {
     int count = 0;
     int total = 0;
 
-    Node<transactions>* current = transactionList.getHead();
+    // Perform binary search to find the first matching transaction
+    Node<transactions>* start = transactionList.getHead();
+    Node<transactions>* end = nullptr;
+    Node<transactions>* match = nullptr;
 
-    // Traverse the linked list
+    while (start != end) {
+        Node<transactions>* mid = findMiddle(start, end);
+
+        if (mid->data.cat == selectedCat && mid->data.paymentMethod == selectedPaymentMethod) {
+            match = mid; // Match found
+            end = mid; // Continue searching in the left half
+        } else if (mid->data.cat < selectedCat || (mid->data.cat == selectedCat && mid->data.paymentMethod < selectedPaymentMethod)) {
+            start = mid->next; // Search in the right half
+        } else {
+            end = mid; // Search in the left half
+        }
+    }
+
+    // If no match is found, print results and return
+    if (match == nullptr) {
+        cout << "No matching transactions found for Category: " << selectedCat
+             << " and Payment Method: " << selectedPaymentMethod << endl;
+        return;
+    }
+
+    // Count all matching transactions
+    Node<transactions>* current = match;
+    while (current != nullptr && current->data.cat == selectedCat && current->data.paymentMethod == selectedPaymentMethod) {
+        count++;
+        current = current->next;
+    }
+
+    // Count total transactions in the selected category
+    current = transactionList.getHead();
     while (current != nullptr) {
         if (current->data.cat == selectedCat) {
-            total++; // Increment total count of transactions in the category
-            if (current->data.paymentMethod == selectedPaymentMethod) {
-                count++; // Increment count of matching transactions
-            }
+            total++;
         }
-        current = current->next; // Move to the next node
+        current = current->next;
     }
 
     // Calculate percentage
@@ -179,12 +191,13 @@ void binarySearch::calculatedPurchasesPaymentMethodPercentage(LinkList<transacti
 }
 
 // Calculate the rating of bad reviews
-Node<reviews>* findMiddle(Node<reviews>* start, Node<reviews>* end) {
+template <typename T>
+Node<T>* findMiddle(Node<T>* start, Node<T>* end) {
     if (start == nullptr || start == end) {
         return nullptr;
     }
-    Node<reviews>* slow = start;
-    Node<reviews>* fast = start;
+    Node<T>* slow = start;
+    Node<T>* fast = start;
     while (fast != end && fast->next != end) {
         slow = slow->next;
         fast = fast->next->next;
@@ -226,4 +239,4 @@ int binarySearch::calculateBadReviewsCommonWords(LinkList<reviews>& reviewList, 
     }
 
     return count;
-} 
+}

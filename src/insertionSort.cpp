@@ -193,6 +193,50 @@ void insertionSort::insertionsort(LinkList<WordFrequency> *wordList) {
   wordList->setHead(sorted);
 }
 
+// Insertion Sort for transactions linked list by category and payment method
+void insertionSort::Category_PaymentMethod(LinkList<transactions> *transactionList) {
+    if (transactionList->getHead() == nullptr || transactionList->getHead()->next == nullptr) {
+        // List is empty or has only one element, no sorting needed
+        return;
+    }
+
+    Node<transactions> *sorted = nullptr; // Start with an empty sorted list
+    Node<transactions> *current = transactionList->getHead(); // Current node to be inserted
+
+    while (current != nullptr) {
+        Node<transactions> *next = current->next; // Save the next node
+        sorted = insertIntoSortedListByCategoryPaymentMethod(sorted, current); // Insert current into the sorted list
+        current = next; // Move to the next node
+    }
+
+    // Update the head of the original list to point to the sorted list
+    transactionList->setHead(sorted);
+}
+
+// Helper function to insert a node into a sorted linked list by category and payment method
+Node<transactions> *insertionSort::insertIntoSortedListByCategoryPaymentMethod(Node<transactions> *sorted, Node<transactions> *newNode) {
+    if (sorted == nullptr || 
+        (newNode->data.cat < sorted->data.cat || 
+        (newNode->data.cat == sorted->data.cat && newNode->data.paymentMethod < sorted->data.paymentMethod))) {
+        // Insert at the beginning of the sorted list
+        newNode->next = sorted;
+        return newNode;
+    }
+
+    Node<transactions> *current = sorted;
+    while (current->next != nullptr && 
+           (current->next->data.cat < newNode->data.cat || 
+           (current->next->data.cat == newNode->data.cat && current->next->data.paymentMethod < newNode->data.paymentMethod))) {
+        current = current->next;
+    }
+
+    // Insert newNode after current
+    newNode->next = current->next;
+    current->next = newNode;
+
+    return sorted;
+}
+
 // Helper function to insert a node into a sorted singly linked list
 Node<transactions> *insertionSort::insertIntoSortedList(Node<transactions> *sorted, Node<transactions> *newNode) {
   if (sorted == nullptr ||
