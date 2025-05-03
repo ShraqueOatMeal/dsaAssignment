@@ -28,6 +28,13 @@ string cleanWord(const string &word) {
   return result;
 }
 
+// Binary Search for linked list
+Node<WordFrequency>* findMiddle(Node<WordFrequency>* start, Node<WordFrequency>* end);
+
+Node<WordFrequency>* binarySearchLinkedList(Node<WordFrequency>* start, Node<WordFrequency>* end, const string& word);
+
+void calculateBadReviewsCommonWords(LinkList<WordFrequency>& wordList, const string& word);
+
 // Link List
 int getMaxFrequency(LinkList<WordFrequency> *wordList) {
   Node<WordFrequency> *current = wordList->getHead();
@@ -159,8 +166,16 @@ void processOneStarReviews(LinkList<reviews> &reviewList, int sortChoice,
             wordNode = wordNode->next;
           }
         } else if (searchChoice == 2) {
-          binarySearch::calculateBadReviewsCommonWords(wordFrequencyList, word); 
-          
+          Node<WordFrequency> *foundNode = binarySearchLinkedList(wordFrequencyList.getHead(), nullptr, word);
+          if (foundNode != nullptr) {
+            foundNode->data.count++;
+            found = true;
+          } else {
+            // Insert the word into the linked list if not found
+            calculateBadReviewsCommonWords(wordFrequencyList, word);
+            found = true;
+          }
+
         } else if (searchChoice == 3) {
           int stepSize = sqrt(wordCount);
           int steps = 0;
@@ -489,3 +504,69 @@ int binarysearch(WordFrequency arr[], int wordCount, const string &word) {
 
     return left; 
 }
+
+Node<WordFrequency>* findMiddle(Node<WordFrequency>* start, Node<WordFrequency>* end) {
+  if (start == nullptr) return nullptr;
+
+  Node<WordFrequency>* slow = start;
+  Node<WordFrequency>* fast = start;
+
+  while (fast != end && fast->next != end) {
+      fast = fast->next->next;
+      if (fast != end && fast != nullptr)
+          slow = slow->next;
+  }
+  return slow;
+}
+
+
+Node<WordFrequency>* binarySearchLinkedList(Node<WordFrequency>* start, Node<WordFrequency>* end, const string& word) {
+  if (start == nullptr || start == end) {
+      return nullptr;
+  }
+      
+  Node<WordFrequency>* mid = findMiddle(start, end);
+  if (mid == nullptr)
+      return nullptr;
+
+  if (mid->data.word == word) {
+      return mid;
+  } else if (mid->data.word < word) {
+      return binarySearchLinkedList(mid->next, end, word); // right half
+  } else {
+      return binarySearchLinkedList(start, mid, word); // left half
+  }
+}
+
+
+
+void calculateBadReviewsCommonWords(LinkList<WordFrequency>& wordList, const string& word) {
+  // Always ensure list is sorted by inserting words in order
+  Node<WordFrequency>* foundNode = binarySearchLinkedList(wordList.getHead(), nullptr, word);
+
+  if (foundNode != nullptr) {
+      foundNode->data.count++;
+  } else {
+      WordFrequency newWord(word);
+      Node<WordFrequency>* current = wordList.getHead();
+      Node<WordFrequency>* previous = nullptr;
+
+      // Find correct position (sorted insert)
+      while (current != nullptr && current->data.word < word) {
+          previous = current;
+          current = current->next;
+      }
+
+      // Insert new node
+      Node<WordFrequency>* newNode = new Node<WordFrequency>(newWord);
+      if (previous == nullptr) {
+          // Insert at head
+          newNode->next = wordList.getHead();
+          wordList.setHead(newNode);
+      } else {
+          newNode->next = previous->next;
+          previous->next = newNode;
+      }
+  }
+}
+

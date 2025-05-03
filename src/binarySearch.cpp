@@ -87,13 +87,16 @@ int binarySearch::calculatedPurchasesPaymentMethodPercentage(transactions *trans
 // // ===========================LINKED LIST==========================
 
 // Helper function to find the middle node of a linked list
-template <typename T>
-static Node<T> *findMiddle(Node<T> *start, Node<T> *end) {
-    if (start == nullptr || start == end) {
+Node<transactions> *binarySearch::findMiddle(Node<transactions>* start, Node<transactions>* end) {
+    if (start == nullptr) {
         return nullptr;
     }
-    Node<T> *slow = start;
-    Node<T> *fast = start;
+    if (start == end) {
+        return start; // Base case: only one node
+    }
+    Node<transactions>* slow = start;
+    Node<transactions>* fast = start;
+
     while (fast != end && fast->next != end) {
         slow = slow->next;
         fast = fast->next->next;
@@ -158,47 +161,65 @@ void binarySearch::calculatePurchasesPaymentMethodPercentage(LinkList<transactio
     cout << "Percentage: " << fixed << setprecision(2) << percentage << "%" << endl;
 }
 
+// Helper function to find the middle node of a linked list
+Node<WordFrequency> *binarySearch::findMiddle(Node<WordFrequency> *start, Node<WordFrequency> *end) {
+    if (start == nullptr || start == end) {
+        return nullptr;
+    }
+    Node<WordFrequency> *slow = start;
+    Node<WordFrequency> *fast = start;
+    while (fast != end && fast->next != end) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    return slow;
+}
+
 // Calculate the rating of bad reviews
-Node<WordFrequency> *binarySearchLinkedList(Node<WordFrequency> *start, Node<WordFrequency> *end, const string &word) {
+Node<WordFrequency>* binarySearch::binarySearchLinkedList(Node<WordFrequency>* start, Node<WordFrequency>* end, const string& word) {
     if (start == nullptr || start == end) {
         return nullptr; // Base case: empty list or no match
     }
 
     // Find the middle node
-    Node<WordFrequency> *mid = findMiddle(start, end);
+    Node<WordFrequency>* mid = binarySearch::findMiddle(start, end);
 
     // Compare the middle node's data with the target
     if (mid->data.word == word) {
         return mid; // Match found
     } else if (mid->data.word < word) {
         // Search in the right half
-        return binarySearchLinkedList(mid->next, end, word);
+        return binarySearch::binarySearchLinkedList(mid->next, end, word);
     } else {
         // Search in the left half
-        return binarySearchLinkedList(start, mid, word);
+        return binarySearch::binarySearchLinkedList(start, mid, word);
     }
 }
 
-void binarySearch::calculateBadReviewsCommonWords(LinkList<WordFrequency> &wordList, const string &word) {
-    Node<WordFrequency> *foundNode = binarySearchLinkedList(wordList.getHead(), nullptr, word);
+void binarySearch::calculateBadReviewsCommonWords(LinkList<WordFrequency>& wordList, const string& word) {
+    Node<WordFrequency>* foundNode = binarySearchLinkedList(wordList.getHead(), nullptr, word);
 
     if (foundNode != nullptr) {
+        // Increment the count if the word is found
         foundNode->data.count++;
     } else {
+        // Insert the word into the linked list if not found
         WordFrequency newWord(word);
-        Node<WordFrequency> *temp = wordList.getHead();
-        Node<WordFrequency> *prev = nullptr;
+        Node<WordFrequency>* temp = wordList.getHead();
+        Node<WordFrequency>* prev = nullptr;
 
         while (temp != nullptr && temp->data.word < word) {
             prev = temp;
             temp = temp->next;
         }
 
-        Node<WordFrequency> *newNode = new Node<WordFrequency>(newWord);
+        Node<WordFrequency>* newNode = new Node<WordFrequency>(newWord);
         if (prev == nullptr) {
+            // Insert at the head
             newNode->next = wordList.getHead();
             wordList.setHead(newNode);
         } else {
+            // Insert in the middle or end
             newNode->next = prev->next;
             prev->next = newNode;
         }
