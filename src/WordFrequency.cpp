@@ -29,11 +29,15 @@ string cleanWord(const string &word) {
 }
 
 // Binary Search for linked list
-Node<WordFrequency>* findMiddle(Node<WordFrequency>* start, Node<WordFrequency>* end);
+Node<WordFrequency> *findMiddle(Node<WordFrequency> *start,
+                                Node<WordFrequency> *end);
 
-Node<WordFrequency>* binarySearchLinkedList(Node<WordFrequency>* start, Node<WordFrequency>* end, const string& word);
+Node<WordFrequency> *binarySearchLinkedList(Node<WordFrequency> *start,
+                                            Node<WordFrequency> *end,
+                                            const string &word);
 
-void calculateBadReviewsCommonWords(LinkList<WordFrequency>& wordList, const string& word);
+void calculateBadReviewsCommonWords(LinkList<WordFrequency> &wordList,
+                                    const string &word);
 
 // Link List
 int getMaxFrequency(LinkList<WordFrequency> *wordList) {
@@ -166,7 +170,8 @@ void processOneStarReviews(LinkList<reviews> &reviewList, int sortChoice,
             wordNode = wordNode->next;
           }
         } else if (searchChoice == 2) {
-          Node<WordFrequency> *foundNode = binarySearchLinkedList(wordFrequencyList.getHead(), nullptr, word);
+          Node<WordFrequency> *foundNode = binarySearchLinkedList(
+              wordFrequencyList.getHead(), nullptr, word);
           if (foundNode != nullptr) {
             foundNode->data.count++;
             found = true;
@@ -390,11 +395,7 @@ void processOneStarReviews(reviews *reviewArray, int reviewCount,
           if (pos < wordCount && wordFrequencyArray[pos].word == word) {
             wordFrequencyArray[pos].count++;
             found = true;
-          } else {
-            if (wordCount >= MAX_WORDS) {
-              cout << "Word array is full. Cannot insert more words." << endl;
-              return;
-            }
+          } else if (wordCount >= MAX_WORDS) {
             // Shift elements to the right to make space
             for (int j = wordCount; j > pos; j--) {
               wordFrequencyArray[j] = wordFrequencyArray[j - 1];
@@ -403,6 +404,7 @@ void processOneStarReviews(reviews *reviewArray, int reviewCount,
             wordFrequencyArray[pos].word = word;
             wordFrequencyArray[pos].count = 1;
             wordCount++;
+            found = true;
           }
         } else if (searchChoice == 3) {
           int pos = jumpSearch(wordFrequencyArray, wordCount, word);
@@ -489,84 +491,86 @@ void insertSorted(WordFrequency arr[], int &wordCount, const string &word) {
 
 int binarysearch(WordFrequency arr[], int wordCount, const string &word) {
   int left = 0;
-    int right = wordCount - 1;
+  int right = wordCount - 1;
 
-    while (left <= right) {
-        int mid = left + (right - left) / 2;
-        if (arr[mid].word == word) {
-            return mid; 
-        } else if (arr[mid].word < word) {
-            left = mid + 1; 
-        } else {
-            right = mid - 1; 
-        }
+  while (left <= right) {
+    int mid = left + (right - left) / 2;
+    if (arr[mid].word == word) {
+      return mid;
+    } else if (arr[mid].word < word) {
+      left = mid + 1;
+    } else {
+      right = mid - 1;
     }
+  }
 
-    return left; 
+  return left;
 }
 
-Node<WordFrequency>* findMiddle(Node<WordFrequency>* start, Node<WordFrequency>* end) {
-  if (start == nullptr) return nullptr;
+Node<WordFrequency> *findMiddle(Node<WordFrequency> *start,
+                                Node<WordFrequency> *end) {
+  if (start == nullptr)
+    return nullptr;
 
-  Node<WordFrequency>* slow = start;
-  Node<WordFrequency>* fast = start;
+  Node<WordFrequency> *slow = start;
+  Node<WordFrequency> *fast = start;
 
   while (fast != end && fast->next != end) {
-      fast = fast->next->next;
-      if (fast != end && fast != nullptr)
-          slow = slow->next;
+    fast = fast->next->next;
+    if (fast != end && fast != nullptr)
+      slow = slow->next;
   }
   return slow;
 }
 
-
-Node<WordFrequency>* binarySearchLinkedList(Node<WordFrequency>* start, Node<WordFrequency>* end, const string& word) {
+Node<WordFrequency> *binarySearchLinkedList(Node<WordFrequency> *start,
+                                            Node<WordFrequency> *end,
+                                            const string &word) {
   if (start == nullptr || start == end) {
-      return nullptr;
+    return nullptr;
   }
-      
-  Node<WordFrequency>* mid = findMiddle(start, end);
+
+  Node<WordFrequency> *mid = findMiddle(start, end);
   if (mid == nullptr)
-      return nullptr;
+    return nullptr;
 
   if (mid->data.word == word) {
-      return mid;
+    return mid;
   } else if (mid->data.word < word) {
-      return binarySearchLinkedList(mid->next, end, word); // right half
+    return binarySearchLinkedList(mid->next, end, word); // right half
   } else {
-      return binarySearchLinkedList(start, mid, word); // left half
+    return binarySearchLinkedList(start, mid, word); // left half
   }
 }
 
-
-
-void calculateBadReviewsCommonWords(LinkList<WordFrequency>& wordList, const string& word) {
+void calculateBadReviewsCommonWords(LinkList<WordFrequency> &wordList,
+                                    const string &word) {
   // Always ensure list is sorted by inserting words in order
-  Node<WordFrequency>* foundNode = binarySearchLinkedList(wordList.getHead(), nullptr, word);
+  Node<WordFrequency> *foundNode =
+      binarySearchLinkedList(wordList.getHead(), nullptr, word);
 
   if (foundNode != nullptr) {
-      foundNode->data.count++;
+    foundNode->data.count++;
   } else {
-      WordFrequency newWord(word);
-      Node<WordFrequency>* current = wordList.getHead();
-      Node<WordFrequency>* previous = nullptr;
+    WordFrequency newWord(word);
+    Node<WordFrequency> *current = wordList.getHead();
+    Node<WordFrequency> *previous = nullptr;
 
-      // Find correct position (sorted insert)
-      while (current != nullptr && current->data.word < word) {
-          previous = current;
-          current = current->next;
-      }
+    // Find correct position (sorted insert)
+    while (current != nullptr && current->data.word < word) {
+      previous = current;
+      current = current->next;
+    }
 
-      // Insert new node
-      Node<WordFrequency>* newNode = new Node<WordFrequency>(newWord);
-      if (previous == nullptr) {
-          // Insert at head
-          newNode->next = wordList.getHead();
-          wordList.setHead(newNode);
-      } else {
-          newNode->next = previous->next;
-          previous->next = newNode;
-      }
+    // Insert new node
+    Node<WordFrequency> *newNode = new Node<WordFrequency>(newWord);
+    if (previous == nullptr) {
+      // Insert at head
+      newNode->next = wordList.getHead();
+      wordList.setHead(newNode);
+    } else {
+      newNode->next = previous->next;
+      previous->next = newNode;
+    }
   }
 }
-

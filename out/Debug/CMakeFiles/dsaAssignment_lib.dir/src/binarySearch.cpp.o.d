@@ -157,6 +157,7 @@ CMakeFiles/dsaAssignment_lib.dir/src/binarySearch.cpp.o: \
  /usr/include/c++/14/bits/istream.tcc \
  /home/loh-yen-kuan/Coding/dsaAssignment/include/reviews.h \
  /home/loh-yen-kuan/Coding/dsaAssignment/include/transactions.h \
+ /home/loh-yen-kuan/Coding/dsaAssignment/include/WordFrequency.h \
  /usr/include/c++/14/iomanip /usr/include/c++/14/locale \
  /usr/include/c++/14/bits/locale_facets_nonio.h /usr/include/c++/14/ctime \
  /usr/include/x86_64-linux-gnu/c++/14/bits/time_members.h \
