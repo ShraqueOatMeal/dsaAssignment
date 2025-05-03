@@ -14,4 +14,7 @@ public:
   static void displaySortedByDate(LinkList<transactions>& list);
   static void displaySortedByDate(transactions* arr, int size);
   static transactions* getSortedArrayByDate(LinkList<transactions>& list, int& size);
+
+  static void bubbleSortByCategory(transactions *arr, int size);
+  static void bubbleSortByCategory(LinkList<transactions>& list);
 };

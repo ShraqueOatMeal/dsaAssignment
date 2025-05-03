@@ -5,9 +5,10 @@ CMakeFiles/dsaAssignment.dir/src/main.cpp.o: /home/loh-yen-kuan/Coding/dsaAssign
   /home/loh-yen-kuan/Coding/dsaAssignment/include/JoinedData.h \
   /home/loh-yen-kuan/Coding/dsaAssignment/include/LinkList.h \
   /home/loh-yen-kuan/Coding/dsaAssignment/include/WordFrequency.h \
+  /home/loh-yen-kuan/Coding/dsaAssignment/include/binarySearch.hpp \
   /home/loh-yen-kuan/Coding/dsaAssignment/include/bubblesort.h \
   /home/loh-yen-kuan/Coding/dsaAssignment/include/insertionSort.hpp \
-  /home/loh-yen-kuan/Coding/dsaAssignment/include/oneStarReview.h \
+  /home/loh-yen-kuan/Coding/dsaAssignment/include/jumpsearch.h \
   /home/loh-yen-kuan/Coding/dsaAssignment/include/radixSort.h \
   /home/loh-yen-kuan/Coding/dsaAssignment/include/reviews.h \
   /home/loh-yen-kuan/Coding/dsaAssignment/include/transactions.h \
@@ -267,8 +268,6 @@ CMakeFiles/dsaAssignment.dir/src/main.cpp.o: /home/loh-yen-kuan/Coding/dsaAssign
 
 /usr/include/x86_64-linux-gnu/bits/types/timer_t.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/struct_tm.h:
-
 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h:
@@ -361,9 +360,9 @@ CMakeFiles/dsaAssignment.dir/src/main.cpp.o: /home/loh-yen-kuan/Coding/dsaAssign
 
 /usr/include/linux/errno.h:
 
-/usr/include/c++/14/bits/quoted_string.h:
+/usr/include/x86_64-linux-gnu/bits/endianness.h:
 
-/usr/include/c++/14/ext/type_traits.h:
+/usr/include/libintl.h:
 
 /usr/include/c++/14/bits/parse_numbers.h:
 
@@ -437,6 +436,10 @@ CMakeFiles/dsaAssignment.dir/src/main.cpp.o: /home/loh-yen-kuan/Coding/dsaAssign
 
 /usr/include/c++/14/concepts:
 
+/usr/include/c++/14/bits/functional_hash.h:
+
+/usr/include/c++/14/ext/atomicity.h:
+
 /usr/include/c++/14/bits/exception.h:
 
 /usr/include/c++/14/cctype:
@@ -446,6 +449,10 @@ CMakeFiles/dsaAssignment.dir/src/main.cpp.o: /home/loh-yen-kuan/Coding/dsaAssign
 /usr/include/c++/14/type_traits:
 
 /usr/include/c++/14/bits/basic_string.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_tm.h:
+
+/home/loh-yen-kuan/Coding/dsaAssignment/include/binarySearch.hpp:
 
 /usr/include/c++/14/bits/ostream.tcc:
 
@@ -481,9 +488,13 @@ CMakeFiles/dsaAssignment.dir/src/main.cpp.o: /home/loh-yen-kuan/Coding/dsaAssign
 
 /usr/include/c++/14/bits/cxxabi_forced.h:
 
-/usr/include/c++/14/bits/functional_hash.h:
+/home/loh-yen-kuan/Coding/dsaAssignment/include/jumpsearch.h:
 
-/usr/include/c++/14/ext/atomicity.h:
+/usr/include/c++/14/bits/postypes.h:
+
+/home/loh-yen-kuan/Coding/dsaAssignment/include/WordFrequency.h:
+
+/home/loh-yen-kuan/Coding/dsaAssignment/include/insertionSort.hpp:
 
 /usr/include/alloca.h:
 
@@ -509,17 +520,7 @@ CMakeFiles/dsaAssignment.dir/src/main.cpp.o: /home/loh-yen-kuan/Coding/dsaAssign
 
 /usr/include/c++/14/bits/cpp_type_traits.h:
 
-/usr/include/c++/14/bits/postypes.h:
-
-/home/loh-yen-kuan/Coding/dsaAssignment/include/WordFrequency.h:
-
-/home/loh-yen-kuan/Coding/dsaAssignment/include/insertionSort.hpp:
-
-/usr/include/c++/14/backward/binders.h:
-
 /usr/include/c++/14/bits/predefined_ops.h:
-
-/home/loh-yen-kuan/Coding/dsaAssignment/include/oneStarReview.h:
 
 /usr/include/asm-generic/errno.h:
 
@@ -531,6 +532,8 @@ CMakeFiles/dsaAssignment.dir/src/main.cpp.o: /home/loh-yen-kuan/Coding/dsaAssign
 
 /usr/include/c++/14/bit:
 
+/usr/include/c++/14/backward/binders.h:
+
 /usr/include/c++/14/bits/basic_ios.h:
 
 /usr/include/c++/14/bits/allocator.h:
@@ -541,6 +544,10 @@ CMakeFiles/dsaAssignment.dir/src/main.cpp.o: /home/loh-yen-kuan/Coding/dsaAssign
 
 /usr/include/c++/14/bits/basic_ios.tcc:
 
+/usr/include/c++/14/bits/quoted_string.h:
+
+/usr/include/c++/14/ext/type_traits.h:
+
 /usr/lib/gcc/x86_64-linux-gnu/14/include/stdarg.h:
 
 /usr/include/c++/14/bits/range_access.h:
@@ -548,6 +555,12 @@ CMakeFiles/dsaAssignment.dir/src/main.cpp.o: /home/loh-yen-kuan/Coding/dsaAssign
 /usr/include/c++/14/bits/refwrap.h:
 
 /usr/include/c++/14/exception:
+
+/usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
+
+/usr/include/c++/14/iostream:
+
+/usr/include/c++/14/bits/requires_hosted.h:
 
 /usr/include/asm-generic/errno-base.h:
 
@@ -615,12 +628,6 @@ CMakeFiles/dsaAssignment.dir/src/main.cpp.o: /home/loh-yen-kuan/Coding/dsaAssign
 
 /usr/include/c++/14/iosfwd:
 
-/usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
-
-/usr/include/c++/14/bits/requires_hosted.h:
-
-/usr/include/c++/14/iostream:
-
 /usr/include/c++/14/limits:
 
 /usr/include/x86_64-linux-gnu/bits/wordsize.h:
@@ -642,10 +649,6 @@ CMakeFiles/dsaAssignment.dir/src/main.cpp.o: /home/loh-yen-kuan/Coding/dsaAssign
 /usr/include/c++/14/bits/std_abs.h:
 
 /usr/include/c++/14/pstl/pstl_config.h:
-
-/usr/include/x86_64-linux-gnu/bits/endianness.h:
-
-/usr/include/libintl.h:
 
 /home/loh-yen-kuan/Coding/dsaAssignment/include/bubblesort.h:
 

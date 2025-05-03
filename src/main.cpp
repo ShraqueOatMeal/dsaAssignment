@@ -4,7 +4,7 @@
 #include "binarySearch.hpp"
 #include "bubblesort.h"
 #include "insertionSort.hpp"
-// #include "jumpsearch.h"
+#include "jumpsearch.h"
 #include "radixSort.h"
 #include "reviews.h"
 #include "transactions.h"
@@ -24,8 +24,8 @@ void loadTransaction(ifstream &transactionFile, transactions *transArray,
                      int size);
 void displayTransactionArr(transactions *transArray, int size);
 
-// void processOneStarReviews(LinkList<reviews>& reviewList);
-// void processOneStarReviews(reviews* reviewArray, int reviewCount);
+void processOneStarReviews(LinkList<reviews> &reviewList);
+void processOneStarReviews(reviews *reviewArray, int reviewCount);
 
 void loadReview(ifstream &reviewFile, LinkList<reviews> &reviewList);
 void loadReview(ifstream &reviewFile, reviews *reviewArray, int size);
@@ -787,6 +787,10 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
         cout << "\nUnknown sorting algorithm" << endl;
         break;
       }
+      cout << "\nSample of joined data (after sorting):" << endl;
+      for (int i = 0; i < min(5, transCount); i++) {
+        transArray[i].print();
+      }
     } else if (processChoice == 2) {
       mergedData *joinedArray = new mergedData[transCount * reviewCount];
       int joinedSize = 0;
@@ -897,7 +901,8 @@ void filterByCategoryAndPayment(int choice,
     } else if (searchChoice == 2) {
       binarysearch(transactionList, transCount, catChoice, paymentChoice);
     } else if (searchChoice == 3) {
-      // TODO: jump search
+      bubblesort::bubbleSortByCategory(transactionList);
+      jumpSearch::searchMenu(transactionList, catChoice, paymentChoice);
     }
   } else if (choice == 2) {
     if (searchChoice == 1) {
@@ -905,7 +910,8 @@ void filterByCategoryAndPayment(int choice,
     } else if (searchChoice == 2) {
       binarysearch(transArray, transCount, catChoice, paymentChoice);
     } else if (searchChoice == 3) {
-      // TODO: jump search
+      bubblesort::bubbleSortByCategory(transArray, transCount);
+      jumpSearch::searchMenu(transArray, transCount, catChoice, paymentChoice);
     }
   } else {
     cout << "\nInvalid mode choice" << endl;

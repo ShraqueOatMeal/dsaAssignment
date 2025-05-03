@@ -133,13 +133,13 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "src/oneStarReview.cpp",
+			"path" : "src/insertionSort.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "src/insertionSort.cpp",
+			"path" : "src/binarySearch.cpp",
 			"sourceGroupIndex" : 0
 		}
 	],

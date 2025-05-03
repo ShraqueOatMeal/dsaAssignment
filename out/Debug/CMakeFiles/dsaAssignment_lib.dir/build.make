@@ -139,24 +139,10 @@ CMakeFiles/dsaAssignment_lib.dir/src/jumpsearch.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/dsaAssignment_lib.dir/src/jumpsearch.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/loh-yen-kuan/Coding/dsaAssignment/src/jumpsearch.cpp -o CMakeFiles/dsaAssignment_lib.dir/src/jumpsearch.cpp.s
 
-CMakeFiles/dsaAssignment_lib.dir/src/oneStarReview.cpp.o: CMakeFiles/dsaAssignment_lib.dir/flags.make
-CMakeFiles/dsaAssignment_lib.dir/src/oneStarReview.cpp.o: /home/loh-yen-kuan/Coding/dsaAssignment/src/oneStarReview.cpp
-CMakeFiles/dsaAssignment_lib.dir/src/oneStarReview.cpp.o: CMakeFiles/dsaAssignment_lib.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/loh-yen-kuan/Coding/dsaAssignment/out/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/dsaAssignment_lib.dir/src/oneStarReview.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/dsaAssignment_lib.dir/src/oneStarReview.cpp.o -MF CMakeFiles/dsaAssignment_lib.dir/src/oneStarReview.cpp.o.d -o CMakeFiles/dsaAssignment_lib.dir/src/oneStarReview.cpp.o -c /home/loh-yen-kuan/Coding/dsaAssignment/src/oneStarReview.cpp
-
-CMakeFiles/dsaAssignment_lib.dir/src/oneStarReview.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/dsaAssignment_lib.dir/src/oneStarReview.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/loh-yen-kuan/Coding/dsaAssignment/src/oneStarReview.cpp > CMakeFiles/dsaAssignment_lib.dir/src/oneStarReview.cpp.i
-
-CMakeFiles/dsaAssignment_lib.dir/src/oneStarReview.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/dsaAssignment_lib.dir/src/oneStarReview.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/loh-yen-kuan/Coding/dsaAssignment/src/oneStarReview.cpp -o CMakeFiles/dsaAssignment_lib.dir/src/oneStarReview.cpp.s
-
 CMakeFiles/dsaAssignment_lib.dir/src/insertionSort.cpp.o: CMakeFiles/dsaAssignment_lib.dir/flags.make
 CMakeFiles/dsaAssignment_lib.dir/src/insertionSort.cpp.o: /home/loh-yen-kuan/Coding/dsaAssignment/src/insertionSort.cpp
 CMakeFiles/dsaAssignment_lib.dir/src/insertionSort.cpp.o: CMakeFiles/dsaAssignment_lib.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/loh-yen-kuan/Coding/dsaAssignment/out/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/dsaAssignment_lib.dir/src/insertionSort.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/loh-yen-kuan/Coding/dsaAssignment/out/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/dsaAssignment_lib.dir/src/insertionSort.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/dsaAssignment_lib.dir/src/insertionSort.cpp.o -MF CMakeFiles/dsaAssignment_lib.dir/src/insertionSort.cpp.o.d -o CMakeFiles/dsaAssignment_lib.dir/src/insertionSort.cpp.o -c /home/loh-yen-kuan/Coding/dsaAssignment/src/insertionSort.cpp
 
 CMakeFiles/dsaAssignment_lib.dir/src/insertionSort.cpp.i: cmake_force
@@ -167,6 +153,20 @@ CMakeFiles/dsaAssignment_lib.dir/src/insertionSort.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/dsaAssignment_lib.dir/src/insertionSort.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/loh-yen-kuan/Coding/dsaAssignment/src/insertionSort.cpp -o CMakeFiles/dsaAssignment_lib.dir/src/insertionSort.cpp.s
 
+CMakeFiles/dsaAssignment_lib.dir/src/binarySearch.cpp.o: CMakeFiles/dsaAssignment_lib.dir/flags.make
+CMakeFiles/dsaAssignment_lib.dir/src/binarySearch.cpp.o: /home/loh-yen-kuan/Coding/dsaAssignment/src/binarySearch.cpp
+CMakeFiles/dsaAssignment_lib.dir/src/binarySearch.cpp.o: CMakeFiles/dsaAssignment_lib.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/loh-yen-kuan/Coding/dsaAssignment/out/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/dsaAssignment_lib.dir/src/binarySearch.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/dsaAssignment_lib.dir/src/binarySearch.cpp.o -MF CMakeFiles/dsaAssignment_lib.dir/src/binarySearch.cpp.o.d -o CMakeFiles/dsaAssignment_lib.dir/src/binarySearch.cpp.o -c /home/loh-yen-kuan/Coding/dsaAssignment/src/binarySearch.cpp
+
+CMakeFiles/dsaAssignment_lib.dir/src/binarySearch.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/dsaAssignment_lib.dir/src/binarySearch.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/loh-yen-kuan/Coding/dsaAssignment/src/binarySearch.cpp > CMakeFiles/dsaAssignment_lib.dir/src/binarySearch.cpp.i
+
+CMakeFiles/dsaAssignment_lib.dir/src/binarySearch.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/dsaAssignment_lib.dir/src/binarySearch.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/loh-yen-kuan/Coding/dsaAssignment/src/binarySearch.cpp -o CMakeFiles/dsaAssignment_lib.dir/src/binarySearch.cpp.s
+
 # Object files for target dsaAssignment_lib
 dsaAssignment_lib_OBJECTS = \
 "CMakeFiles/dsaAssignment_lib.dir/src/radixSort.cpp.o" \
@@ -174,8 +174,8 @@ dsaAssignment_lib_OBJECTS = \
 "CMakeFiles/dsaAssignment_lib.dir/src/JoinedData.cpp.o" \
 "CMakeFiles/dsaAssignment_lib.dir/src/bubblesort.cpp.o" \
 "CMakeFiles/dsaAssignment_lib.dir/src/jumpsearch.cpp.o" \
-"CMakeFiles/dsaAssignment_lib.dir/src/oneStarReview.cpp.o" \
-"CMakeFiles/dsaAssignment_lib.dir/src/insertionSort.cpp.o"
+"CMakeFiles/dsaAssignment_lib.dir/src/insertionSort.cpp.o" \
+"CMakeFiles/dsaAssignment_lib.dir/src/binarySearch.cpp.o"
 
 # External object files for target dsaAssignment_lib
 dsaAssignment_lib_EXTERNAL_OBJECTS =
@@ -185,8 +185,8 @@ libdsaAssignment_lib.a: CMakeFiles/dsaAssignment_lib.dir/src/WordFrequency.cpp.o
 libdsaAssignment_lib.a: CMakeFiles/dsaAssignment_lib.dir/src/JoinedData.cpp.o
 libdsaAssignment_lib.a: CMakeFiles/dsaAssignment_lib.dir/src/bubblesort.cpp.o
 libdsaAssignment_lib.a: CMakeFiles/dsaAssignment_lib.dir/src/jumpsearch.cpp.o
-libdsaAssignment_lib.a: CMakeFiles/dsaAssignment_lib.dir/src/oneStarReview.cpp.o
 libdsaAssignment_lib.a: CMakeFiles/dsaAssignment_lib.dir/src/insertionSort.cpp.o
+libdsaAssignment_lib.a: CMakeFiles/dsaAssignment_lib.dir/src/binarySearch.cpp.o
 libdsaAssignment_lib.a: CMakeFiles/dsaAssignment_lib.dir/build.make
 libdsaAssignment_lib.a: CMakeFiles/dsaAssignment_lib.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/loh-yen-kuan/Coding/dsaAssignment/out/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX static library libdsaAssignment_lib.a"

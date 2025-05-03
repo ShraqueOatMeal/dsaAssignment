@@ -157,4 +157,5 @@ CMakeFiles/dsaAssignment_lib.dir/src/insertionSort.cpp.o: \
  /usr/include/c++/14/bits/istream.tcc \
  /home/loh-yen-kuan/Coding/dsaAssignment/include/reviews.h \
  /home/loh-yen-kuan/Coding/dsaAssignment/include/transactions.h \
+ /home/loh-yen-kuan/Coding/dsaAssignment/include/WordFrequency.h \
  /usr/include/c++/14/sstream /usr/include/c++/14/bits/sstream.tcc

@@ -2,9 +2,9 @@
 
 #include "JoinedData.h"
 #include "LinkList.h"
+#include "WordFrequency.h"
 #include "reviews.h"
 #include "transactions.h"
-#include "WordFrequency.h"
 #include <string>
 using namespace std;
 
@@ -34,14 +34,12 @@ public:
   static void Category_PaymentMethod(LinkList<transactions> *transactionList);
   
 
-  
   // Sorting for array
   static void insertionsort(transactions *transArray, int size);
   static void insertionsort(reviews *reviewArray, int size);
   static void insertionsort(mergedData *JoinedData, int size);
   static void insertionsort(WordFrequency *wordArray, int size);
   static void Category_PaymentMethod(transactions *transArray, int size);
-  
 
   // Helper functions
   static bool compareDates(const string &date1, const string &date2);

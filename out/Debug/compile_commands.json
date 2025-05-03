@@ -31,15 +31,15 @@
 },
 {
   "directory": "/home/loh-yen-kuan/Coding/dsaAssignment/out/Debug",
-  "command": "/usr/bin/c++  -I/home/loh-yen-kuan/Coding/dsaAssignment/include -g -std=gnu++17 -o CMakeFiles/dsaAssignment_lib.dir/src/oneStarReview.cpp.o -c /home/loh-yen-kuan/Coding/dsaAssignment/src/oneStarReview.cpp",
-  "file": "/home/loh-yen-kuan/Coding/dsaAssignment/src/oneStarReview.cpp",
-  "output": "CMakeFiles/dsaAssignment_lib.dir/src/oneStarReview.cpp.o"
-},
-{
-  "directory": "/home/loh-yen-kuan/Coding/dsaAssignment/out/Debug",
   "command": "/usr/bin/c++  -I/home/loh-yen-kuan/Coding/dsaAssignment/include -g -std=gnu++17 -o CMakeFiles/dsaAssignment_lib.dir/src/insertionSort.cpp.o -c /home/loh-yen-kuan/Coding/dsaAssignment/src/insertionSort.cpp",
   "file": "/home/loh-yen-kuan/Coding/dsaAssignment/src/insertionSort.cpp",
   "output": "CMakeFiles/dsaAssignment_lib.dir/src/insertionSort.cpp.o"
+},
+{
+  "directory": "/home/loh-yen-kuan/Coding/dsaAssignment/out/Debug",
+  "command": "/usr/bin/c++  -I/home/loh-yen-kuan/Coding/dsaAssignment/include -g -std=gnu++17 -o CMakeFiles/dsaAssignment_lib.dir/src/binarySearch.cpp.o -c /home/loh-yen-kuan/Coding/dsaAssignment/src/binarySearch.cpp",
+  "file": "/home/loh-yen-kuan/Coding/dsaAssignment/src/binarySearch.cpp",
+  "output": "CMakeFiles/dsaAssignment_lib.dir/src/binarySearch.cpp.o"
 },
 {
   "directory": "/home/loh-yen-kuan/Coding/dsaAssignment/out/Debug",

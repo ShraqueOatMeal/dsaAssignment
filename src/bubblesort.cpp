@@ -171,3 +171,36 @@ void bubblesort::displaySortedByDate(transactions *arr, int size) {
   cout << "Estimated Time Complexity of Bubble Sort: O(n^2)\n";
   cout << "Estimated Space Complexity: O(1)\n";
 }
+
+void bubblesort::bubbleSortByCategory(transactions *arr, int size) {
+  for (int i = 0; i < size - 1; i++) {
+    for (int j = 0; j < size - i - 1; j++) {
+      if (arr[j].cat > arr[j + 1].cat) {
+        swap(arr[j], arr[j + 1]);
+      }
+    }
+  }
+}
+
+void bubblesort::bubbleSortByCategory(LinkList<transactions> &list) {
+  bool swapped;
+  Node<transactions> *ptr1;
+  Node<transactions> *lptr = nullptr;
+
+  if (list.getHead() == nullptr)
+    return;
+
+  do {
+    swapped = false;
+    ptr1 = list.getHead();
+
+    while (ptr1->next != lptr) {
+      if (ptr1->data.cat > ptr1->next->data.cat) {
+        swap(ptr1->data, ptr1->next->data);
+        swapped = true;
+      }
+      ptr1 = ptr1->next;
+    }
+    lptr = ptr1;
+  } while (swapped);
+}
