@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 #include <iostream>
+#include <limits>
 #include <sstream>
 
 using namespace std;
@@ -119,12 +120,25 @@ int main(int argc, char *argv[]) {
   getline(reviewFile, dummyLine); // Skip header
 
   // Choose data structure
-  cout << "Choose a mode to run:" << endl;
-  cout << "\t1. Linked List" << endl;
-  cout << "\t2. Array" << endl;
-  cout << "Mode: ";
   int choice;
-  cin >> choice;
+  while (true) {     // Add loop
+    system("clear"); // Already suggested
+    cout << "Choose a mode to run:\n" << endl;
+    cout << "\t1. Linked List" << endl;
+    cout << "\t2. Array" << endl;
+    cout << "\nMode: ";
+    cin >> choice;
+    if (!choice || choice < 1 || choice > 2) {
+      cout << "Invalid choice, please try again." << endl;
+      cin.clear();
+      cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      cout << "\nPress Enter to continue...";
+      cin.get();
+      system("clear");
+      continue;
+    }
+    break;
+  }
 
   // Data structures
   LinkList<transactions> transactionList;
@@ -141,35 +155,52 @@ int main(int argc, char *argv[]) {
     reviewArray = new reviews[reviewCount];
     loadTransaction(transactionFile, transArray, transCount);
     loadReview(reviewFile, reviewArray, reviewCount);
-  } else {
-    cout << "Invalid mode choice" << endl;
-    return 1;
   }
 
   // Main menu loop
   bool exit = false;
   while (!exit) {
+    system("clear");
     displayMainMenu();
     int funcChoice;
     cin >> funcChoice;
 
+    if (!funcChoice || funcChoice < 1 || funcChoice > 4) {
+      cout << "Invalid choice, please try again." << endl;
+      cin.clear();
+      cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      cout << "\nPress Enter to continue...";
+      cin.get();
+      system("clear");
+      continue;
+    }
+
     switch (funcChoice) {
     case 1:
+      system("clear");
       sortByDateMenu(choice, transactionList, reviewList, transArray,
                      reviewArray, transCount, reviewCount);
       break;
     case 2:
+      system("clear");
       filterByCategoryAndPayment(choice, transactionList, transArray,
                                  transCount);
       break;
     case 3:
+      system("clear");
       checkNegativeReviews(choice, reviewList, reviewArray, reviewCount);
       break;
     case 4:
+      system("clear");
       exit = true;
       break;
     default:
-      cout << "Invalid choice, please try again." << endl;
+      cout << "\nInvalid choice, please try again." << endl;
+      cin.clear();
+      cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      cout << "\nPress Enter to continue...";
+      cin.get();
+      system("clear");
       break;
     }
   }
@@ -627,32 +658,58 @@ void cleanData(ifstream &inputFile, const string &outputFilename) {
 }
 
 void displayMainMenu() {
-  cout << "\n==========Main Menu==========" << endl;
+  cout << "\n==========Main Menu==========\n" << endl;
   cout << "1. Sort by date" << endl;
   cout << "2. Filter by category and payment method" << endl;
   cout << "3. Check negative reviews" << endl;
   cout << "4. Exit" << endl;
-  cout << "Choice: ";
+  cout << "\nChoice: ";
 }
 
 void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
                     LinkList<reviews> &reviewList, transactions *transArray,
                     reviews *reviewArray, int transCount, int reviewCount) {
-  cout << "\nChoose a process:" << endl;
-  cout << "1. Regular sort of transaction data" << endl;
-  cout << "2. Inner join on Customer ID and sort by date" << endl;
-  cout << "3. Left join on Customer ID and sort by date" << endl;
-  cout << "Choice: ";
   int processChoice;
-  cin >> processChoice;
+  while (true) {
+    system("clear");
+    cout << "\nChoose a process:\n" << endl;
+    cout << "1. Regular sort of transaction data" << endl;
+    cout << "2. Inner join on Customer ID and sort by date" << endl;
+    cout << "3. Left join on Customer ID and sort by date" << endl;
+    cout << "\nChoice: ";
+    cin >> processChoice;
+    if (!processChoice || processChoice < 1 || processChoice > 3) {
+      cout << "Invalid choice, please try again." << endl;
+      cin.clear();
+      cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      cout << "\nPress Enter to continue...";
+      cin.get();
+      system("clear");
+      continue;
+    }
+    break;
+  }
 
-  cout << "\nChoose a sorting algorithm:" << endl;
-  cout << "\t1. Bubble Sort" << endl;
-  cout << "\t2. Insertion Sort" << endl;
-  cout << "\t3. Radix Sort" << endl;
-  cout << "Sorting Algorithm: ";
   int sortChoice;
-  cin >> sortChoice;
+  while (true) {
+    system("clear");
+    cout << "\nChoose a sorting algorithm:\n" << endl;
+    cout << "\t1. Bubble Sort" << endl;
+    cout << "\t2. Insertion Sort" << endl;
+    cout << "\t3. Radix Sort\n" << endl;
+    cout << "Sorting Algorithm: ";
+    cin >> sortChoice;
+    if (!sortChoice || sortChoice < 1 || sortChoice > 3) {
+      cout << "Invalid choice, please try again." << endl;
+      cin.clear();
+      cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      cout << "\nPress Enter to continue...";
+      cin.get();
+      system("clear");
+      continue;
+    }
+    break;
+  }
 
   if (choice == 1) { // Linked List
     if (processChoice == 1) {
@@ -674,9 +731,13 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
         break;
       }
       default:
-        cout << "\nUnknown sorting algorithm" << endl;
+        cout << "\nUnknown sorting algorithm\n" << endl;
         break;
       }
+      cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      cout << "\n\nPress Enter to continue...";
+      cin.get();
+      system("clear");
     } else if (processChoice == 2) {
       LinkList<mergedData> mergedList;
       JoinedData::innerJoinLists(transactionList, reviewList, mergedList);
@@ -708,7 +769,7 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
         break;
       }
       default:
-        cout << "\nUnknown sorting algorithm" << endl;
+        cout << "\nUnknown sorting algorithm\n" << endl;
         break;
       }
       cout << "\nSample of joined data (after sorting):" << endl;
@@ -719,6 +780,10 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
         current = current->next;
         displayCount++;
       }
+      cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      cout << "\n\nPress Enter to continue...";
+      cin.get();
+      system("clear");
     } else if (processChoice == 3) {
       LinkList<mergedData> mergedList;
       JoinedData::leftJoinLists(transactionList, reviewList, mergedList);
@@ -761,6 +826,10 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
         current = current->next;
         displayCount++;
       }
+      cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      cout << "\n\nPress Enter to continue...";
+      cin.get();
+      system("clear");
     } else {
       cout << "\nInvalid process choice" << endl;
     }
@@ -791,6 +860,10 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
       for (int i = 0; i < min(5, transCount); i++) {
         transArray[i].print();
       }
+      cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      cout << "\n\nPress Enter to continue...";
+      cin.get();
+      system("clear");
     } else if (processChoice == 2) {
       mergedData *joinedArray = new mergedData[transCount * reviewCount];
       int joinedSize = 0;
@@ -827,6 +900,10 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
         joinedArray[i].print();
       }
       delete[] joinedArray;
+      cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      cout << "\n\nPress Enter to continue...";
+      cin.get();
+      system("clear");
     } else if (processChoice == 3) {
       mergedData *joinedArray = new mergedData[transCount * reviewCount];
       int joinedSize = 0;
@@ -863,8 +940,10 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
         joinedArray[i].print();
       }
       delete[] joinedArray;
-    } else {
-      cout << "\nInvalid process choice" << endl;
+      cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      cout << "\n\nPress Enter to continue...";
+      cin.get();
+      system("clear");
     }
   }
 }
@@ -872,28 +951,66 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
 void filterByCategoryAndPayment(int choice,
                                 LinkList<transactions> &transactionList,
                                 transactions *transArray, int transCount) {
-  cout << "\nChoose a category to filter:" << endl;
-  cout << "\t1. Automotive\n\t2. Books\n\t3. Groceries\n\t4. Sports\n\t5. "
-          "Toys\n\t6. Beauty\n\t7. Furniture\n\t8. Electronics\n\t9. "
-          "Fashion\n\t10. Home Appliances"
-       << endl;
-  cout << "Category: ";
   int catChoice;
-  cin >> catChoice;
-
-  cout << "\nChoose a payment method to filter:" << endl;
-  cout << "\t1. Bank Transfer\n\t2. PayPal\n\t3. Debit Card\n\t4. Cash on "
-          "Delivery\n\t5. Credit Card"
-       << endl;
-  cout << "Payment Method: ";
+  while (true) {
+    system("clear");
+    cout << "\nChoose a category to filter:" << endl;
+    cout << "\t1. Automotive\n\t2. Books\n\t3. Groceries\n\t4. Sports\n\t5. "
+            "Toys\n\t6. Beauty\n\t7. Furniture\n\t8. Electronics\n\t9. "
+            "Fashion\n\t10. Home Appliances"
+         << endl;
+    cout << "Category: ";
+    cin >> catChoice;
+    if (!catChoice || catChoice < 1 || catChoice > 10) {
+      cout << "Invalid choice, please try again." << endl;
+      cin.clear();
+      cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      cout << "\nPress Enter to continue...";
+      cin.get();
+      system("clear");
+      continue;
+    }
+    break;
+  }
   int paymentChoice;
-  cin >> paymentChoice;
+  while (true) {
+    system("clear");
+    cout << "\nChoose a payment method to filter:" << endl;
+    cout << "\t1. Bank Transfer\n\t2. PayPal\n\t3. Debit Card\n\t4. Cash on "
+            "Delivery\n\t5. Credit Card"
+         << endl;
+    cout << "Payment Method: ";
+    cin >> paymentChoice;
+    if (!paymentChoice || paymentChoice < 1 || paymentChoice > 5) {
+      cout << "Invalid choice, please try again." << endl;
+      cin.clear();
+      cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      cout << "\nPress Enter to continue...";
+      cin.get();
+      system("clear");
+      continue;
+    }
+    break;
+  }
 
-  cout << "\nChoose a search algorithm for word frequencies:" << endl;
-  cout << "\t1. Linear Search\n\t2. Binary Search\n\t3. Jump Search";
-  cout << "\nSearch Algorithm: ";
   int searchChoice;
-  cin >> searchChoice;
+  while (true) {
+    system("clear");
+    cout << "\nChoose a search algorithm for word frequencies:" << endl;
+    cout << "\t1. Linear Search\n\t2. Binary Search\n\t3. Jump Search";
+    cout << "\nSearch Algorithm: ";
+    cin >> searchChoice;
+    if (!searchChoice || searchChoice < 1 || searchChoice > 3) {
+      cout << "Invalid choice, please try again." << endl;
+      cin.clear();
+      cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      cout << "\nPress Enter to continue...";
+      cin.get();
+      system("clear");
+      continue;
+    }
+    break;
+  }
 
   if (choice == 1) {
     if (searchChoice == 1) {
@@ -904,6 +1021,10 @@ void filterByCategoryAndPayment(int choice,
       bubblesort::bubbleSortByCategory(transactionList);
       jumpSearch::searchMenu(transactionList, catChoice, paymentChoice);
     }
+    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    cout << "\nPress Enter to continue...";
+    cin.get();
+    system("clear");
   } else if (choice == 2) {
     if (searchChoice == 1) {
       linearSearch(catChoice, paymentChoice, transCount, transArray);
@@ -913,32 +1034,77 @@ void filterByCategoryAndPayment(int choice,
       bubblesort::bubbleSortByCategory(transArray, transCount);
       jumpSearch::searchMenu(transArray, transCount, catChoice, paymentChoice);
     }
+    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    cout << "\nPress Enter to continue...";
+    cin.get();
+    system("clear");
   } else {
     cout << "\nInvalid mode choice" << endl;
+    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    cout << "\nPress Enter to continue...";
+    cin.get();
+    system("clear");
   }
 }
 
 void checkNegativeReviews(int choice, LinkList<reviews> &reviewList,
                           reviews *reviewArray, int reviewCount) {
-
-  cout << "Choose sorting algorithm for word frequencies:" << endl;
-  cout << "1. Bubble Sort\n2. Insertion Sort\n3. Radix Sort" << endl;
-  cout << "\nSorting Algorithm: ";
   int sortChoice;
-  cin >> sortChoice;
+  while (true) {
+    system("clear");
+    cout << "Choose sorting algorithm for word frequencies:" << endl;
+    cout << "1. Bubble Sort\n2. Insertion Sort\n3. Radix Sort" << endl;
+    cout << "\nSorting Algorithm: ";
+    cin >> sortChoice;
+    if (!sortChoice || sortChoice < 1 || sortChoice > 3) {
+      cout << "Invalid choice, please try again." << endl;
+      cin.clear();
+      cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      cout << "\nPress Enter to continue...";
+      cin.get();
+      system("clear");
+      continue;
+    }
+    break;
+  }
 
-  cout << "\nChoose a search algorithm for word frequencies:" << endl;
-  cout << "\t1. Linear Search\n\t2. Binary Search\n\t3. Jump Search";
-  cout << "\nSearch Algorithm: ";
   int searchChoice;
-  cin >> searchChoice;
+  while (true) {
+    system("clear");
+    cout << "\nChoose a search algorithm for word frequencies:" << endl;
+    cout << "\t1. Linear Search\n\t2. Binary Search\n\t3. Jump Search";
+    cout << "\nSearch Algorithm: ";
+    cin >> searchChoice;
+    if (!searchChoice || searchChoice < 1 || searchChoice > 3) {
+      cout << "Invalid choice, please try again." << endl;
+      cin.clear();
+      cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      cout << "\nPress Enter to continue...";
+      cin.get();
+      system("clear");
+      continue;
+    }
+    break;
+  }
 
   if (choice == 1) {
     processOneStarReviews(reviewList, sortChoice, searchChoice);
+    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    cout << "\nPress Enter to continue...";
+    cin.get();
+    system("clear");
   } else if (choice == 2) {
     processOneStarReviews(reviewArray, reviewCount, sortChoice, searchChoice);
+    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    cout << "\nPress Enter to continue...";
+    cin.get();
+    system("clear");
   } else {
     cout << "Invalid mode choice" << endl;
+    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    cout << "\nPress Enter to continue...";
+    cin.get();
+    system("clear");
   }
 }
 
