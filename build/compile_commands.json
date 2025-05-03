@@ -37,12 +37,6 @@
 },
 {
   "directory": "C:/Users/Albert Leonardus/OneDrive/Dokumen/GitHub/dsaAssignment/build",
-  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -I\"C:/Users/Albert Leonardus/OneDrive/Dokumen/GitHub/dsaAssignment/include\" -g -std=gnu++17 -o CMakeFiles\\dsaAssignment_lib.dir\\src\\oneStarReview.cpp.obj -c \"C:\\Users\\Albert Leonardus\\OneDrive\\Dokumen\\GitHub\\dsaAssignment\\src\\oneStarReview.cpp\"",
-  "file": "C:\\Users\\Albert Leonardus\\OneDrive\\Dokumen\\GitHub\\dsaAssignment\\src\\oneStarReview.cpp",
-  "output": "CMakeFiles\\dsaAssignment_lib.dir\\src\\oneStarReview.cpp.obj"
-},
-{
-  "directory": "C:/Users/Albert Leonardus/OneDrive/Dokumen/GitHub/dsaAssignment/build",
   "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -I\"C:/Users/Albert Leonardus/OneDrive/Dokumen/GitHub/dsaAssignment/include\" -g -std=gnu++17 -o CMakeFiles\\dsaAssignment_lib.dir\\src\\insertionSort.cpp.obj -c \"C:\\Users\\Albert Leonardus\\OneDrive\\Dokumen\\GitHub\\dsaAssignment\\src\\insertionSort.cpp\"",
   "file": "C:\\Users\\Albert Leonardus\\OneDrive\\Dokumen\\GitHub\\dsaAssignment\\src\\insertionSort.cpp",
   "output": "CMakeFiles\\dsaAssignment_lib.dir\\src\\insertionSort.cpp.obj"

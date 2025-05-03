@@ -89,28 +89,46 @@ int binarySearch::calculateBadReviewsCommonWords(reviews *reviewArray, int size)
     int left = 0;
     int right = size - 1;
     int count = 0;
-
-    // Perform binary search to find the first occurrence
+    
+    // Find the first occurrence
+    int first = -1;
     while (left <= right) {
         int mid = left + (right - left) / 2;
         if (reviewArray[mid].rating == 1) {
-            // Count all occurrences of the matching element
-            int temp = mid;
-            while (temp >= 0 && reviewArray[temp].rating == 1) {
-                count++;
-                temp--;
-            }
-            temp = mid + 1;
-            while (temp < size && reviewArray[temp].rating == 1) {
-                count++;
-                temp++;
-            }
-            break;
+            first = mid;
+            right = mid - 1; // Continue searching in the left half
         } else if (reviewArray[mid].rating < 1) {
             left = mid + 1;
         } else {
             right = mid - 1;
         }
+    }
+
+    // Find the last occurrence
+    int last = -1;
+    left = 0;
+    right = size - 1;
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+        if (reviewArray[mid].rating == 1) {
+            last = mid;
+            left = mid + 1; // Continue searching in the right half
+        } else if (reviewArray[mid].rating < 1) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+
+    // Calculate count
+    if (first != -1 && last != -1) {
+        count = last - first + 1;
+    }
+
+    // Handle case where no matches are found
+    if (count == 0) {
+        cout << "No matching reviews found with rating 1." << endl;
+        return 0;
     }
     return count; // Return the count of bad reviews
 }

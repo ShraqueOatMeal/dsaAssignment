@@ -12,6 +12,8 @@
 // Forward declaration of insertSorted
 void insertSorted(WordFrequency arr[], int &wordCount, const std::string &word);
 
+int binarysearch(WordFrequency arr[], int wordCount, const string &target);
+
 using namespace std;
 
 int jumpSearch(WordFrequency arr[], int wordCount, const std::string &target);
@@ -157,6 +159,7 @@ void processOneStarReviews(LinkList<reviews> &reviewList, int sortChoice,
             wordNode = wordNode->next;
           }
         } else if (searchChoice == 2) {
+          // insertionSort::insertionsort(reviewList);
           binarySearch::calculateBadReviewsCommonWords(reviewList, 1);
         } else if (searchChoice == 3) {
           int stepSize = sqrt(wordCount);
@@ -367,8 +370,45 @@ void processOneStarReviews(reviews *reviewArray, int reviewCount,
             }
           }
         } else if (searchChoice == 2) {
-          insertionSort::insertionsort(reviewArray, reviewCount);
-          binarySearch::calculateBadReviewsCommonWords(reviewArray, reviewCount);
+          int left = 0
+          int right = wordCount - 1;
+          int insertPos = 0;
+          bool found = false;
+
+          // Binary search to find word or insertion position
+          while (left <= right) {
+              int mid = left + (right - left) / 2;
+              if (wordFrequencyArray[mid].word == word) {
+                  // Word found, increment count
+                  wordFrequencyArray[mid].count++;
+                  found = true;
+                  break;
+              } else if (wordFrequencyArray[mid].word < word) {
+                  left = mid + 1;
+              } else {
+                  right = mid - 1;
+              }
+          }
+
+          // If not found, insert at position `left` (which is the correct sorted position)
+          if (!found) {
+              if (wordCount >= MAX_WORDS) {
+                  cout << "Word array is full. Cannot insert more words." << endl;
+                  return;
+              }
+
+              // Shift elements to the right to make space
+              for (int j = wordCount; j > left; j--) {
+                  wordFrequencyArray[j] = wordFrequencyArray[j - 1];
+              }
+
+              // Insert the new word
+              wordFrequencyArray[left].word = word;
+              wordFrequencyArray[left].count = 1;
+              wordCount++;
+          }
+
+
         } else if (searchChoice == 3) {
           int pos = jumpSearch(wordFrequencyArray, wordCount, word);
           if (pos != -1) {
@@ -450,4 +490,48 @@ void insertSorted(WordFrequency arr[], int &wordCount, const string &word) {
   arr[i + 1].word = word;
   arr[i + 1].count = 1;
   wordCount++;
+}
+
+int binarysearch(WordFrequency arr[], int wordCount, const string &target) {
+  const int MAX_WORDS = 10000; 
+  WordFrequency wordFrequencyArray[MAX_WORDS];
+  int left = 0, right = wordCount - 1;
+  int insertPos = 0;
+  bool found = false;
+  
+  // Binary search to find word or insertion position
+  while (left <= right) {
+    int mid = left + (right - left) / 2;
+    if (wordFrequencyArray[mid].word == target) {
+      // Word found, increment count
+      wordFrequencyArray[mid].count++;
+      found = true;
+      break;
+    } else if (wordFrequencyArray[mid].word < target) {
+      left = mid + 1;
+    } else {
+      right = mid - 1;
+    }
+  }
+  
+  // If not found, insert at position `left` (which is the correct sorted position)
+  if (!found) {
+    if (wordCount >= MAX_WORDS) {
+      cout << "Word array is full. Cannot insert more words." << endl;
+      return -1;
+    }
+    // Shift elements to the right to make space
+    for (int j = wordCount; j > left; j--) {
+      wordFrequencyArray[j] = wordFrequencyArray[j - 1];
+    }
+    // Insert the new word
+    wordFrequencyArray[left].word = target;
+    wordFrequencyArray[left].count = 1;
+    wordCount++;
+  }
+          
+
+  insertSorted(arr, wordCount, target);
+  arr[wordCount - 1].count = 1; 
+  return wordCount - 1; // Return the index of the newly inserted word
 }
