@@ -1,9 +1,9 @@
 #include "JoinedData.h"
 #include "LinkList.h"
 #include "WordFrequency.h"
+#include "binarySearch.hpp"
 #include "bubblesort.h"
 #include "insertionSort.hpp"
-#include "binarySearch.hpp"
 // #include "jumpsearch.h"
 #include "radixSort.h"
 #include "reviews.h"
@@ -37,8 +37,10 @@ void linearSearch(int catChoice, int paymentChoice, int size,
 void linearSearch(int catChoice, int paymentChoice, int size,
                   LinkList<transactions> &transactionList);
 
-void binarysearch(transactions *transArray, int size, int catChoice, int paymentChoice);
-void binarysearch(LinkList<transactions> &transactionList, int size, int catChoice, int paymentChoice);
+void binarysearch(transactions *transArray, int size, int catChoice,
+                  int paymentChoice);
+void binarysearch(LinkList<transactions> &transactionList, int size,
+                  int catChoice, int paymentChoice);
 
 int rowsNum(ifstream &file);
 
@@ -89,20 +91,19 @@ void checkNegativeReviews(int choice, LinkList<reviews> &reviewList,
                           reviews *reviewArray,
                           int reviewCount); // discard //ltr
 
-
 // System will run in here
 int main(int argc, char *argv[]) {
   // Data cleaning (unchanged)
-  ifstream uncleanedTransactionFile("../data/transactions.csv");
-  ifstream uncleanedReviewFile("../data/reviews.csv");
-  cleanData(uncleanedTransactionFile, "../data/transactions_cleaned.csv");
-  cleanData(uncleanedReviewFile, "../data/reviews_cleaned.csv");
+  ifstream uncleanedTransactionFile("../../data/transactions.csv");
+  ifstream uncleanedReviewFile("../../data/reviews.csv");
+  cleanData(uncleanedTransactionFile, "../../data/transactions_cleaned.csv");
+  cleanData(uncleanedReviewFile, "../../data/reviews_cleaned.csv");
   uncleanedTransactionFile.close();
   uncleanedReviewFile.close();
 
   // Open cleaned files
-  ifstream transactionFile("../data/transactions_cleaned.csv");
-  ifstream reviewFile("../data/reviews_cleaned.csv");
+  ifstream transactionFile("../../data/transactions_cleaned.csv");
+  ifstream reviewFile("../../data/reviews_cleaned.csv");
 
   // Count rows
   int transCount = rowsNum(transactionFile);
@@ -935,131 +936,136 @@ void checkNegativeReviews(int choice, LinkList<reviews> &reviewList,
   }
 }
 
-// Using Binary Search to calculate the percentage of purchases by payment method
-void binarysearch(transactions *transArray, int size, int catChoice, int paymentChoice){
+// Using Binary Search to calculate the percentage of purchases by payment
+// method
+void binarysearch(transactions *transArray, int size, int catChoice,
+                  int paymentChoice) {
   string selectedCat;
   string selectedPaymentMethod;
-  
+
   switch (catChoice) {
-    case Automotive:
-        selectedCat = "Automotive";
+  case Automotive:
+    selectedCat = "Automotive";
     break;
-    case Books:
-        selectedCat = "Books";
-        break;
-    case Groceries:
-        selectedCat = "Groceries";
-        break;
-    case Sports:
-        selectedCat = "Sports";
-        break;
-    case Toys:
-        selectedCat = "Toys";
-        break;
-    case Beauty:
-        selectedCat = "Beauty";
-        break;
-    case Furniture:
-        selectedCat = "Furniture";
-        break;
-    case Electronics:
-        selectedCat = "Electronics";
-        break;
-    case Fashion:
-        selectedCat = "Fashion";
-        break;
-    case HomeAppliances:
-        selectedCat = "Home Appliances";
-        break;
-    default:
-        cout << "Unknown Category Choice" << endl;
-        break;
-    }
-
-    switch (paymentChoice) {
-    case BankTransfer:
-        selectedPaymentMethod = "Bank Transfer";
-        break;
-    case PayPal:
-        selectedPaymentMethod = "PayPal";
-        break;
-    case DebitCard:
-        selectedPaymentMethod = "Debit Card";
-        break;
-    case COD:
-        selectedPaymentMethod = "Cash on Delivery";
-        break;
-    case CreditCard:
-        selectedPaymentMethod = "Credit Card";
-        break;
-    default:
-        cout << "Unknown Payment Method Choice" << endl;
-        break;
-    }
-    insertionSort::Category_PaymentMethod(transArray, size);
-    binarySearch::calculatedPurchasesPaymentMethodPercentage(transArray, size, selectedCat, selectedPaymentMethod);
-}
-
-void binarysearch(LinkList<transactions> &transactionList, int size, int catChoice, int paymentChoice){
-  string selectedCat;
-  string selectedPaymentMethod;
-  
-  switch (catChoice) {
-    case Automotive:
-        selectedCat = "Automotive";
+  case Books:
+    selectedCat = "Books";
     break;
-    case Books:
-        selectedCat = "Books";
-        break;
-    case Groceries:
-        selectedCat = "Groceries";
-        break;
-    case Sports:
-        selectedCat = "Sports";
-        break;
-    case Toys:
-        selectedCat = "Toys";
-        break;
-    case Beauty:
-        selectedCat = "Beauty";
-        break;
-    case Furniture:
-        selectedCat = "Furniture";
-        break;
-    case Electronics:
-        selectedCat = "Electronics";
-        break;
-    case Fashion:
-        selectedCat = "Fashion";
-        break;
-    case HomeAppliances:
-        selectedCat = "Home Appliances";
-        break;
-    default:
-        cout << "Unknown Category Choice" << endl;
-        break;
-    }
-
-switch (paymentChoice) {
-  case BankTransfer:
-      selectedPaymentMethod = "Bank Transfer";
-      break;
-  case PayPal:
-      selectedPaymentMethod = "PayPal";
-      break;
-  case DebitCard:
-      selectedPaymentMethod = "Debit Card";
-      break;
-  case COD:
-      selectedPaymentMethod = "Cash on Delivery";
-      break;
-  case CreditCard:
-      selectedPaymentMethod = "Credit Card";
-      break;
+  case Groceries:
+    selectedCat = "Groceries";
+    break;
+  case Sports:
+    selectedCat = "Sports";
+    break;
+  case Toys:
+    selectedCat = "Toys";
+    break;
+  case Beauty:
+    selectedCat = "Beauty";
+    break;
+  case Furniture:
+    selectedCat = "Furniture";
+    break;
+  case Electronics:
+    selectedCat = "Electronics";
+    break;
+  case Fashion:
+    selectedCat = "Fashion";
+    break;
+  case HomeAppliances:
+    selectedCat = "Home Appliances";
+    break;
   default:
-      cout << "Unknown Payment Method Choice" << endl;
-      break;
+    cout << "Unknown Category Choice" << endl;
+    break;
   }
 
-binarySearch::calculatedPurchasesPaymentMethodPercentage(transactionList, selectedCat, selectedPaymentMethod);
+  switch (paymentChoice) {
+  case BankTransfer:
+    selectedPaymentMethod = "Bank Transfer";
+    break;
+  case PayPal:
+    selectedPaymentMethod = "PayPal";
+    break;
+  case DebitCard:
+    selectedPaymentMethod = "Debit Card";
+    break;
+  case COD:
+    selectedPaymentMethod = "Cash on Delivery";
+    break;
+  case CreditCard:
+    selectedPaymentMethod = "Credit Card";
+    break;
+  default:
+    cout << "Unknown Payment Method Choice" << endl;
+    break;
+  }
+  insertionSort::Category_PaymentMethod(transArray, size);
+  binarySearch::calculatedPurchasesPaymentMethodPercentage(
+      transArray, size, selectedCat, selectedPaymentMethod);
+}
+
+void binarysearch(LinkList<transactions> &transactionList, int size,
+                  int catChoice, int paymentChoice) {
+  string selectedCat;
+  string selectedPaymentMethod;
+
+  switch (catChoice) {
+  case Automotive:
+    selectedCat = "Automotive";
+    break;
+  case Books:
+    selectedCat = "Books";
+    break;
+  case Groceries:
+    selectedCat = "Groceries";
+    break;
+  case Sports:
+    selectedCat = "Sports";
+    break;
+  case Toys:
+    selectedCat = "Toys";
+    break;
+  case Beauty:
+    selectedCat = "Beauty";
+    break;
+  case Furniture:
+    selectedCat = "Furniture";
+    break;
+  case Electronics:
+    selectedCat = "Electronics";
+    break;
+  case Fashion:
+    selectedCat = "Fashion";
+    break;
+  case HomeAppliances:
+    selectedCat = "Home Appliances";
+    break;
+  default:
+    cout << "Unknown Category Choice" << endl;
+    break;
+  }
+
+  switch (paymentChoice) {
+  case BankTransfer:
+    selectedPaymentMethod = "Bank Transfer";
+    break;
+  case PayPal:
+    selectedPaymentMethod = "PayPal";
+    break;
+  case DebitCard:
+    selectedPaymentMethod = "Debit Card";
+    break;
+  case COD:
+    selectedPaymentMethod = "Cash on Delivery";
+    break;
+  case CreditCard:
+    selectedPaymentMethod = "Credit Card";
+    break;
+  default:
+    cout << "Unknown Payment Method Choice" << endl;
+    break;
+  }
+
+  binarySearch::calculatedPurchasesPaymentMethodPercentage(
+      transactionList, selectedCat, selectedPaymentMethod);
 }
