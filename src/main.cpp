@@ -94,16 +94,16 @@ void checkNegativeReviews(int choice, LinkList<reviews> &reviewList,
 // System will run in here
 int main(int argc, char *argv[]) {
   // Data cleaning (unchanged)
-  ifstream uncleanedTransactionFile("../../data/transactions.csv");
-  ifstream uncleanedReviewFile("../../data/reviews.csv");
-  cleanData(uncleanedTransactionFile, "../../data/transactions_cleaned.csv");
-  cleanData(uncleanedReviewFile, "../../data/reviews_cleaned.csv");
+  ifstream uncleanedTransactionFile("../data/transactions.csv");
+  ifstream uncleanedReviewFile("../data/reviews.csv");
+  cleanData(uncleanedTransactionFile, "../data/transactions_cleaned.csv");
+  cleanData(uncleanedReviewFile, "../data/reviews_cleaned.csv");
   uncleanedTransactionFile.close();
   uncleanedReviewFile.close();
 
   // Open cleaned files
-  ifstream transactionFile("../../data/transactions_cleaned.csv");
-  ifstream reviewFile("../../data/reviews_cleaned.csv");
+  ifstream transactionFile("../data/transactions_cleaned.csv");
+  ifstream reviewFile("../data/reviews_cleaned.csv");
 
   // Count rows
   int transCount = rowsNum(transactionFile);
@@ -901,6 +901,7 @@ void filterByCategoryAndPayment(int choice,
     } else if (searchChoice == 2) {
       binarysearch(transactionList, transCount, catChoice, paymentChoice);
     } else if (searchChoice == 3) {
+      bubblesort::bubbleSortByCategory(transactionList);
       jumpSearch::searchMenu(transactionList, catChoice, paymentChoice);
     }
   } else if (choice == 2) {
@@ -909,6 +910,7 @@ void filterByCategoryAndPayment(int choice,
     } else if (searchChoice == 2) {
       binarysearch(transArray, transCount, catChoice, paymentChoice);
     } else if (searchChoice == 3) {
+      bubblesort::bubbleSortByCategory(transArray, transCount);
       jumpSearch::searchMenu(transArray, transCount, catChoice, paymentChoice);
     }
   } else {

@@ -10,6 +10,9 @@
 #include <sstream>
 #include <string>
 
+// Forward declaration of insertSorted
+void insertSorted(WordFrequency arr[], int &wordCount, const std::string &word);
+
 using namespace std;
 
 int jumpSearch(WordFrequency arr[], int wordCount, const std::string &target);
@@ -377,9 +380,8 @@ void processOneStarReviews(reviews *reviewArray, int reviewCount,
 
         // Add new word if not found and space is available
         if (!found && wordCount < MAX_WORDS) {
-          wordFrequencyArray[wordCount].word = word;
-          wordFrequencyArray[wordCount].count = 1;
-          wordCount++;
+          insertSorted(wordFrequencyArray, wordCount, word);
+
         }
       }
     }
@@ -450,3 +452,7 @@ void insertSorted(WordFrequency arr[], int &wordCount, const string &word) {
   arr[i + 1].count = 1;
   wordCount++;
 }
+
+
+
+
