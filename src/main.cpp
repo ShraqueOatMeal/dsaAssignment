@@ -1072,6 +1072,7 @@ void binarysearch(LinkList<transactions> &transactionList, int size,
     break;
   }
 
-  binarySearch::calculatedPurchasesPaymentMethodPercentage(
+  insertionSort::Category_PaymentMethod(&transactionList);
+  binarySearch::calculatePurchasesPaymentMethodPercentage(
       transactionList, selectedCat, selectedPaymentMethod);
 }

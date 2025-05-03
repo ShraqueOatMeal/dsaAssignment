@@ -430,6 +430,7 @@ CMakeFiles/dsaAssignment_lib.dir/src/WordFrequency.cpp.o: /home/loh-yen-kuan/Cod
 CMakeFiles/dsaAssignment_lib.dir/src/binarySearch.cpp.o: /home/loh-yen-kuan/Coding/dsaAssignment/src/binarySearch.cpp \
   /home/loh-yen-kuan/Coding/dsaAssignment/include/JoinedData.h \
   /home/loh-yen-kuan/Coding/dsaAssignment/include/LinkList.h \
+  /home/loh-yen-kuan/Coding/dsaAssignment/include/WordFrequency.h \
   /home/loh-yen-kuan/Coding/dsaAssignment/include/binarySearch.hpp \
   /home/loh-yen-kuan/Coding/dsaAssignment/include/reviews.h \
   /home/loh-yen-kuan/Coding/dsaAssignment/include/transactions.h \

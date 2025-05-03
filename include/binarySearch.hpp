@@ -1,5 +1,6 @@
 #pragma once
 #include "JoinedData.h"
+#include "WordFrequency.h" 
 using namespace std;
 
 
@@ -11,14 +12,12 @@ public:
     // Linked List
     static Node<transactions> *findMiddle(Node<transactions> *head, Node<transactions>* end);
     static Node<transactions> *binarySearchLinkedList(Node<transactions> *start, Node<transactions> *end, const string &selectedCat, const string &selectedPaymentMethod);
-    static void calculatedPurchasesPaymentMethodPercentage(LinkList<transactions>& transactionList, const string& selectedCat, const string& selectedPaymentMethod);
+    static void calculatePurchasesPaymentMethodPercentage(LinkList<transactions> &transactionList, const string &selectedCat, const string &selectedPaymentMethod);
     
-    static Node<reviews> *findMiddle(Node<reviews> *head, Node<reviews>* end);
-    static Node<reviews>* binarySearchLinkedList(Node<reviews>* start, Node<reviews>* end, int rating);
-    static int calculateBadReviewsCommonWords(LinkList<reviews>& reviewList, int rating);
+    static Node<WordFrequency> *findMiddle(Node<WordFrequency> *head, Node<WordFrequency>* end);
+    static Node<WordFrequency>* binarySearchLinkedList(Node<WordFrequency>* start, Node<WordFrequency>* end, const string& word);
+    static void calculateBadReviewsCommonWords(LinkList<WordFrequency> &wordList, const string &word);
     
     // Array
     static int calculatedPurchasesPaymentMethodPercentage(transactions *transArray, int size, const string &selectedCat, const string &selectedPaymentMethod);
-    static int calculateBadReviewsCommonWords(reviews *reviewArray, int size);
-    
 };
