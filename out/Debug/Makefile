@@ -190,6 +190,30 @@ src/WordFrequency.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/WordFrequency.cpp.s
 .PHONY : src/WordFrequency.cpp.s
 
+src/binarySearch.o: src/binarySearch.cpp.o
+.PHONY : src/binarySearch.o
+
+# target to build an object file
+src/binarySearch.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/binarySearch.cpp.o
+.PHONY : src/binarySearch.cpp.o
+
+src/binarySearch.i: src/binarySearch.cpp.i
+.PHONY : src/binarySearch.i
+
+# target to preprocess a source file
+src/binarySearch.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/binarySearch.cpp.i
+.PHONY : src/binarySearch.cpp.i
+
+src/binarySearch.s: src/binarySearch.cpp.s
+.PHONY : src/binarySearch.s
+
+# target to generate assembly for a file
+src/binarySearch.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dsaAssignment_lib.dir/build.make CMakeFiles/dsaAssignment_lib.dir/src/binarySearch.cpp.s
+.PHONY : src/binarySearch.cpp.s
+
 src/bubblesort.o: src/bubblesort.cpp.o
 .PHONY : src/bubblesort.o
 
@@ -326,6 +350,9 @@ help:
 	@echo "... src/WordFrequency.o"
 	@echo "... src/WordFrequency.i"
 	@echo "... src/WordFrequency.s"
+	@echo "... src/binarySearch.o"
+	@echo "... src/binarySearch.i"
+	@echo "... src/binarySearch.s"
 	@echo "... src/bubblesort.o"
 	@echo "... src/bubblesort.i"
 	@echo "... src/bubblesort.s"
