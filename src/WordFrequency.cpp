@@ -1,6 +1,8 @@
 #include "WordFrequency.h"
 #include "LinkList.h"
-// #include "insertionSort.hpp"
+#include "insertionSort.hpp"
+#include "binarySearch.hpp"
+// #include "oneStarReview.h"
 #include "reviews.h"
 #include <chrono>
 #include <cmath>
@@ -153,7 +155,7 @@ void processOneStarReviews(LinkList<reviews> &reviewList, int sortChoice,
             wordNode = wordNode->next;
           }
         } else if (searchChoice == 2) {
-          // TODO: binary search
+          binarySearch::calculateBadReviewsCommonWords(reviewList, 1);
         } else if (searchChoice == 3) {
           int stepSize = sqrt(wordCount);
           int steps = 0;
@@ -234,7 +236,7 @@ void processOneStarReviews(LinkList<reviews> &reviewList, int sortChoice,
       } while (swapped);
     }
   } else if (sortChoice == 2) {
-    // TODO: insertion sort
+    insertionSort::insertionsort(&wordFrequencyList);
   } else if (sortChoice == 3) {
     radixsort(&wordFrequencyList, wordCount);
   }
@@ -363,7 +365,7 @@ void processOneStarReviews(reviews *reviewArray, int reviewCount,
             }
           }
         } else if (searchChoice == 2) {
-          // TODO: binary search
+          binarySearch::calculateBadReviewsCommonWords(reviewArray, reviewCount);
         } else if (searchChoice == 3) {
           int pos = jumpSearch(wordFrequencyArray, wordCount, word);
           if (pos != -1) {
@@ -396,8 +398,7 @@ void processOneStarReviews(reviews *reviewArray, int reviewCount,
     }
   }
   if (sortChoice == 2) {
-    // TODO: insertion sort
-
+    insertionSort::insertionsort(wordFrequencyArray, wordCount);
   } else if (sortChoice == 3) {
     radixsort(wordFrequencyArray, wordCount);    // Sorts in ascending order
     reverseArray(wordFrequencyArray, wordCount); // Reverses to descending order

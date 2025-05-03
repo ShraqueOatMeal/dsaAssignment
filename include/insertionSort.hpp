@@ -4,6 +4,7 @@
 #include "LinkList.h"
 #include "reviews.h"
 #include "transactions.h"
+#include "WordFrequency.h"
 #include <string>
 using namespace std;
 
@@ -28,11 +29,16 @@ public:
   static void insertionsort(LinkList<transactions> *transactionList);
   static void insertionsort(LinkList<reviews> *reviewsList);
   static void insertionsort(LinkList<mergedData> *JoinedDataList);
+  static void insertionsort(LinkList<WordFrequency> *wordList);
 
+  
   // Sorting for array
   static void insertionsort(transactions *transArray, int size);
   static void insertionsort(reviews *reviewArray, int size);
   static void insertionsort(mergedData *JoinedData, int size);
+  static void insertionsort(WordFrequency *wordArray, int size);
+  static void Category_PaymentMethod(transactions *transArray, int size);
+  
 
   // Helper functions
   static bool compareDates(const string &date1, const string &date2);

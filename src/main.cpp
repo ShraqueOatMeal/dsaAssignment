@@ -1,6 +1,7 @@
 #include "JoinedData.h"
 #include "LinkList.h"
 #include "WordFrequency.h"
+#include "binarySearch.hpp"
 #include "bubblesort.h"
 #include "insertionSort.hpp"
 #include "jumpsearch.h"
@@ -35,6 +36,11 @@ void linearSearch(int catChoice, int paymentChoice, int size,
 
 void linearSearch(int catChoice, int paymentChoice, int size,
                   LinkList<transactions> &transactionList);
+
+void binarysearch(transactions *transArray, int size, int catChoice,
+                  int paymentChoice);
+void binarysearch(LinkList<transactions> &transactionList, int size,
+                  int catChoice, int paymentChoice);
 
 int rowsNum(ifstream &file);
 
@@ -84,6 +90,7 @@ void filterByCategoryAndPayment(int choice,
 void checkNegativeReviews(int choice, LinkList<reviews> &reviewList,
                           reviews *reviewArray,
                           int reviewCount); // discard //ltr
+
 // System will run in here
 int main(int argc, char *argv[]) {
   // Data cleaning (unchanged)
@@ -800,7 +807,7 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
         bubblesort::displaySortedByDate(joinedArray, joinedSize); // Adjusting
         break;
       case 2:
-        // quickSort::displaySortedByDate(joinedArray);
+        insertionSort::insertionsort(joinedArray, joinedSize);
         break;
       case 3: {
         auto start = chrono::high_resolution_clock::now();
@@ -836,7 +843,7 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
         bubblesort::displaySortedByDate(joinedArray, joinedSize); // Adjusting
         break;
       case 2:
-        // quickSort::displaySortedByDate(joinedArray);
+        insertionSort::insertionsort(joinedArray, joinedSize);
         break;
       case 3: {
         auto start = chrono::high_resolution_clock::now();
@@ -892,7 +899,7 @@ void filterByCategoryAndPayment(int choice,
     if (searchChoice == 1) {
       linearSearch(catChoice, paymentChoice, transCount, transactionList);
     } else if (searchChoice == 2) {
-      // TODO: binary search
+      binarysearch(transactionList, transCount, catChoice, paymentChoice);
     } else if (searchChoice == 3) {
       jumpSearch::searchMenu(transactionList, catChoice, paymentChoice);
     }
@@ -900,7 +907,7 @@ void filterByCategoryAndPayment(int choice,
     if (searchChoice == 1) {
       linearSearch(catChoice, paymentChoice, transCount, transArray);
     } else if (searchChoice == 2) {
-      // TODO: binary search
+      binarysearch(transArray, transCount, catChoice, paymentChoice);
     } else if (searchChoice == 3) {
       jumpSearch::searchMenu(transArray, transCount, catChoice, paymentChoice);
     }
@@ -931,4 +938,138 @@ void checkNegativeReviews(int choice, LinkList<reviews> &reviewList,
   } else {
     cout << "Invalid mode choice" << endl;
   }
+}
+
+// Using Binary Search to calculate the percentage of purchases by payment
+// method
+void binarysearch(transactions *transArray, int size, int catChoice,
+                  int paymentChoice) {
+  string selectedCat;
+  string selectedPaymentMethod;
+
+  switch (catChoice) {
+  case Automotive:
+    selectedCat = "Automotive";
+    break;
+  case Books:
+    selectedCat = "Books";
+    break;
+  case Groceries:
+    selectedCat = "Groceries";
+    break;
+  case Sports:
+    selectedCat = "Sports";
+    break;
+  case Toys:
+    selectedCat = "Toys";
+    break;
+  case Beauty:
+    selectedCat = "Beauty";
+    break;
+  case Furniture:
+    selectedCat = "Furniture";
+    break;
+  case Electronics:
+    selectedCat = "Electronics";
+    break;
+  case Fashion:
+    selectedCat = "Fashion";
+    break;
+  case HomeAppliances:
+    selectedCat = "Home Appliances";
+    break;
+  default:
+    cout << "Unknown Category Choice" << endl;
+    break;
+  }
+
+  switch (paymentChoice) {
+  case BankTransfer:
+    selectedPaymentMethod = "Bank Transfer";
+    break;
+  case PayPal:
+    selectedPaymentMethod = "PayPal";
+    break;
+  case DebitCard:
+    selectedPaymentMethod = "Debit Card";
+    break;
+  case COD:
+    selectedPaymentMethod = "Cash on Delivery";
+    break;
+  case CreditCard:
+    selectedPaymentMethod = "Credit Card";
+    break;
+  default:
+    cout << "Unknown Payment Method Choice" << endl;
+    break;
+  }
+  insertionSort::Category_PaymentMethod(transArray, size);
+  binarySearch::calculatedPurchasesPaymentMethodPercentage(
+      transArray, size, selectedCat, selectedPaymentMethod);
+}
+
+void binarysearch(LinkList<transactions> &transactionList, int size,
+                  int catChoice, int paymentChoice) {
+  string selectedCat;
+  string selectedPaymentMethod;
+
+  switch (catChoice) {
+  case Automotive:
+    selectedCat = "Automotive";
+    break;
+  case Books:
+    selectedCat = "Books";
+    break;
+  case Groceries:
+    selectedCat = "Groceries";
+    break;
+  case Sports:
+    selectedCat = "Sports";
+    break;
+  case Toys:
+    selectedCat = "Toys";
+    break;
+  case Beauty:
+    selectedCat = "Beauty";
+    break;
+  case Furniture:
+    selectedCat = "Furniture";
+    break;
+  case Electronics:
+    selectedCat = "Electronics";
+    break;
+  case Fashion:
+    selectedCat = "Fashion";
+    break;
+  case HomeAppliances:
+    selectedCat = "Home Appliances";
+    break;
+  default:
+    cout << "Unknown Category Choice" << endl;
+    break;
+  }
+
+  switch (paymentChoice) {
+  case BankTransfer:
+    selectedPaymentMethod = "Bank Transfer";
+    break;
+  case PayPal:
+    selectedPaymentMethod = "PayPal";
+    break;
+  case DebitCard:
+    selectedPaymentMethod = "Debit Card";
+    break;
+  case COD:
+    selectedPaymentMethod = "Cash on Delivery";
+    break;
+  case CreditCard:
+    selectedPaymentMethod = "Credit Card";
+    break;
+  default:
+    cout << "Unknown Payment Method Choice" << endl;
+    break;
+  }
+
+  binarySearch::calculatedPurchasesPaymentMethodPercentage(
+      transactionList, selectedCat, selectedPaymentMethod);
 }

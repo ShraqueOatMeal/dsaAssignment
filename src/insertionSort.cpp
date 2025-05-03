@@ -28,14 +28,12 @@ void insertionSort::insertionsort(transactions *transArray, int size) {
   for (int i = 1; i < size; i++) {
     transactions key = transArray[i];
     int j = i - 1;
-
-    // Move elements of transArray[0..i-1], that are greater than key,
-    // to one position ahead of their current position
+    
     while (j >= 0 && compareDates(transArray[j].date, key.date)) {
       transArray[j + 1] = transArray[j];
       j = j - 1;
     }
-    transArray[j + 1] = key; // Place the key in its correct position
+    transArray[j + 1] = key; 
   }
 }
 
@@ -45,13 +43,11 @@ void insertionSort::insertionsort(reviews *reviewArray, int size) {
     reviews key = reviewArray[i];
     int j = i - 1;
 
-    // Move elements of reviewArray[0..i-1], that are greater than key,
-    // to one position ahead of their current position
     while (j >= 0 && reviewArray[j].rating > key.rating) {
       reviewArray[j + 1] = reviewArray[j];
       j = j - 1;
     }
-    reviewArray[j + 1] = key; // Place the key in its correct position
+    reviewArray[j + 1] = key; 
   }
 }
 
@@ -61,21 +57,51 @@ void insertionSort::insertionsort(mergedData *joinedDataArray, int size) {
     mergedData key = joinedDataArray[i];
     int j = i - 1;
 
-    // Move elements of joinedDataArray[0..i-1], that are greater than key,
-    // to one position ahead of their current position
     while (j >= 0 && compareDates(joinedDataArray[j].date, key.date)) {
       joinedDataArray[j + 1] = joinedDataArray[j];
       j = j - 1;
     }
-    joinedDataArray[j + 1] = key; // Place the key in its correct position
+    joinedDataArray[j + 1] = key; 
   }
 }
 
+// Insertion Sort for word frequency array
+void insertionSort::insertionsort(WordFrequency *wordArray, int size) {
+  for (int i = 1; i < size; i++) {
+      WordFrequency key = wordArray[i];
+      int j = i - 1;
+
+      // Sort by count (descending), then by rating (ascending)
+      while (j >= 0 && 
+        (wordArray[j].count < key.count || wordArray[j].count == key.count)) {
+          wordArray[j + 1] = wordArray[j];
+          j--;
+      }
+      wordArray[j + 1] = key;
+  }
+}
+
+// Insertion Sort for transactions array by category and payment method
+void insertionSort::Category_PaymentMethod(transactions *transArray, int size) {
+    for (int i = 1; i < size; i++) {
+        transactions key = transArray[i];
+        int j = i - 1;
+        
+        while (j >= 0 && 
+              (transArray[j].cat > key.cat || 
+              (transArray[j].cat == key.cat && transArray[j].paymentMethod > key.paymentMethod))) {
+            transArray[j + 1] = transArray[j];
+            j = j - 1;
+        }
+        transArray[j + 1] = key; 
+    }
+}
+
 // ==========================LINKED LIST==========================
+
 // Insertion Sort for linked list
 void insertionSort::insertionsort(LinkList<transactions> *transactionList) {
-  if (transactionList->getHead() == nullptr ||
-      transactionList->getHead()->next == nullptr) {
+  if (transactionList->getHead() == nullptr || transactionList->getHead()->next == nullptr) {
     // List is empty or has only one element, no sorting needed
     return;
   }
@@ -118,26 +144,6 @@ void insertionSort::insertionsort(LinkList<reviews> *reviewsList) {
   reviewsList->setHead(sorted);
 }
 
-Node<mergedData> *
-insertionSort::insertIntoSortedList(Node<mergedData> *sorted,
-                                    Node<mergedData> *newNode) {
-  if (!sorted || compareDates(newNode->data.date, sorted->data.date)) {
-    newNode->next = sorted;
-    return newNode;
-  }
-
-  Node<mergedData> *current = sorted;
-  while (current->next &&
-         !compareDates(newNode->data.date, current->next->data.date)) {
-    current = current->next;
-  }
-
-  newNode->next = current->next;
-  current->next = newNode;
-
-  return sorted;
-}
-
 // Inserting JoinedData into sorted linked list
 void insertionSort::insertionsort(LinkList<mergedData> *JoinedDataList) {
   if (JoinedDataList->getHead() == nullptr ||
@@ -161,10 +167,34 @@ void insertionSort::insertionsort(LinkList<mergedData> *JoinedDataList) {
   JoinedDataList->setHead(sorted);
 }
 
+// Insertion Sort for word frequency linked list
+void insertionSort::insertionsort(LinkList<WordFrequency> *wordList) {
+  if (!wordList || !wordList->getHead()) return;
+
+  Node<WordFrequency> *sorted = nullptr;
+  Node<WordFrequency> *current = wordList->getHead();
+
+  while (current != nullptr) {
+      Node<WordFrequency> *next = current->next;
+      if (!sorted || sorted->data.count <= current->data.count) {
+          current->next = sorted;
+          sorted = current;
+      } else {
+          Node<WordFrequency> *temp = sorted;
+          while (temp->next != nullptr && temp->next->data.count > current->data.count) {
+              temp = temp->next;
+          }
+          current->next = temp->next;
+          temp->next = current;
+      }
+      current = next;
+  }
+
+  wordList->setHead(sorted);
+}
+
 // Helper function to insert a node into a sorted singly linked list
-Node<transactions> *
-insertionSort::insertIntoSortedList(Node<transactions> *sorted,
-                                    Node<transactions> *newNode) {
+Node<transactions> *insertionSort::insertIntoSortedList(Node<transactions> *sorted, Node<transactions> *newNode) {
   if (sorted == nullptr ||
       compareDates(newNode->data.date, sorted->data.date)) {
     // Insert at the beginning of the sorted list
@@ -185,8 +215,7 @@ insertionSort::insertIntoSortedList(Node<transactions> *sorted,
   return sorted;
 }
 
-Node<reviews> *insertionSort::insertIntoSortedList(Node<reviews> *sorted,
-                                                   Node<reviews> *newNode) {
+Node<reviews> *insertionSort::insertIntoSortedList(Node<reviews> *sorted, Node<reviews> *newNode) {
   if (sorted == nullptr || newNode->data.rating > sorted->data.rating) {
     // Insert at the beginning of the sorted list
     newNode->next = sorted;
@@ -205,3 +234,23 @@ Node<reviews> *insertionSort::insertIntoSortedList(Node<reviews> *sorted,
 
   return sorted;
 }
+
+Node<mergedData> *insertionSort::insertIntoSortedList(Node<mergedData> *sorted, Node<mergedData> *newNode) {
+  if (!sorted || compareDates(newNode->data.date, sorted->data.date)) {
+    newNode->next = sorted;
+    return newNode;
+  }
+
+  Node<mergedData> *current = sorted;
+  while (current->next &&
+         !compareDates(newNode->data.date, current->next->data.date)) {
+    current = current->next;
+  }
+
+  newNode->next = current->next;
+  current->next = newNode;
+
+  return sorted;
+}
+
+
