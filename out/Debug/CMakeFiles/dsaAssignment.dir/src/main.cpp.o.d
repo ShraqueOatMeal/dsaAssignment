@@ -157,6 +157,7 @@ CMakeFiles/dsaAssignment.dir/src/main.cpp.o: \
  /home/loh-yen-kuan/Coding/dsaAssignment/include/reviews.h \
  /home/loh-yen-kuan/Coding/dsaAssignment/include/transactions.h \
  /home/loh-yen-kuan/Coding/dsaAssignment/include/WordFrequency.h \
+ /home/loh-yen-kuan/Coding/dsaAssignment/include/binarySearch.hpp \
  /home/loh-yen-kuan/Coding/dsaAssignment/include/bubblesort.h \
  /home/loh-yen-kuan/Coding/dsaAssignment/include/insertionSort.hpp \
  /home/loh-yen-kuan/Coding/dsaAssignment/include/jumpsearch.h \

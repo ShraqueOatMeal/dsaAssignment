@@ -1,8 +1,7 @@
 #include "WordFrequency.h"
 #include "LinkList.h"
-#include "insertionSort.hpp"
 #include "binarySearch.hpp"
-// #include "oneStarReview.h"
+#include "insertionSort.hpp"
 #include "reviews.h"
 #include <chrono>
 #include <cmath>
@@ -368,7 +367,8 @@ void processOneStarReviews(reviews *reviewArray, int reviewCount,
             }
           }
         } else if (searchChoice == 2) {
-          binarySearch::calculateBadReviewsCommonWords(reviewArray, reviewCount);
+          binarySearch::calculateBadReviewsCommonWords(reviewArray,
+                                                       reviewCount);
         } else if (searchChoice == 3) {
           int pos = jumpSearch(wordFrequencyArray, wordCount, word);
           if (pos != -1) {
@@ -381,7 +381,6 @@ void processOneStarReviews(reviews *reviewArray, int reviewCount,
         // Add new word if not found and space is available
         if (!found && wordCount < MAX_WORDS) {
           insertSorted(wordFrequencyArray, wordCount, word);
-
         }
       }
     }
@@ -452,7 +451,3 @@ void insertSorted(WordFrequency arr[], int &wordCount, const string &word) {
   arr[i + 1].count = 1;
   wordCount++;
 }
-
-
-
-
