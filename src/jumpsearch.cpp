@@ -117,7 +117,7 @@ void jumpSearch::searchMenu(transactions *arr, int size, int catChoice,
     total++;
   }
 
-  system("cls");
+  system("clear");
 
   double percentage = (matchCount * 100.0) / total;
   cout << "Category: " << selectedCat << endl;
@@ -233,7 +233,7 @@ void jumpSearch::searchMenu(LinkList<transactions> &list, int catChoice,
     total++;
   }
 
-  system("cls");
+  system("clear");
 
   double percentage =
       (categoryCount > 0) ? (double)matchCount / categoryCount * 100 : 0;
