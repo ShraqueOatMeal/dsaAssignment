@@ -122,7 +122,7 @@ int main(int argc, char *argv[]) {
   // Choose data structure
   int choice;
   while (true) { // Add loop
-    system("cls");
+    system("clear");
     cout << "Choose a mode to run:\n" << endl;
     cout << "\t1. Linked List" << endl;
     cout << "\t2. Array" << endl;
@@ -134,7 +134,7 @@ int main(int argc, char *argv[]) {
       cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
       cout << "\nPress Enter to continue...";
       cin.get();
-      system("cls");
+      system("clear");
       continue;
     }
     break;
@@ -160,7 +160,7 @@ int main(int argc, char *argv[]) {
   // Main menu loop
   bool exit = false;
   while (!exit) {
-    system("cls");
+    system("clear");
     displayMainMenu();
     int funcChoice;
     cin >> funcChoice;
@@ -171,27 +171,27 @@ int main(int argc, char *argv[]) {
       cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
       cout << "\nPress Enter to continue...";
       cin.get();
-      system("cls");
+      system("clear");
       continue;
     }
 
     switch (funcChoice) {
     case 1:
-      system("cls");
+      system("clear");
       sortByDateMenu(choice, transactionList, reviewList, transArray,
                      reviewArray, transCount, reviewCount);
       break;
     case 2:
-      system("cls");
+      system("clear");
       filterByCategoryAndPayment(choice, transactionList, transArray,
                                  transCount);
       break;
     case 3:
-      system("cls");
+      system("clear");
       checkNegativeReviews(choice, reviewList, reviewArray, reviewCount);
       break;
     case 4:
-      system("cls");
+      system("clear");
       exit = true;
       break;
     default:
@@ -200,7 +200,7 @@ int main(int argc, char *argv[]) {
       cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
       cout << "\nPress Enter to continue...";
       cin.get();
-      system("cls");
+      system("clear");
       break;
     }
   }
@@ -400,18 +400,7 @@ void linearSearch(int catChoice, int paymentChoice, int size,
     break;
   }
 
-  cout << "Filtered List: " << endl;
-
-  Node<transactions> *current = transactionList.getHead();
-
-  while (current != nullptr) {
-
-    if (current->data.cat == selectedCat &&
-        current->data.paymentMethod == selectedPaymentMethod) {
-      current->data.print();
-    }
-    current = current->next;
-  }
+  system("clear");
 
   calculatePercentage(transactionList, selectedCat, selectedPaymentMethod);
 }
@@ -540,13 +529,7 @@ void linearSearch(int catChoice, int paymentChoice, int size,
     break;
   }
 
-  cout << "Filtered List: " << endl;
-  for (int i = 0; i < size; i++) {
-    if (transArray[i].cat == selectedCat &&
-        transArray[i].paymentMethod == selectedPaymentMethod) {
-      transArray[i].print();
-    }
-  }
+  system("clear");
 
   calculatePercentage(transArray, size, selectedCat, selectedPaymentMethod);
 }
@@ -671,7 +654,7 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
                     reviews *reviewArray, int transCount, int reviewCount) {
   int processChoice;
   while (true) {
-    system("cls");
+    system("clear");
     cout << "\nChoose a process:\n" << endl;
     cout << "1. Regular sort of transaction data" << endl;
     cout << "2. Inner join on Customer ID and sort by date" << endl;
@@ -684,7 +667,7 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
       cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
       cout << "\nPress Enter to continue...";
       cin.get();
-      system("cls");
+      system("clear");
       continue;
     }
     break;
@@ -692,7 +675,7 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
 
   int sortChoice;
   while (true) {
-    system("cls");
+    system("clear");
     cout << "\nChoose a sorting algorithm:\n" << endl;
     cout << "\t1. Bubble Sort" << endl;
     cout << "\t2. Insertion Sort" << endl;
@@ -705,7 +688,7 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
       cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
       cout << "\nPress Enter to continue...";
       cin.get();
-      system("cls");
+      system("clear");
       continue;
     }
     break;
@@ -714,6 +697,16 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
   if (choice == 1) { // Linked List
     if (processChoice == 1) {
       cout << "\nSorting transaction data..." << endl;
+      cout << "\nSample of data (before sorting):" << endl;
+      int displayCount = 0;
+      Node<transactions> *current = transactionList.getHead();
+      while (current != nullptr && displayCount < 5) {
+        current->data.print();
+        current = current->next;
+        displayCount++;
+      }
+      cout << "\nSorting data by date..." << endl;
+      auto start = chrono::high_resolution_clock::now();
       switch (sortChoice) {
       case 1:
         bubblesort::displaySortedByDate(transactionList);
@@ -722,22 +715,29 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
         insertionSort::insertionsort(&transactionList);
         break;
       case 3: {
-        auto start = chrono::high_resolution_clock::now();
         radixSort::radixsort(&transactionList, transCount);
-        auto end = chrono::high_resolution_clock::now();
-        chrono::duration<double, milli> duration = end - start;
-        cout << "\nSorting completed in " << duration.count()
-             << " milliseconds." << endl;
         break;
       }
       default:
         cout << "\nUnknown sorting algorithm\n" << endl;
         break;
       }
+      auto end = chrono::high_resolution_clock::now();
+      chrono::duration<double, milli> duration = end - start;
+      cout << "\nSorting completed in " << duration.count() << " milliseconds."
+           << endl;
+      cout << "\nSample of data (after sorting):" << endl;
+      displayCount = 0;
+      current = transactionList.getHead();
+      while (current != nullptr && displayCount < 5) {
+        current->data.print();
+        current = current->next;
+        displayCount++;
+      }
       cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
       cout << "\n\nPress Enter to continue...";
       cin.get();
-      system("cls");
+      system("clear");
     } else if (processChoice == 2) {
       LinkList<mergedData> mergedList;
       JoinedData::innerJoinLists(transactionList, reviewList, mergedList);
@@ -752,6 +752,7 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
         displayCount++;
       }
       cout << "\nSorting joined data by date..." << endl;
+      auto start = chrono::high_resolution_clock::now();
       switch (sortChoice) {
       case 1:
         bubblesort::displaySortedByDate(mergedList);
@@ -760,18 +761,17 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
         insertionSort::insertionsort(&mergedList);
         break;
       case 3: {
-        auto start = chrono::high_resolution_clock::now();
         radixSort::radixsort(&mergedList, mergedList.getCount());
-        auto end = chrono::high_resolution_clock::now();
-        chrono::duration<double, milli> duration = end - start;
-        cout << "\nSorting completed in " << duration.count()
-             << " milliseconds." << endl;
         break;
       }
       default:
         cout << "\nUnknown sorting algorithm\n" << endl;
         break;
       }
+      auto end = chrono::high_resolution_clock::now();
+      chrono::duration<double, milli> duration = end - start;
+      cout << "\nSorting completed in " << duration.count() << " milliseconds."
+           << endl;
       cout << "\nSample of joined data (after sorting):" << endl;
       displayCount = 0;
       current = mergedList.getHead();
@@ -783,7 +783,7 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
       cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
       cout << "\n\nPress Enter to continue...";
       cin.get();
-      system("cls");
+      system("clear");
     } else if (processChoice == 3) {
       LinkList<mergedData> mergedList;
       JoinedData::leftJoinLists(transactionList, reviewList, mergedList);
@@ -798,6 +798,7 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
         displayCount++;
       }
       cout << "\nSorting joined data by date..." << endl;
+      auto start = chrono::high_resolution_clock::now();
       switch (sortChoice) {
       case 1:
         bubblesort::displaySortedByDate(mergedList);
@@ -806,18 +807,17 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
         insertionSort::insertionsort(&mergedList);
         break;
       case 3: {
-        auto start = chrono::high_resolution_clock::now();
         radixSort::radixsort(&mergedList, mergedList.getCount());
-        auto end = chrono::high_resolution_clock::now();
-        chrono::duration<double, milli> duration = end - start;
-        cout << "\nSorting completed in " << duration.count()
-             << " milliseconds." << endl;
         break;
       }
       default:
         cout << "\nUnknown sorting algorithm" << endl;
         break;
       }
+      auto end = chrono::high_resolution_clock::now();
+      chrono::duration<double, milli> duration = end - start;
+      cout << "\nSorting completed in " << duration.count() << " milliseconds."
+           << endl;
       cout << "\nSample of joined data (after sorting):" << endl;
       displayCount = 0;
       current = mergedList.getHead();
@@ -829,33 +829,38 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
       cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
       cout << "\n\nPress Enter to continue...";
       cin.get();
-      system("cls");
+      system("clear");
     } else {
       cout << "\nInvalid process choice" << endl;
     }
   } else if (choice == 2) { // Array
     if (processChoice == 1) {
       cout << "\nSorting transaction data..." << endl;
+      cout << "\nSample of data (before sorting):" << endl;
+      for (int i = 0; i < min(5, transCount); i++) {
+        transArray[i].print();
+      }
+      auto start = chrono::high_resolution_clock::now();
       switch (sortChoice) {
-      case 1:
+      case 1: {
         bubblesort::displaySortedByDate(transArray, transCount); // Adjusted
         break;
+      }
       case 2:
         insertionSort::insertionsort(transArray, transCount);
         break;
       case 3: {
-        auto start = chrono::high_resolution_clock::now();
         radixSort::radixsort(transArray, transCount);
-        auto end = chrono::high_resolution_clock::now();
-        chrono::duration<double, milli> duration = end - start;
-        cout << "\nSorting completed in " << duration.count()
-             << " milliseconds." << endl;
         break;
       }
       default:
         cout << "\nUnknown sorting algorithm" << endl;
         break;
       }
+      auto end = chrono::high_resolution_clock::now();
+      chrono::duration<double, milli> duration = end - start;
+      cout << "\nSorting completed in " << duration.count() << " milliseconds."
+           << endl;
       cout << "\nSample of joined data (after sorting):" << endl;
       for (int i = 0; i < min(5, transCount); i++) {
         transArray[i].print();
@@ -863,7 +868,7 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
       cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
       cout << "\n\nPress Enter to continue...";
       cin.get();
-      system("cls");
+      system("clear");
     } else if (processChoice == 2) {
       mergedData *joinedArray = new mergedData[transCount * reviewCount];
       int joinedSize = 0;
@@ -875,26 +880,27 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
         joinedArray[i].print();
       }
       cout << "\nSorting joined data by date..." << endl;
+      auto start = chrono::high_resolution_clock::now();
       switch (sortChoice) {
-      case 1:
+      case 1: {
         bubblesort::displaySortedByDate(joinedArray, joinedSize); // Adjusting
         break;
+      }
       case 2:
         insertionSort::insertionsort(joinedArray, joinedSize);
         break;
       case 3: {
-        auto start = chrono::high_resolution_clock::now();
         radixSort::radixsort(joinedArray, joinedSize);
-        auto end = chrono::high_resolution_clock::now();
-        chrono::duration<double, milli> duration = end - start;
-        cout << "\nSorting completed in " << duration.count()
-             << " milliseconds." << endl;
         break;
       }
       default:
         cout << "\nUnknown sorting algorithm" << endl;
         break;
       }
+      auto end = chrono::high_resolution_clock::now();
+      chrono::duration<double, milli> duration = end - start;
+      cout << "\nSorting completed in " << duration.count()
+           << " milliseconds.\n";
       cout << "\nSample of joined data (after sorting):" << endl;
       for (int i = 0; i < min(5, joinedSize); i++) {
         joinedArray[i].print();
@@ -903,7 +909,7 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
       cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
       cout << "\n\nPress Enter to continue...";
       cin.get();
-      system("cls");
+      system("clear");
     } else if (processChoice == 3) {
       mergedData *joinedArray = new mergedData[transCount * reviewCount];
       int joinedSize = 0;
@@ -915,26 +921,28 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
         joinedArray[i].print();
       }
       cout << "\nSorting joined data by date..." << endl;
+      auto start = chrono::high_resolution_clock::now();
       switch (sortChoice) {
-      case 1:
+      case 1: {
         bubblesort::displaySortedByDate(joinedArray, joinedSize); // Adjusting
         break;
-      case 2:
+      }
+      case 2: {
         insertionSort::insertionsort(joinedArray, joinedSize);
         break;
+      }
       case 3: {
-        auto start = chrono::high_resolution_clock::now();
         radixSort::radixsort(joinedArray, joinedSize);
-        auto end = chrono::high_resolution_clock::now();
-        chrono::duration<double, milli> duration = end - start;
-        cout << "\nSorting completed in " << duration.count()
-             << " milliseconds." << endl;
         break;
       }
       default:
         cout << "\nUnknown sorting algorithm" << endl;
         break;
       }
+      auto end = chrono::high_resolution_clock::now();
+      chrono::duration<double, milli> duration = end - start;
+      cout << "\nSorting completed in " << duration.count()
+           << " milliseconds.\n";
       cout << "\nSample of joined data (after sorting):" << endl;
       for (int i = 0; i < min(5, joinedSize); i++) {
         joinedArray[i].print();
@@ -943,7 +951,7 @@ void sortByDateMenu(int choice, LinkList<transactions> &transactionList,
       cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
       cout << "\n\nPress Enter to continue...";
       cin.get();
-      system("cls");
+      system("clear");
     }
   }
 }
@@ -953,7 +961,7 @@ void filterByCategoryAndPayment(int choice,
                                 transactions *transArray, int transCount) {
   int catChoice;
   while (true) {
-    system("cls");
+    system("clear");
     cout << "\nChoose a category to filter:" << endl;
     cout << "\t1. Automotive\n\t2. Books\n\t3. Groceries\n\t4. Sports\n\t5. "
             "Toys\n\t6. Beauty\n\t7. Furniture\n\t8. Electronics\n\t9. "
@@ -967,14 +975,14 @@ void filterByCategoryAndPayment(int choice,
       cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
       cout << "\nPress Enter to continue...";
       cin.get();
-      system("cls");
+      system("clear");
       continue;
     }
     break;
   }
   int paymentChoice;
   while (true) {
-    system("cls");
+    system("clear");
     cout << "\nChoose a payment method to filter:" << endl;
     cout << "\t1. Bank Transfer\n\t2. PayPal\n\t3. Debit Card\n\t4. Cash on "
             "Delivery\n\t5. Credit Card"
@@ -987,7 +995,7 @@ void filterByCategoryAndPayment(int choice,
       cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
       cout << "\nPress Enter to continue...";
       cin.get();
-      system("cls");
+      system("clear");
       continue;
     }
     break;
@@ -995,7 +1003,7 @@ void filterByCategoryAndPayment(int choice,
 
   int searchChoice;
   while (true) {
-    system("cls");
+    system("clear");
     cout << "\nChoose a search algorithm for word frequencies:" << endl;
     cout << "\t1. Linear Search\n\t2. Binary Search\n\t3. Jump Search";
     cout << "\nSearch Algorithm: ";
@@ -1006,13 +1014,14 @@ void filterByCategoryAndPayment(int choice,
       cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
       cout << "\nPress Enter to continue...";
       cin.get();
-      system("cls");
+      system("clear");
       continue;
     }
     break;
   }
 
   if (choice == 1) {
+    auto start = chrono::high_resolution_clock::now();
     if (searchChoice == 1) {
       linearSearch(catChoice, paymentChoice, transCount, transactionList);
     } else if (searchChoice == 2) {
@@ -1021,11 +1030,16 @@ void filterByCategoryAndPayment(int choice,
       bubblesort::bubbleSortByCategory(transactionList);
       jumpSearch::searchMenu(transactionList, catChoice, paymentChoice);
     }
+    auto end = chrono::high_resolution_clock::now();
+    chrono::duration<double, milli> duration = end - start;
+    cout << "\nSearching completed in " << duration.count() << " milliseconds."
+         << endl;
     cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     cout << "\nPress Enter to continue...";
     cin.get();
-    system("cls");
+    system("clear");
   } else if (choice == 2) {
+    auto start = chrono::high_resolution_clock::now();
     if (searchChoice == 1) {
       linearSearch(catChoice, paymentChoice, transCount, transArray);
     } else if (searchChoice == 2) {
@@ -1034,16 +1048,20 @@ void filterByCategoryAndPayment(int choice,
       bubblesort::bubbleSortByCategory(transArray, transCount);
       jumpSearch::searchMenu(transArray, transCount, catChoice, paymentChoice);
     }
+    auto end = chrono::high_resolution_clock::now();
+    chrono::duration<double, milli> duration = end - start;
+    cout << "\nSearching completed in " << duration.count() << " milliseconds."
+         << endl;
     cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     cout << "\nPress Enter to continue...";
     cin.get();
-    system("cls");
+    system("clear");
   } else {
     cout << "\nInvalid mode choice" << endl;
     cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     cout << "\nPress Enter to continue...";
     cin.get();
-    system("cls");
+    system("clear");
   }
 }
 
@@ -1051,7 +1069,7 @@ void checkNegativeReviews(int choice, LinkList<reviews> &reviewList,
                           reviews *reviewArray, int reviewCount) {
   int sortChoice;
   while (true) {
-    system("cls");
+    system("clear");
     cout << "Choose sorting algorithm for word frequencies:" << endl;
     cout << "1. Bubble Sort\n2. Insertion Sort\n3. Radix Sort" << endl;
     cout << "\nSorting Algorithm: ";
@@ -1062,7 +1080,7 @@ void checkNegativeReviews(int choice, LinkList<reviews> &reviewList,
       cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
       cout << "\nPress Enter to continue...";
       cin.get();
-      system("cls");
+      system("clear");
       continue;
     }
     break;
@@ -1070,7 +1088,7 @@ void checkNegativeReviews(int choice, LinkList<reviews> &reviewList,
 
   int searchChoice;
   while (true) {
-    system("cls");
+    system("clear");
     cout << "\nChoose a search algorithm for word frequencies:" << endl;
     cout << "\t1. Linear Search\n\t2. Binary Search\n\t3. Jump Search";
     cout << "\nSearch Algorithm: ";
@@ -1081,7 +1099,7 @@ void checkNegativeReviews(int choice, LinkList<reviews> &reviewList,
       cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
       cout << "\nPress Enter to continue...";
       cin.get();
-      system("cls");
+      system("clear");
       continue;
     }
     break;
@@ -1092,19 +1110,19 @@ void checkNegativeReviews(int choice, LinkList<reviews> &reviewList,
     cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     cout << "\nPress Enter to continue...";
     cin.get();
-    system("cls");
+    system("clear");
   } else if (choice == 2) {
     processOneStarReviews(reviewArray, reviewCount, sortChoice, searchChoice);
     cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     cout << "\nPress Enter to continue...";
     cin.get();
-    system("cls");
+    system("clear");
   } else {
     cout << "Invalid mode choice" << endl;
     cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     cout << "\nPress Enter to continue...";
     cin.get();
-    system("cls");
+    system("clear");
   }
 }
 
@@ -1171,6 +1189,9 @@ void binarysearch(transactions *transArray, int size, int catChoice,
     cout << "Unknown Payment Method Choice" << endl;
     break;
   }
+
+  system("clear");
+
   insertionSort::Category_PaymentMethod(transArray, size);
   binarySearch::calculatedPurchasesPaymentMethodPercentage(
       transArray, size, selectedCat, selectedPaymentMethod);
@@ -1237,6 +1258,8 @@ void binarysearch(LinkList<transactions> &transactionList, int size,
     cout << "Unknown Payment Method Choice" << endl;
     break;
   }
+
+  system("clear");
 
   insertionSort::Category_PaymentMethod(&transactionList);
   binarySearch::calculatePurchasesPaymentMethodPercentage(

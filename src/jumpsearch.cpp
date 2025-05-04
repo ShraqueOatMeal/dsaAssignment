@@ -68,10 +68,6 @@ void jumpSearch::searchMenu(transactions *arr, int size, int catChoice,
     return;
   }
 
-  cout << "\nJump Search (Array) for Category: " << selectedCat
-       << ", Payment Method: " << selectedPaymentMethod << "\n";
-
-  auto start = chrono::high_resolution_clock::now();
   // Jump Search for the first appearance of selectedCat
   int step = sqrt(size);
   int prev = 0;
@@ -112,31 +108,24 @@ void jumpSearch::searchMenu(transactions *arr, int size, int catChoice,
   // Count and print matches in full category range
   int categoryCount = last - first + 1;
   int matchCount = 0;
+  int total = 0;
+
   for (int i = first; i <= last; i++) {
     if (arr[i].paymentMethod == selectedPaymentMethod) {
-      arr[i].print();
       matchCount++;
     }
+    total++;
   }
 
-  auto end = chrono::high_resolution_clock::now();
-  chrono::duration<double, milli> duration = end - start;
+  system("clear");
 
-  if (categoryCount == 0) {
-    cout << "No transactions found for category \"" << selectedCat << "\".\n";
-  } else {
-    double percentage = (matchCount * 100.0) / categoryCount;
-    cout << "\nTotal in category \"" << selectedCat << "\": " << categoryCount
-         << endl;
-    cout << "Matching with \"" << selectedPaymentMethod << "\": " << matchCount
-         << endl;
-    cout << "Percentage: " << fixed << setprecision(2) << percentage << "%\n";
-  }
-
-  cout << "Jump Search (Array) completed.\n";
-  cout << "Execution time: " << duration.count() << " ms\n";
-  cout << "Estimated Time Complexity: O(square root n)\n";
-  cout << "Estimated Space Complexity: O(1)\n";
+  double percentage = (matchCount * 100.0) / total;
+  cout << "Category: " << selectedCat << endl;
+  cout << "Payment Method: " << selectedPaymentMethod << endl;
+  cout << "Transactions in category: " << categoryCount << endl;
+  cout << "Total Transactions under " << selectedCat << ": " << total << endl;
+  cout << "Percentage: " << fixed << setprecision(2) << percentage << "%"
+       << endl;
 }
 
 void jumpSearch::searchMenu(LinkList<transactions> &list, int catChoice,
@@ -204,8 +193,6 @@ void jumpSearch::searchMenu(LinkList<transactions> &list, int catChoice,
   cout << "\nJump Search (Linked List) Category: " << selectedCat
        << ", Payment Method: " << selectedPaymentMethod << "\n";
 
-  auto start = chrono::high_resolution_clock::now();
-
   // Count total size
   int size = 0;
   Node<transactions> *node = list.getHead();
@@ -233,35 +220,27 @@ void jumpSearch::searchMenu(LinkList<transactions> &list, int catChoice,
   Node<transactions> *startScan = (prev != nullptr) ? prev : list.getHead();
   int categoryCount = 0;
   int matchCount = 0;
+  int total = 0;
 
   while (startScan != nullptr && startScan->data.cat <= selectedCat) {
     if (startScan->data.cat == selectedCat) {
       categoryCount++;
       if (startScan->data.paymentMethod == selectedPaymentMethod) {
-        startScan->data.print();
         matchCount++;
       }
     }
     startScan = startScan->next;
+    total++;
   }
 
-  auto end = chrono::high_resolution_clock::now();
-  chrono::duration<double, milli> duration = end - start;
+  system("clear");
 
-  if (matchCount == 0) {
-    cout << "No matching transactions found.\n";
-  } else {
-    double percentage =
-        (categoryCount > 0) ? (matchCount * 100.0 / categoryCount) : 0;
-    cout << "\nTotal in category \"" << selectedCat << "\": " << categoryCount
-         << endl;
-    cout << "Matching with \"" << selectedPaymentMethod << "\": " << matchCount
-         << endl;
-    cout << "Percentage: " << fixed << setprecision(2) << percentage << "%\n";
-  }
-
-  cout << "Jump Search (Linked List) completed.\n";
-  cout << "Execution time: " << duration.count() << " ms\n";
-  cout << "Estimated Time Complexity: O(square root n)\n";
-  cout << "Estimated Space Complexity: O(1)\n";
+  double percentage =
+      (categoryCount > 0) ? (double)matchCount / categoryCount * 100 : 0;
+  cout << "Category: " << selectedCat << endl;
+  cout << "Payment Method: " << selectedPaymentMethod << endl;
+  cout << "Transactions in category: " << categoryCount << endl;
+  cout << "Total Transactions under " << selectedCat << ": " << total << endl;
+  cout << "Percentage: " << fixed << setprecision(2) << percentage << "%"
+       << endl;
 }

@@ -2,6 +2,7 @@
 #include "LinkList.h"
 #include "reviews.h"
 #include "transactions.h"
+#include <chrono>
 #include <sstream>
 #include <string>
 using namespace std;
@@ -28,12 +29,12 @@ void insertionSort::insertionsort(transactions *transArray, int size) {
   for (int i = 1; i < size; i++) {
     transactions key = transArray[i];
     int j = i - 1;
-    
+
     while (j >= 0 && compareDates(transArray[j].date, key.date)) {
       transArray[j + 1] = transArray[j];
       j = j - 1;
     }
-    transArray[j + 1] = key; 
+    transArray[j + 1] = key;
   }
 }
 
@@ -47,7 +48,7 @@ void insertionSort::insertionsort(reviews *reviewArray, int size) {
       reviewArray[j + 1] = reviewArray[j];
       j = j - 1;
     }
-    reviewArray[j + 1] = key; 
+    reviewArray[j + 1] = key;
   }
 }
 
@@ -61,47 +62,48 @@ void insertionSort::insertionsort(mergedData *joinedDataArray, int size) {
       joinedDataArray[j + 1] = joinedDataArray[j];
       j = j - 1;
     }
-    joinedDataArray[j + 1] = key; 
+    joinedDataArray[j + 1] = key;
   }
 }
 
 // Insertion Sort for word frequency array
 void insertionSort::insertionsort(WordFrequency *wordArray, int size) {
   for (int i = 1; i < size; i++) {
-      WordFrequency key = wordArray[i];
-      int j = i - 1;
+    WordFrequency key = wordArray[i];
+    int j = i - 1;
 
-      // Sort by count (descending), then by rating (ascending)
-      while (j >= 0 && 
-        (wordArray[j].count < key.count || wordArray[j].count == key.count)) {
-          wordArray[j + 1] = wordArray[j];
-          j--;
-      }
-      wordArray[j + 1] = key;
+    // Sort by count (descending), then by rating (ascending)
+    while (j >= 0 && (wordArray[j].count < key.count ||
+                      wordArray[j].count == key.count)) {
+      wordArray[j + 1] = wordArray[j];
+      j--;
+    }
+    wordArray[j + 1] = key;
   }
 }
 
 // Insertion Sort for transactions array by category and payment method
 void insertionSort::Category_PaymentMethod(transactions *transArray, int size) {
-    for (int i = 1; i < size; i++) {
-        transactions key = transArray[i];
-        int j = i - 1;
-        
-        while (j >= 0 && 
-              (transArray[j].cat > key.cat || 
-              (transArray[j].cat == key.cat && transArray[j].paymentMethod > key.paymentMethod))) {
-            transArray[j + 1] = transArray[j];
-            j = j - 1;
-        }
-        transArray[j + 1] = key; 
+  for (int i = 1; i < size; i++) {
+    transactions key = transArray[i];
+    int j = i - 1;
+
+    while (j >= 0 && (transArray[j].cat > key.cat ||
+                      (transArray[j].cat == key.cat &&
+                       transArray[j].paymentMethod > key.paymentMethod))) {
+      transArray[j + 1] = transArray[j];
+      j = j - 1;
     }
+    transArray[j + 1] = key;
+  }
 }
 
 // ==========================LINKED LIST==========================
 
 // Insertion Sort for linked list
 void insertionSort::insertionsort(LinkList<transactions> *transactionList) {
-  if (transactionList->getHead() == nullptr || transactionList->getHead()->next == nullptr) {
+  if (transactionList->getHead() == nullptr ||
+      transactionList->getHead()->next == nullptr) {
     // List is empty or has only one element, no sorting needed
     return;
   }
@@ -169,76 +171,88 @@ void insertionSort::insertionsort(LinkList<mergedData> *JoinedDataList) {
 
 // Insertion Sort for word frequency linked list
 void insertionSort::insertionsort(LinkList<WordFrequency> *wordList) {
-  if (!wordList || !wordList->getHead()) return;
+  if (!wordList || !wordList->getHead())
+    return;
 
   Node<WordFrequency> *sorted = nullptr;
   Node<WordFrequency> *current = wordList->getHead();
 
   while (current != nullptr) {
-      Node<WordFrequency> *next = current->next;
-      if (!sorted || sorted->data.count <= current->data.count) {
-          current->next = sorted;
-          sorted = current;
-      } else {
-          Node<WordFrequency> *temp = sorted;
-          while (temp->next != nullptr && temp->next->data.count > current->data.count) {
-              temp = temp->next;
-          }
-          current->next = temp->next;
-          temp->next = current;
+    Node<WordFrequency> *next = current->next;
+    if (!sorted || sorted->data.count <= current->data.count) {
+      current->next = sorted;
+      sorted = current;
+    } else {
+      Node<WordFrequency> *temp = sorted;
+      while (temp->next != nullptr &&
+             temp->next->data.count > current->data.count) {
+        temp = temp->next;
       }
-      current = next;
+      current->next = temp->next;
+      temp->next = current;
+    }
+    current = next;
   }
 
   wordList->setHead(sorted);
 }
 
 // Insertion Sort for transactions linked list by category and payment method
-void insertionSort::Category_PaymentMethod(LinkList<transactions> *transactionList) {
-    if (transactionList->getHead() == nullptr || transactionList->getHead()->next == nullptr) {
-        // List is empty or has only one element, no sorting needed
-        return;
-    }
+void insertionSort::Category_PaymentMethod(
+    LinkList<transactions> *transactionList) {
+  if (transactionList->getHead() == nullptr ||
+      transactionList->getHead()->next == nullptr) {
+    // List is empty or has only one element, no sorting needed
+    return;
+  }
 
-    Node<transactions> *sorted = nullptr; // Start with an empty sorted list
-    Node<transactions> *current = transactionList->getHead(); // Current node to be inserted
+  Node<transactions> *sorted = nullptr; // Start with an empty sorted list
+  Node<transactions> *current =
+      transactionList->getHead(); // Current node to be inserted
 
-    while (current != nullptr) {
-        Node<transactions> *next = current->next; // Save the next node
-        sorted = insertIntoSortedListByCategoryPaymentMethod(sorted, current); // Insert current into the sorted list
-        current = next; // Move to the next node
-    }
+  while (current != nullptr) {
+    Node<transactions> *next = current->next; // Save the next node
+    sorted = insertIntoSortedListByCategoryPaymentMethod(
+        sorted, current); // Insert current into the sorted list
+    current = next;       // Move to the next node
+  }
 
-    // Update the head of the original list to point to the sorted list
-    transactionList->setHead(sorted);
+  // Update the head of the original list to point to the sorted list
+  transactionList->setHead(sorted);
 }
 
-// Helper function to insert a node into a sorted linked list by category and payment method
-Node<transactions> *insertionSort::insertIntoSortedListByCategoryPaymentMethod(Node<transactions> *sorted, Node<transactions> *newNode) {
-    if (sorted == nullptr || 
-        (newNode->data.cat < sorted->data.cat || 
-        (newNode->data.cat == sorted->data.cat && newNode->data.paymentMethod < sorted->data.paymentMethod))) {
-        // Insert at the beginning of the sorted list
-        newNode->next = sorted;
-        return newNode;
-    }
+// Helper function to insert a node into a sorted linked list by category and
+// payment method
+Node<transactions> *insertionSort::insertIntoSortedListByCategoryPaymentMethod(
+    Node<transactions> *sorted, Node<transactions> *newNode) {
+  if (sorted == nullptr ||
+      (newNode->data.cat < sorted->data.cat ||
+       (newNode->data.cat == sorted->data.cat &&
+        newNode->data.paymentMethod < sorted->data.paymentMethod))) {
+    // Insert at the beginning of the sorted list
+    newNode->next = sorted;
+    return newNode;
+  }
 
-    Node<transactions> *current = sorted;
-    while (current->next != nullptr && 
-           (current->next->data.cat < newNode->data.cat || 
-           (current->next->data.cat == newNode->data.cat && current->next->data.paymentMethod < newNode->data.paymentMethod))) {
-        current = current->next;
-    }
+  Node<transactions> *current = sorted;
+  while (current->next != nullptr &&
+         (current->next->data.cat < newNode->data.cat ||
+          (current->next->data.cat == newNode->data.cat &&
+           current->next->data.paymentMethod < newNode->data.paymentMethod))) {
+    current = current->next;
+  }
 
-    // Insert newNode after current
-    newNode->next = current->next;
-    current->next = newNode;
+  // Insert newNode after current
+  newNode->next = current->next;
+  current->next = newNode;
 
-    return sorted;
+  return sorted;
 }
 
 // Helper function to insert a node into a sorted singly linked list
-Node<transactions> *insertionSort::insertIntoSortedList(Node<transactions> *sorted, Node<transactions> *newNode) {
+Node<transactions> *
+insertionSort::insertIntoSortedList(Node<transactions> *sorted,
+                                    Node<transactions> *newNode) {
   if (sorted == nullptr ||
       compareDates(newNode->data.date, sorted->data.date)) {
     // Insert at the beginning of the sorted list
@@ -259,7 +273,8 @@ Node<transactions> *insertionSort::insertIntoSortedList(Node<transactions> *sort
   return sorted;
 }
 
-Node<reviews> *insertionSort::insertIntoSortedList(Node<reviews> *sorted, Node<reviews> *newNode) {
+Node<reviews> *insertionSort::insertIntoSortedList(Node<reviews> *sorted,
+                                                   Node<reviews> *newNode) {
   if (sorted == nullptr || newNode->data.rating > sorted->data.rating) {
     // Insert at the beginning of the sorted list
     newNode->next = sorted;
@@ -279,7 +294,9 @@ Node<reviews> *insertionSort::insertIntoSortedList(Node<reviews> *sorted, Node<r
   return sorted;
 }
 
-Node<mergedData> *insertionSort::insertIntoSortedList(Node<mergedData> *sorted, Node<mergedData> *newNode) {
+Node<mergedData> *
+insertionSort::insertIntoSortedList(Node<mergedData> *sorted,
+                                    Node<mergedData> *newNode) {
   if (!sorted || compareDates(newNode->data.date, sorted->data.date)) {
     newNode->next = sorted;
     return newNode;
@@ -296,5 +313,3 @@ Node<mergedData> *insertionSort::insertIntoSortedList(Node<mergedData> *sorted, 
 
   return sorted;
 }
-
-
