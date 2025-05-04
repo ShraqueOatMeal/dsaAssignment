@@ -230,7 +230,6 @@ void jumpSearch::searchMenu(LinkList<transactions> &list, int catChoice,
       }
     }
     startScan = startScan->next;
-    total++;
   }
 
   system("clear");
@@ -239,8 +238,9 @@ void jumpSearch::searchMenu(LinkList<transactions> &list, int catChoice,
       (categoryCount > 0) ? (double)matchCount / categoryCount * 100 : 0;
   cout << "Category: " << selectedCat << endl;
   cout << "Payment Method: " << selectedPaymentMethod << endl;
-  cout << "Transactions in category: " << categoryCount << endl;
-  cout << "Total Transactions under " << selectedCat << ": " << total << endl;
+  cout << "Transactions in category: " << matchCount << endl;
+  cout << "Total Transactions under " << selectedCat << ": " << categoryCount
+       << endl;
   cout << "Percentage: " << fixed << setprecision(2) << percentage << "%"
        << endl;
 }
